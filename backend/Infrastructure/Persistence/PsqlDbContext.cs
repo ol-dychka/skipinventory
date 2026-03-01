@@ -2,7 +2,7 @@ using System;
 using Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure;
+namespace Infrastructure.Persistence;
 
 public class PsqlDbContext(DbContextOptions options) : DbContext(options)
 {

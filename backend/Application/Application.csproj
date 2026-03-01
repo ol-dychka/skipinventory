@@ -8,6 +8,19 @@
 
   <ItemGroup>
     <ProjectReference Include="../Domain/Domain.csproj" />
+    <ProjectReference Include="../Infrastructure/Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="14.0.0" />
+    <PackageReference Include="MediatR" Version="12.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Core/" />
+    <Folder Include="Organizations/" />
+    <Folder Include="Organizations/Commands/" />
+    <Folder Include="Organizations/Queries/" />
   </ItemGroup>
 
 </Project>
