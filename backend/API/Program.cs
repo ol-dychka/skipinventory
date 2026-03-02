@@ -1,6 +1,8 @@
 using Application.Core;
+using Application.Interfaces;
 using Application.Organizations.Queries;
 using Infrastructure.Persistence;
+using Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,8 @@ builder.Services.AddDbContext<PsqlDbContext>(options =>
 builder.Services.AddMediatR(x =>
     x.RegisterServicesFromAssemblyContaining<GetOrganizationList.Handler>());
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+
+builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 
 var app = builder.Build();
 

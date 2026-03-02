@@ -1,20 +1,19 @@
 using System;
+using Application.Interfaces;
 using Domain;
-using Infrastructure.Persistence;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Organizations.Queries;
 
 public class GetOrganizationList
 {
-    public class Query : IRequest<List<Organization>> {}
+    public record Query : IRequest<List<Organization>>;
 
-    public class Handler(PsqlDbContext context) : IRequestHandler<Query, List<Organization>>
+    public class Handler(IOrganizationRepository repository) : IRequestHandler<Query, List<Organization>>
     {
         public async Task<List<Organization>> Handle(Query request, CancellationToken cancellationToken)
         {
-            return await context.Organizations.ToListAsync(cancellationToken);
+            return await repository.GetAllAsync(cancellationToken);
         }
     }
 }

@@ -1,26 +1,23 @@
-using System;
-using Domain;
-using Infrastructure.Persistence;
 using MediatR;
+using Domain;
+using Application.Interfaces;
 
 namespace Application.Organizations.Commands;
 
 public class CreateOrganization
 {
-    public class Command : IRequest<string>
-    {
-        public required Organization Organization { get; set; }
-    }
+    public record Command(string Name) : IRequest<string>;
 
-    public class Handler(PsqlDbContext context) : IRequestHandler<Command, string>
+    public class Handler(IOrganizationRepository repository) : IRequestHandler<Command, string>
     {
         public async Task<string> Handle(Command request, CancellationToken cancellationToken)
         {
-            context.Organizations.Add(request.Organization);
+            var organization = new Organization(request.Name);
 
-            await context.SaveChangesAsync(cancellationToken);
+            await repository.Add(organization);
+            await repository.SaveChangesAsync(cancellationToken);
 
-            return request.Organization.Id;
+            return organization.Id;
         }
     }
 }

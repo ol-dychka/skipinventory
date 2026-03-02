@@ -1,9 +1,7 @@
 using System;
-using System.Runtime.CompilerServices;
 using Application.Organizations.Commands;
 using Application.Organizations.Queries;
 using Domain;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -19,26 +17,28 @@ public class OrganizationController : BaseAPIController
     [HttpGet("{id}")]
     public async Task<ActionResult<Organization>> GetOrganization(string id)
     {
-        return await Mediator.Send(new GetOrganization.Query{Id = id});
+        return await Mediator.Send(new GetOrganization.Query(id));
     }
 
+    public record CreateOrganizationRequest(string Name);
     [HttpPost]
-    public async Task<ActionResult<string>> CreateOrganization(Organization organization)
+    public async Task<ActionResult<string>> Create([FromBody] CreateOrganizationRequest request)
     {
-        return await Mediator.Send(new CreateOrganization.Command{Organization = organization});
+        var id = await Mediator.Send(new CreateOrganization.Command(request.Name));
+        return Ok(id);
     }
 
     [HttpPut]
     public async Task<ActionResult> EditOrganization(Organization organization)
     {
-        await Mediator.Send(new EditOrganization.Command{Organization = organization});
+        await Mediator.Send(new EditOrganization.Command(organization));
         return NoContent();
     }
 
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteOrganization(string id)
     {
-        await Mediator.Send(new DeleteOrganization.Command{Id = id});
+        await Mediator.Send(new DeleteOrganization.Command(id));
         return Ok();
     }
 }

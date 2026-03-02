@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="../Domain/Domain.csproj" />
-    <ProjectReference Include="../Infrastructure/Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -18,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Core/" />
+    <Folder Include="Interfaces/" />
     <Folder Include="Organizations/" />
     <Folder Include="Organizations/Commands/" />
     <Folder Include="Organizations/Queries/" />
