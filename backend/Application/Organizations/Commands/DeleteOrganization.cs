@@ -15,7 +15,7 @@ public class DeleteOrganization
             var organization = await repository.GetByIdAsync(request.Id, cancellationToken)
                 ?? throw new Exception("Cannot find this organization");
 
-            await repository.Delete(organization);
+            repository.Delete(organization);
 
             await repository.SaveChangesAsync(cancellationToken);
         }

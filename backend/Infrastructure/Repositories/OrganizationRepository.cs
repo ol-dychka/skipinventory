@@ -10,10 +10,14 @@ public class OrganizationRepository(PsqlDbContext context) : IOrganizationReposi
 {
     private readonly PsqlDbContext _context = context;
 
-    public Task Add(Organization organization)
+    public void Add(Organization organization)
     {
         _context.Organizations.Add(organization);
-        return Task.CompletedTask;
+    }
+    
+    public void Delete(Organization organization)
+    {
+        _context.Organizations.Remove(organization);
     }
 
     public Task SaveChangesAsync(CancellationToken cancellationToken)
@@ -31,11 +35,5 @@ public class OrganizationRepository(PsqlDbContext context) : IOrganizationReposi
     {
         return await _context.Organizations
             .FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
-    }
-
-    public Task Delete(Organization organization)
-    {
-        _context.Organizations.Remove(organization);
-        return Task.CompletedTask;
     }
 }

@@ -14,7 +14,7 @@ public class CreateOrganization
         {
             var organization = new Organization(request.Name);
 
-            await repository.Add(organization);
+            repository.Add(organization);
             await repository.SaveChangesAsync(cancellationToken);
 
             return organization.Id;

@@ -1,0 +1,13 @@
+using System;
+using Domain;
+
+namespace Application.Interfaces;
+
+public interface IUserRepository
+{
+    void Add(User user);
+    void Delete(User user);
+    // Task<User?> GetByIdAsync(string id, CancellationToken cancellationToken);
+    Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken);
+    Task SaveChangesAsync(CancellationToken cancellationToken);
+}
