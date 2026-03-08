@@ -1,4 +1,5 @@
 using System;
+using API.DTOs;
 using Application.Organizations.Commands;
 using Application.Organizations.Queries;
 using Domain;
@@ -20,7 +21,6 @@ public class OrganizationController : BaseAPIController
         return await Mediator.Send(new GetOrganization.Query(id));
     }
 
-    public record CreateOrganizationRequest(string Name);
     [HttpPost]
     public async Task<ActionResult<string>> Create([FromBody] CreateOrganizationRequest request)
     {
