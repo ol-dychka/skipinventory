@@ -4,7 +4,7 @@ using Application.Interfaces;
 using Application.Organizations.Queries;
 using Infrastructure.Authentication;
 using Infrastructure.Persistence;
-using Infrastructure.Repositories;
+using Infrastructure.Persistence.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -23,7 +23,11 @@ builder.Services.AddMediatR(x =>
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
 builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
-builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+
+builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
+builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
@@ -34,9 +38,7 @@ builder.Services.AddAuthentication(options =>
 })
 .AddJwtBearer(options =>
 {
-    var jwtSettings = builder.Configuration
-        .GetSection("JwtSettings")
-        .Get<JwtSettings>();
+    var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
 
     options.TokenValidationParameters = new TokenValidationParameters
     {

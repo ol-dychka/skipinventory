@@ -11,7 +11,7 @@ using Application.Models;
 
 namespace Infrastructure.Authentication;
 
-public class JwtTokenGenerator(IOptions<JwtSettings> jwtOptions) : IJwtTokenGenerator
+public class TokenGenerator(IOptions<JwtSettings> jwtOptions) : ITokenGenerator
 {
     private readonly JwtSettings _jwtSettings = jwtOptions.Value;
     public string GenerateAccessToken(string id, string email)

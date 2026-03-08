@@ -1,10 +1,9 @@
 using System;
 using Application.Interfaces;
 using Domain;
-using Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 
-namespace Infrastructure.Repositories;
+namespace Infrastructure.Persistence.Repositories;
 
 public class OrganizationRepository(PsqlDbContext context) : IOrganizationRepository
 {

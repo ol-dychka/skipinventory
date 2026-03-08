@@ -4,7 +4,7 @@ using Domain;
 
 namespace Application.Interfaces;
 
-public interface IJwtTokenGenerator
+public interface ITokenGenerator
 {
     string GenerateAccessToken(string id, string email);
     RefreshTokenData GenerateRefreshToken();
