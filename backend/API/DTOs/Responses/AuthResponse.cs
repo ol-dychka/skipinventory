@@ -1,6 +1,6 @@
 using System;
 
-namespace API.DTOs;
+namespace API.DTOs.Responses;
 
 public class AuthResponse
 {

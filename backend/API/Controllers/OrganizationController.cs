@@ -1,5 +1,5 @@
 using System;
-using API.DTOs;
+using API.DTOs.Requests;
 using Application.Organizations.Commands;
 using Application.Organizations.Queries;
 using Domain;

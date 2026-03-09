@@ -21,9 +21,6 @@
     <Folder Include="Organizations/" />
     <Folder Include="Organizations/Commands/" />
     <Folder Include="Organizations/Queries/" />
-    <Folder Include="Users/" />
-    <Folder Include="Users/Commands/" />
-    <Folder Include="Users/Queries/" />
   </ItemGroup>
 
 </Project>

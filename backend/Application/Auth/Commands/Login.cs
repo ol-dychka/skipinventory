@@ -1,17 +1,15 @@
 using System;
-using System.Runtime.Intrinsics.Arm;
 using Application.Core;
 using Application.Interfaces;
 using Domain;
 using MediatR;
-using Microsoft.Win32.SafeHandles;
 
-namespace Application.Users.Commands;
+namespace Application.Auth.Commands;
 
-public class RegisterUser
+public class Login
 {
     public record Response(string AccessToken, string RefreshToken);
-    public record Command(string Email, string Password, string Name, bool IsOwner) : IRequest<Result<Response>>;
+    public record Command(string Email, string Password ) : IRequest<Result<Response>>;
 
     public class Handler(
         IUserRepository userRepository,
@@ -23,21 +21,13 @@ public class RegisterUser
         public async Task<Result<Response>> Handle(Command request, CancellationToken cancellationToken)
         {
             var user = await userRepository.GetByEmailAsync(request.Email, cancellationToken);
-            if (user != null) return Result<Response>.Failure("Email already in use");
+            if (user == null) return Result<Response>.Failure("Email not found");
 
-            // password validation
-            // email validation
+            var isValidPassword = passwordHasher.VerifyPassword(request.Password, user.PasswordHash);
+            if (!isValidPassword) return Result<Response>.Failure("Password is not correct");
 
             var refreshTokenData = tokenGenerator.GenerateRefreshToken();
             var refreshTokenHash = tokenGenerator.HashRefreshToken(refreshTokenData.Token);
-            var passwordHash = passwordHasher.HashPassword(request.Password);
-
-            user = request.IsOwner
-                ? User.CreateOwner(request.Email, passwordHash, request.Name)
-                : User.CreateEmployee(request.Email, passwordHash, request.Name);
-            userRepository.Add(user);
-
-            await userRepository.SaveChangesAsync(cancellationToken);
 
             var refreshToken = new RefreshToken(user.Id, refreshTokenHash, refreshTokenData.ExpiresAt);
             

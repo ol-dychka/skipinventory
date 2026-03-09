@@ -9,13 +9,11 @@ public class PasswordHasher : IPasswordHasher
 {
     public string HashPassword(string password)
     {
-        var hash = BCrypt.Net.BCrypt.HashPassword(password);
-        return hash;
+        return BCrypt.Net.BCrypt.HashPassword(password);
     }
 
     public bool VerifyPassword(string password, string hash)
     {
-        var isValid = BCrypt.Net.BCrypt.Verify(password, hash);
-        return isValid;
+        return BCrypt.Net.BCrypt.Verify(password, hash);
     }
 }
