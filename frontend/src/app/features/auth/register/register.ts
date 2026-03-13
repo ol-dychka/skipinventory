@@ -3,17 +3,18 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthInput } from '../../../shared/components/auth-input/auth-input';
 import { Auth } from '../../../core/services/auth';
 import { finalize } from 'rxjs';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, AuthInput],
+  imports: [ReactiveFormsModule, AuthInput, RouterLink],
   templateUrl: './register.html',
-  styleUrl: './register.scss',
 })
 export class Register {
   private fb = inject(FormBuilder);
   private auth = inject(Auth);
+  private router = inject(Router);
 
   readonly loading = signal(false);
 
@@ -48,9 +49,11 @@ export class Register {
 
     this.loading.set(true);
 
+    console.log(this.form.getRawValue());
+
     this.auth
-      .login(this.form.getRawValue())
+      .register(this.form.getRawValue())
       .pipe(finalize(() => this.loading.set(false)))
-      .subscribe();
+      .subscribe(() => this.router.navigate(['/dashboard']));
   }
 }

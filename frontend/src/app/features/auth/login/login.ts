@@ -3,17 +3,18 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthInput } from '../../../shared/components/auth-input/auth-input';
 import { Auth } from '../../../core/services/auth';
 import { finalize } from 'rxjs';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, AuthInput],
+  imports: [ReactiveFormsModule, AuthInput, RouterLink],
   templateUrl: './login.html',
-  styleUrl: './login.scss',
 })
 export class Login {
   private fb = inject(FormBuilder);
   private auth = inject(Auth);
+  private router = inject(Router);
 
   readonly loading = signal(false);
 
@@ -49,6 +50,6 @@ export class Login {
     this.auth
       .login(this.form.getRawValue())
       .pipe(finalize(() => this.loading.set(false)))
-      .subscribe();
+      .subscribe(() => this.router.navigate(['/dashboard']));
   }
 }

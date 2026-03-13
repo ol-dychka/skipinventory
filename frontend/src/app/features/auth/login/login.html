@@ -1,23 +1,36 @@
-<div class="container">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()">
-    <app-auth-input
-      type="email"
-      label="Email"
-      placeholder="you@example.com"
-      formControlName="email"
-      [error]="emailError"
-    />
+<div class="container" class="flex h-full items-center justify-center">
+  <div class="space-y-12">
+    <p class="text-center text-6xl font-bold text-gray-400">Login</p>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <app-auth-input
+        type="email"
+        label="Email"
+        placeholder="you@example.com"
+        formControlName="email"
+        [error]="emailError"
+      />
 
-    <app-auth-input
-      type="password"
-      label="Password"
-      placeholder="••••••••"
-      formControlName="password"
-      [error]="passwordError"
-    />
+      <app-auth-input
+        type="password"
+        label="Password"
+        placeholder="••••••••"
+        formControlName="password"
+        [error]="passwordError"
+      />
 
-    <button type="submit" [disabled]="loading()" class="button">
-      {{ loading() ? 'Signing in…' : 'Sign in' }}
-    </button>
-  </form>
+      <button
+        class="w-full cursor-pointer rounded-lg bg-cyan-600 p-4 text-white transition-colors duration-300 hover:bg-cyan-700"
+        type="submit"
+        [disabled]="loading()"
+      >
+        {{ loading() ? 'Signing in…' : 'Sign in' }}
+      </button>
+    </form>
+    <p class="text-center text-gray-400">
+      Don't have an account?
+      <a routerLink="/register" class="cursor-pointer underline hover:text-cyan-600">
+        Register instead
+      </a>
+    </p>
+  </div>
 </div>

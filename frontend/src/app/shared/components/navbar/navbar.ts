@@ -5,7 +5,6 @@ import { Auth } from '../../../core/services/auth';
   selector: 'app-navbar',
   imports: [],
   templateUrl: './navbar.html',
-  styleUrl: './navbar.scss',
 })
 export class Navbar {
   constructor(private auth: Auth) {}

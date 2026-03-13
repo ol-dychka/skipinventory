@@ -1,13 +1,12 @@
 import { Component, input, output, signal, computed, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 
-export type InputType = 'email' | 'password' | 'text';
+export type InputType = 'password' | 'text' | 'email';
 
 @Component({
   selector: 'app-auth-input',
   imports: [ReactiveFormsModule],
   templateUrl: './auth-input.html',
-  styleUrl: './auth-input.scss',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -26,7 +25,6 @@ export class AuthInput implements ControlValueAccessor {
 
   // Internal state
   value = signal<string>('');
-  isFocused = signal<boolean>(false);
   isPasswordVisible = signal<boolean>(false);
 
   // Computed
@@ -37,7 +35,6 @@ export class AuthInput implements ControlValueAccessor {
     return this.type();
   });
 
-  hasValue = computed(() => this.value().length > 0);
   isPassword = computed(() => this.type() === 'password');
 
   // CVA callbacks
@@ -56,22 +53,13 @@ export class AuthInput implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {
-    // handled via input signal + attr.disabled binding in template
-  }
-
   onInput(event: Event): void {
     const val = (event.target as HTMLInputElement).value;
     this.value.set(val);
     this.onChange(val);
   }
 
-  onFocus(): void {
-    this.isFocused.set(true);
-  }
-
   onBlur(): void {
-    this.isFocused.set(false);
     this.onTouched();
   }
 

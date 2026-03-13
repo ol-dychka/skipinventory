@@ -1,6 +1,4 @@
-$primary: #2e4057;
-$error: #f26b6b;
-$text-muted: #444444;
+@import 'tailwindcss';
 
 html,
 body {

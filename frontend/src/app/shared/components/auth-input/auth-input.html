@@ -1,26 +1,21 @@
-<div>
-  <p>{{ label() }}</p>
-  <div class="flex">
+<div class="space-y-2 pb-6">
+  <p class="text-cyan-600">{{ label() }}</p>
+  <div class="flex gap-2">
     <input
-      class="input"
-      [id]="type()"
+      class="rounded-lg border-2 border-gray-200 p-2"
       [type]="resolvedType()"
       [placeholder]="placeholder()"
       [disabled]="disabled()"
       [value]="value()"
       (input)="onInput($event)"
-      (focus)="onFocus()"
       (blur)="onBlur()"
-      autocomplete="off"
     />
 
     @if (isPassword()) {
       <button
         type="button"
-        class="button"
+        class="w-16 cursor-pointer rounded-lg bg-cyan-600 text-center text-white transition-colors duration-300 hover:bg-cyan-700"
         (click)="togglePasswordVisibility()"
-        [attr.aria-label]="isPasswordVisible() ? 'Hide password' : 'Show password'"
-        tabindex="-1"
       >
         @if (isPasswordVisible()) {
           <p>Hide</p>
@@ -32,6 +27,6 @@
   </div>
 
   @if (error()) {
-    <p class="error">{{ error() }}</p>
+    <p class="rounded-lg bg-red-100 p-1 text-red-500">{{ error() }}</p>
   }
 </div>
