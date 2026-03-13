@@ -2,7 +2,7 @@ using System.Text;
 using Application.Core;
 using Application.Interfaces;
 using Application.Organizations.Queries;
-using Infrastructure.Authentication;
+using Infrastructure.Auth;
 using Infrastructure.Persistence;
 using Infrastructure.Persistence.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -56,10 +56,22 @@ builder.Services.AddAuthentication(options =>
 });
 builder.Services.AddAuthorization();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular", policy =>
+        {
+            policy.WithOrigins("http://localhost:4200")
+                  .AllowAnyHeader()
+                  .AllowAnyMethod()
+                  .AllowCredentials();
+        });
+});
+
 var app = builder.Build();
 
-app.MapControllers();
+app.UseCors("AllowAngular");
 app.UseAuthentication();
 app.UseAuthorization();
+app.MapControllers();
 
 app.Run();

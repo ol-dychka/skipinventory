@@ -1,1 +1,28 @@
-<p>register works!</p>
+<div class="container">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <app-auth-input type="text" label="Name" placeholder="Your Name" />
+
+    <app-auth-input
+      type="email"
+      label="Email"
+      placeholder="you@example.com"
+      formControlName="email"
+      [error]="emailError"
+    />
+
+    <app-auth-input
+      type="password"
+      label="Password"
+      placeholder="••••••••"
+      formControlName="password"
+      [error]="passwordError"
+    />
+
+    <p>I am the business owner</p>
+    <input type="checkbox" />
+
+    <button type="submit" [disabled]="loading()" class="button">
+      {{ loading() ? 'Signing in…' : 'Sign in' }}
+    </button>
+  </form>
+</div>

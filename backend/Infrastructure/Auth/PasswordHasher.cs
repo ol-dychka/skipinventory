@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 using Application.Interfaces;
 
-namespace Infrastructure.Authentication;
+namespace Infrastructure.Auth;
 
 public class PasswordHasher : IPasswordHasher
 {

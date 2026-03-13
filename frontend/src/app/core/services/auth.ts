@@ -1,52 +1,56 @@
 import { Injectable, signal, computed, inject } from '@angular/core';
-import { Router } from '@angular/router';
-import { AuthApi, LoginRequest } from '../services/auth-api';
 import { tap } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+import { LoginRequest, AuthResponse, RegisterRequest } from '../models/auth';
 
 @Injectable({
   providedIn: 'root',
 })
 export class Auth {
-  private readonly api = inject(AuthApi);
-  private readonly router = inject(Router);
+  private api = environment.apiUrl;
+  private readonly http = inject(HttpClient);
 
   private readonly accessTokenSignal = signal<string | null>(null);
 
-  readonly isAuthenticated = computed(() => !!this.accessTokenSignal());
+  isAuthenticated() {
+    return !!this.accessTokenSignal() || sessionStorage.getItem('isLoggedIn') === 'true';
+  }
+
+  getAccessToken() {
+    return this.accessTokenSignal();
+  }
 
   login(payload: LoginRequest) {
-    return this.api.login(payload).pipe(
+    return this.http.post<AuthResponse>(`${this.api}/auth/login`, payload).pipe(
       tap((response) => {
         this.accessTokenSignal.set(response.accessToken);
-
-        localStorage.setItem('access_token', response.accessToken);
-        localStorage.setItem('refresh_token', response.refreshToken);
-
-        this.router.navigate(['/dashboard']);
+        sessionStorage.setItem('isLoggedIn', 'true');
       }),
     );
   }
 
-  logout(): void {
+  register(payload: RegisterRequest) {
+    return this.http.post<AuthResponse>(`${this.api}/auth/register`, payload).pipe(
+      tap((response) => {
+        this.accessTokenSignal.set(response.accessToken);
+        sessionStorage.setItem('isLoggedIn', 'true');
+      }),
+    );
+  }
+
+  refresh() {
+    return this.http.post<AuthResponse>(`${this.api}/auth/refresh`, {}).pipe(
+      tap((response) => {
+        this.accessTokenSignal.set(response.accessToken);
+        sessionStorage.setItem('isLoggedIn', 'true');
+      }),
+    );
+  }
+
+  logout() {
     this.accessTokenSignal.set(null);
-
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('refresh_token');
-
-    // get backend to logout as well
-
-    this.router.navigate(['/login']);
-  }
-
-  getAccessToken(): string | null {
-    return this.accessTokenSignal();
-  }
-
-  restoreSession(): void {
-    const token = localStorage.getItem('access_token');
-
-    if (token) {
-      this.accessTokenSignal.set(token);
-    }
+    sessionStorage.removeItem('isLoggedIn');
+    return this.http.post<AuthResponse>(`${this.api}/auth/logout`, {});
   }
 }

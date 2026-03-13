@@ -1,32 +1,44 @@
-import { Component, ChangeDetectionStrategy, signal, inject } from '@angular/core';
-import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
+import { Component, inject, signal } from '@angular/core';
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+import { AuthInput } from '../../../shared/components/auth-input/auth-input';
 import { Auth } from '../../../core/services/auth';
 import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [ReactiveFormsModule],
+  standalone: true,
+  imports: [ReactiveFormsModule, AuthInput],
   templateUrl: './login.html',
   styleUrl: './login.scss',
 })
 export class Login {
-  private readonly fb = inject(FormBuilder);
-  private readonly auth = inject(Auth);
+  private fb = inject(FormBuilder);
+  private auth = inject(Auth);
 
   readonly loading = signal(false);
 
-  readonly form = this.fb.nonNullable.group({
+  form = this.fb.nonNullable.group({
     email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
   });
 
-  get emailInvalid(): boolean {
-    const control = this.form.controls.email;
-    return control.invalid && (control.touched || control.dirty);
+  get emailError(): string | null {
+    const ctrl = this.form.get('email');
+    if (!ctrl?.touched || !ctrl.errors) return null;
+    if (ctrl.errors['required']) return 'Email is required';
+    if (ctrl.errors['email']) return 'Enter a valid email address';
+    return null;
   }
 
-  submit(): void {
+  get passwordError(): string | null {
+    const ctrl = this.form.get('password');
+    if (!ctrl?.touched || !ctrl.errors) return null;
+    if (ctrl.errors['required']) return 'Password is required';
+    if (ctrl.errors['minlength']) return 'Password must be at least 8 characters';
+    return null;
+  }
+
+  onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
