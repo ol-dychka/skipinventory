@@ -1,6 +1,7 @@
 using System;
 using Application.Core;
 using Application.Interfaces;
+using Application.Models;
 using Domain;
 using MediatR;
 
@@ -8,7 +9,7 @@ namespace Application.Auth.Commands;
 
 public class Refresh
 {
-    public record Response(string AccessToken, string RefreshToken);
+    public record Response(string AccessToken, RefreshTokenData RefreshTokenData);
     public record Command(string RefreshToken) : IRequest<Result<Response>>;
 
     public class Handler(
@@ -41,7 +42,7 @@ public class Refresh
             var accessToken = tokenGenerator.
                 GenerateAccessToken(currentRefreshToken.User.Id, currentRefreshToken.User.Email);
 
-            return Result<Response>.Success(new Response(accessToken, newRefreshTokenData.Token)); 
+            return Result<Response>.Success(new Response(accessToken, newRefreshTokenData)); 
         }
     }
 }

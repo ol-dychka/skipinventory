@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { Auth } from '../services/auth';
+import { catchError, map, of } from 'rxjs';
 
 export const noAuthGuard: CanActivateFn = (route, state) => {
   const auth = inject(Auth);
@@ -11,5 +12,8 @@ export const noAuthGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  return true;
+  return auth.refresh().pipe(
+    map(() => false),
+    catchError(() => of(true)),
+  );
 };

@@ -1,5 +1,5 @@
 import { Injectable, signal, computed, inject } from '@angular/core';
-import { tap } from 'rxjs';
+import { finalize, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { LoginRequest, AuthResponse, RegisterRequest } from '../models/auth';
@@ -22,35 +22,44 @@ export class Auth {
   }
 
   login(payload: LoginRequest) {
-    return this.http.post<AuthResponse>(`${this.api}/auth/login`, payload).pipe(
-      tap((response) => {
-        this.accessTokenSignal.set(response.accessToken);
-        sessionStorage.setItem('isLoggedIn', 'true');
-      }),
-    );
+    return this.http
+      .post<AuthResponse>(`${this.api}/auth/login`, payload, { withCredentials: true })
+      .pipe(
+        tap((response) => {
+          this.accessTokenSignal.set(response.accessToken);
+          sessionStorage.setItem('isLoggedIn', 'true');
+        }),
+      );
   }
 
   register(payload: RegisterRequest) {
-    return this.http.post<AuthResponse>(`${this.api}/auth/register`, payload).pipe(
-      tap((response) => {
-        this.accessTokenSignal.set(response.accessToken);
-        sessionStorage.setItem('isLoggedIn', 'true');
-      }),
-    );
+    return this.http
+      .post<AuthResponse>(`${this.api}/auth/register`, payload, { withCredentials: true })
+      .pipe(
+        tap((response) => {
+          this.accessTokenSignal.set(response.accessToken);
+          sessionStorage.setItem('isLoggedIn', 'true');
+        }),
+      );
   }
 
   refresh() {
-    return this.http.post<AuthResponse>(`${this.api}/auth/refresh`, {}).pipe(
-      tap((response) => {
-        this.accessTokenSignal.set(response.accessToken);
-        sessionStorage.setItem('isLoggedIn', 'true');
-      }),
-    );
+    return this.http
+      .post<AuthResponse>(`${this.api}/auth/refresh`, {}, { withCredentials: true })
+      .pipe(
+        tap((response) => {
+          this.accessTokenSignal.set(response.accessToken);
+          sessionStorage.setItem('isLoggedIn', 'true');
+        }),
+      );
   }
 
   logout() {
-    this.accessTokenSignal.set(null);
-    sessionStorage.removeItem('isLoggedIn');
-    return this.http.post<AuthResponse>(`${this.api}/auth/logout`, {});
+    return this.http.post<AuthResponse>(`${this.api}/auth/logout`, {}).pipe(
+      finalize(() => {
+        this.accessTokenSignal.set(null);
+        sessionStorage.removeItem('isLoggedIn');
+      }),
+    );
   }
 }

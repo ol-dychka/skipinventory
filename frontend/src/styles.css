@@ -8,3 +8,9 @@ body {
   padding: 0;
   margin: 0;
 }
+
+@layer components {
+  .btn {
+    @apply cursor-pointer rounded-lg bg-cyan-600 text-center text-white transition-colors duration-300 hover:bg-cyan-700;
+  }
+}
