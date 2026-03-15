@@ -25,6 +25,13 @@ public class UserRepository(PsqlDbContext context) : IUserRepository
             .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
     }
 
+    public async Task<User?> GetByIdWithOrganizationAsync(string id, CancellationToken cancellationToken)
+    {
+        return await _context.Users
+            .Include(u => u.Organization)
+            .FirstOrDefaultAsync(u => u.Id == id, cancellationToken: cancellationToken);
+    }
+
     public Task SaveChangesAsync(CancellationToken cancellationToken)
     {
         return _context.SaveChangesAsync(cancellationToken);

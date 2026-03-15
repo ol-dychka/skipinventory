@@ -1,6 +1,5 @@
 using System;
 using Application.Interfaces;
-using Domain;
 using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Security.Cryptography;
