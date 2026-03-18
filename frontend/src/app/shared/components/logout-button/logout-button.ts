@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { Auth } from '../../../core/services/auth';
+import { AuthService } from '../../../core/services/auth-service';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 
@@ -9,15 +9,15 @@ import { finalize } from 'rxjs';
   templateUrl: './logout-button.html',
 })
 export class LogoutButton {
-  private auth = inject(Auth);
-  private router = inject(Router);
+  authService = inject(AuthService);
+  router = inject(Router);
 
   readonly loading = signal(false);
 
   onClick(): void {
     this.loading.set(true);
 
-    this.auth
+    this.authService
       .logout()
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe(() => this.router.navigate(['/login']));

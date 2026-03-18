@@ -1,7 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthInput } from '../../../shared/components/auth-input/auth-input';
-import { Auth } from '../../../core/services/auth';
+import { AuthService } from '../../../core/services/auth-service';
 import { finalize } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 
@@ -13,7 +13,7 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class Register {
   private fb = inject(FormBuilder);
-  private auth = inject(Auth);
+  private authService = inject(AuthService);
   private router = inject(Router);
 
   readonly loading = signal(false);
@@ -51,7 +51,7 @@ export class Register {
 
     console.log(this.form.getRawValue());
 
-    this.auth
+    this.authService
       .register(this.form.getRawValue())
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe(() => this.router.navigate(['/dashboard']));

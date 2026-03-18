@@ -1,6 +1,7 @@
 <nav class="fixed top-0 w-full">
   <div class="flex justify-between gap-4">
     <a routerLink="/dashboard">skipinventory</a>
+    <span>{{ authService.currentUser()?.name }}</span>
     <app-logout-button />
   </div>
 </nav>

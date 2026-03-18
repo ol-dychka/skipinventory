@@ -9,10 +9,18 @@ namespace API.Controllers;
 
 public class UserController : BaseAPIController
 {
-    [HttpPost("details")]
+    [HttpGet("details")]
     public async Task<IActionResult> Register()
     {
         var id = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+        
+        Console.WriteLine($"[DEBUG] sub claim: {id}");         // prints to terminal
+        Console.WriteLine($"[DEBUG] all claims:");
+        foreach (var claim in User.Claims)
+        {
+            Console.WriteLine($"  {claim.Type} = {claim.Value}"); // dumps every claim
+        }
+
         if (id == null) return Unauthorized("token does not exist");
 
         var result = await Mediator.Send(new Details.Query(id));
