@@ -1,8 +1,8 @@
 <div class="space-y-2 pb-6">
-  <p class="text-cyan-600">{{ label() }}</p>
+  <p class="text-primary">{{ label() }}</p>
   <div class="flex gap-2">
     <input
-      class="rounded-lg border-2 border-gray-200 p-2"
+      class="border-secondary rounded-lg border-2 p-2"
       [type]="resolvedType()"
       [placeholder]="placeholder()"
       [disabled]="disabled()"
@@ -23,6 +23,6 @@
   </div>
 
   @if (error()) {
-    <p class="rounded-lg bg-red-100 p-1 text-red-500">{{ error() }}</p>
+    <p class="bg-error-l text-error rounded-lg p-1">{{ error() }}</p>
   }
 </div>

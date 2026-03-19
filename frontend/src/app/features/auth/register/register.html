@@ -1,6 +1,6 @@
 <div class="flex h-full items-center justify-center">
   <div class="space-y-12">
-    <p class="text-center text-6xl font-bold text-gray-400">Register</p>
+    <p class="text-primary text-center text-6xl font-bold">Register</p>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <app-auth-input type="text" label="Name" placeholder="Your Name" formControlName="name" />
 
@@ -21,17 +21,17 @@
       />
 
       <div class="flex gap-2 pb-6">
-        <p class="text-cyan-600">I am the business owner</p>
-        <input class="accent-cyan-600" type="checkbox" formControlName="isOwner" />
+        <p class="text-primary">I am the business owner</p>
+        <input class="accent-primary" type="checkbox" formControlName="isOwner" />
       </div>
 
       <button class="btn w-full p-4" type="submit" [disabled]="loading()">
         {{ loading() ? 'Signing in…' : 'Sign in' }}
       </button>
     </form>
-    <p class="text-center text-gray-400">
+    <p class="text-secondary text-center">
       Already have an account?
-      <a routerLink="/login" class="cursor-pointer underline hover:text-cyan-600">
+      <a routerLink="/login" class="hover:text-primary-l cursor-pointer underline">
         Login instead
       </a>
     </p>

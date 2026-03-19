@@ -1,5 +1,25 @@
 @import 'tailwindcss';
 
+@theme {
+  --color-*: initial;
+
+  --color-white: #ffffff;
+
+  --color-black-l: #555555;
+  --color-black: #000000;
+
+  --color-primary-l: #778da9;
+  --color-primary: #415a77;
+  --color-primary-d: #1b263b;
+
+  --color-secondary: #e0e1dd;
+
+  --color-tertiary: #0d1b2a;
+
+  --color-error-l: #ef7674;
+  --color-error: #d91e36;
+}
+
 html,
 body {
   font-family: Arial, Helvetica, sans-serif;
@@ -11,6 +31,6 @@ body {
 
 @layer components {
   .btn {
-    @apply cursor-pointer rounded-lg bg-cyan-600 text-center text-white transition-colors duration-300 hover:bg-cyan-700;
+    @apply bg-primary hover:bg-primary-d cursor-pointer rounded-lg text-center text-white transition-colors duration-300;
   }
 }
