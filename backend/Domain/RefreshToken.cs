@@ -1,24 +1,15 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Domain;
 
-public class RefreshToken
+public class RefreshToken(string userId, string hash, DateTime expiresAt)
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
-    public required string UserId { get; set; }
-    public User? User { get; set; }
-    public required string Hash { get; set; }
-    public DateTime ExpiresAt { get; set; }
+    public string UserId { get; set; } = userId;
+    public string Hash { get; set; } = hash;
+    public DateTime ExpiresAt { get; set; } = expiresAt;
     public bool IsRevoked { get; set; } = false;
 
-    private RefreshToken() {}
-
-    [SetsRequiredMembers]
-    public RefreshToken(string userId, string hash, DateTime expiresAt)
-    {
-        UserId = userId;
-        Hash = hash;
-        ExpiresAt = expiresAt;
-    }
+    // relationships
+    public User User { get; set; } = null!;
 }

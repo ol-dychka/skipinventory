@@ -36,7 +36,6 @@ public class Refresh
             refreshTokenRepository.Add(newRefreshToken);
             
             currentRefreshToken.IsRevoked = true;
-
             await refreshTokenRepository.SaveChangesAsync(cancellationToken);
 
             var accessToken = tokenGenerator.

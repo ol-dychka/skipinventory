@@ -10,7 +10,7 @@ namespace Application.Auth.Commands;
 public class Register
 {
     public record Response(string AccessToken, RefreshTokenData RefreshTokenData);
-    public record Command(string Email, string Password, string Name, bool IsOwner) : IRequest<Result<Response>>;
+    public record Command(string Email, string Password, string Name) : IRequest<Result<Response>>;
 
     public class Handler(
         IUserRepository userRepository,
@@ -31,17 +31,12 @@ public class Register
             var refreshTokenHash = tokenGenerator.HashRefreshToken(refreshTokenData.Token);
             var passwordHash = passwordHasher.HashPassword(request.Password);
 
-            user = request.IsOwner
-                ? User.CreateOwner(request.Email, passwordHash, request.Name)
-                : User.CreateEmployee(request.Email, passwordHash, request.Name);
+            user = new User(request.Email, passwordHash, request.Name);
             userRepository.Add(user);
-
             await userRepository.SaveChangesAsync(cancellationToken);
 
             var refreshToken = new RefreshToken(user.Id, refreshTokenHash, refreshTokenData.ExpiresAt);
-            
             refreshTokenRepository.Add(refreshToken);
-
             await refreshTokenRepository.SaveChangesAsync(cancellationToken);
 
             var accessToken = tokenGenerator.GenerateAccessToken(user.Id, user.Email);

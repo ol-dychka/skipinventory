@@ -1,5 +1,5 @@
 using System;
-using API.DTOs.Requests;
+using API.DTOs.Requests.Organizations;
 using Application.Organizations.Commands;
 using Application.Organizations.Queries;
 using Domain;
@@ -22,9 +22,9 @@ public class OrganizationController : BaseAPIController
     }
 
     [HttpPost]
-    public async Task<ActionResult<string>> Create([FromBody] CreateOrganizationRequest request)
+    public async Task<ActionResult<string>> Create([FromBody] CreateRequest request)
     {
-        var id = await Mediator.Send(new CreateOrganization.Command(request.Name));
+        var id = await Mediator.Send(new Create.Command(request.Name, request.CreatedBy));
         return Ok(id);
     }
 

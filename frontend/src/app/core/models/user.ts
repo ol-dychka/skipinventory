@@ -1,11 +1,16 @@
 import { OrganizationModel } from './organization';
 
+interface Membership {
+  role: string;
+  organizationId: string;
+  organizationName: string;
+}
+
 export interface UserModel {
   id: string;
   name: string;
   email: string;
-  role: string;
-  organization?: OrganizationModel;
+  memberships: Membership[];
 }
 
 export interface UserResponse {

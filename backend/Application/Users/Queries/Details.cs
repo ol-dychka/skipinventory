@@ -14,7 +14,7 @@ public class Details
     {
         public async Task<Result<User>> Handle(Query request, CancellationToken cancellationToken)
         {
-            var user = await repository.GetByIdWithOrganizationAsync(request.Id, cancellationToken);
+            var user = await repository.GetByIdAsync(request.Id, cancellationToken);
             
             if (user == null) return Result<User>.Failure("user does not exist");
 

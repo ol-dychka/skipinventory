@@ -31,9 +31,7 @@ public class Login
             var refreshTokenHash = tokenGenerator.HashRefreshToken(refreshTokenData.Token);
 
             var refreshToken = new RefreshToken(user.Id, refreshTokenHash, refreshTokenData.ExpiresAt);
-            
             refreshTokenRepository.Add(refreshToken);
-
             await refreshTokenRepository.SaveChangesAsync(cancellationToken);
 
             var accessToken = tokenGenerator.GenerateAccessToken(user.Id, user.Email);

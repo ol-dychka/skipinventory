@@ -15,7 +15,7 @@ public class AuthController : BaseAPIController
     public async Task<IActionResult> Register([FromBody] RegisterRequest request)
     {
         var result = await Mediator.Send(new Register.Command
-            (request.Email, request.Password, request.Name, request.IsOwner));
+            (request.Email, request.Password, request.Name));
         if (!result.IsSuccess || result.Value == null) return Unauthorized(result.Error);
 
         Response.Cookies.SetRefreshToken(result.Value.RefreshTokenData);

@@ -25,10 +25,11 @@ public class UserRepository(PsqlDbContext context) : IUserRepository
             .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
     }
 
-    public async Task<User?> GetByIdWithOrganizationAsync(string id, CancellationToken cancellationToken)
+    public async Task<User?> GetByIdAsync(string id, CancellationToken cancellationToken)
     {
         return await _context.Users
-            .Include(u => u.Organization)
+            .Include(u => u.Memberships)
+                .ThenInclude(m => m.Organization)
             .FirstOrDefaultAsync(u => u.Id == id, cancellationToken: cancellationToken);
     }
 

@@ -26,7 +26,7 @@ public class UserController : BaseAPIController
         var result = await Mediator.Send(new Details.Query(id));
         if (!result.IsSuccess || result.Value == null) return Unauthorized(result.Error);
 
-        var userDTO = new UserDetailsResponse(result.Value);
+        var userDTO = new UserDto(result.Value);
 
         return Ok(new { user = userDTO });
     }
