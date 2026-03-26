@@ -12,7 +12,7 @@ export const noAuthGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  return authService.refresh().pipe(
+  return authService.refresh({}).pipe(
     map(() => {
       router.navigate(['/dashboard']);
       return false;

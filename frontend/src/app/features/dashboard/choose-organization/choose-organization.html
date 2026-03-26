@@ -1,0 +1,19 @@
+@let organization = organizationService.currentOrganization();
+<!-- Protected endpoint, user is never null -->
+@let memberships = authService.currentUser()!.memberships;
+
+@if (organization) {
+  <p>organization exists</p>
+} @else {
+  <div class="flex flex-col items-center justify-center gap-2">
+    @if (memberships.length > 0) {
+      @for (m of memberships; track m) {
+        <p>{{ m.organizationName }} - {{ m.role }}</p>
+      }
+    } @else {
+      <p>You are currently not in any Organization.</p>
+    }
+    <button class="btn" routerLink="/join-organization">Join an Organization</button>
+    <button class="btn" routerLink="/create-organization">Create an Organization</button>
+  </div>
+}

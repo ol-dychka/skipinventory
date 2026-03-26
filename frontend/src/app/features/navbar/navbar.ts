@@ -5,7 +5,7 @@ import { AuthService } from '../../core/services/auth-service';
 
 @Component({
   selector: 'app-navbar',
-  imports: [RouterLink, LogoutButton],
+  imports: [LogoutButton],
   templateUrl: './navbar.html',
 })
 export class Navbar {

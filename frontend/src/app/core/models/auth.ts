@@ -10,6 +10,10 @@ export interface RegisterRequest {
   isOwner: boolean;
 }
 
+export interface RefreshRequest {
+  organizationId?: string;
+}
+
 export interface AuthResponse {
   accessToken: string;
 }

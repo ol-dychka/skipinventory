@@ -13,7 +13,7 @@ import {
 } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { LoginRequest, AuthResponse, RegisterRequest } from '../models/auth';
+import { LoginRequest, AuthResponse, RegisterRequest, RefreshRequest } from '../models/auth';
 import { UserModel, UserResponse } from '../models/user';
 
 @Injectable({
@@ -76,9 +76,9 @@ export class AuthService {
       );
   }
 
-  refresh(): Observable<string> {
+  refresh(payload: RefreshRequest): Observable<string> {
     return this.http
-      .post<AuthResponse>(`${this.api}/auth/refresh`, {}, { withCredentials: true })
+      .post<AuthResponse>(`${this.api}/auth/refresh`, payload, { withCredentials: true })
       .pipe(
         switchMap(({ accessToken }) => this.applySession(accessToken)),
         catchError((err) => this.handleSessionError(err)),

@@ -4,5 +4,5 @@ namespace API.DTOs.Requests.Auth;
 
 public class RefreshRequest
 {
-    public required string RefreshToken { get; set; }
+    public string? OrganizationId { get; set; }
 }

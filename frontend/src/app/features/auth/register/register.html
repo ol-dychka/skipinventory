@@ -25,11 +25,11 @@
         <input class="accent-primary" type="checkbox" formControlName="isOwner" />
       </div>
 
-      <button class="btn w-full p-4" type="submit" [disabled]="loading()">
+      <button class="btn w-full" type="submit" [disabled]="loading()">
         {{ loading() ? 'Signing in…' : 'Sign in' }}
       </button>
     </form>
-    <p class="text-secondary text-center">
+    <p class="text-black-l text-center">
       Already have an account?
       <a routerLink="/login" class="hover:text-primary-l cursor-pointer underline">
         Login instead

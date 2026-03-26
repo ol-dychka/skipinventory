@@ -17,54 +17,60 @@ builder.Services.AddDbContext<PsqlDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddMediatR(x =>
-    x.RegisterServicesFromAssemblyContaining<GetOrganizationList.Handler>());
+    x.RegisterServicesFromAssemblyContaining<GetOrganizationList.Handler>()
+);
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
 builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
+builder.Services.AddScoped<IMemberRepository, MemberRepository>();
 
 builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
-builder.Services.AddAuthentication(options =>
-{
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.MapInboundClaims = false;
-    
-    var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
-
-    options.TokenValidationParameters = new TokenValidationParameters
+builder
+    .Services.AddAuthentication(options =>
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
+        options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+        options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.MapInboundClaims = false;
 
-        ValidIssuer = jwtSettings!.Issuer,
-        ValidAudience = jwtSettings.Audience,
+        var jwtSettings = builder.Configuration.GetSection("JwtSettings").Get<JwtSettings>();
 
-        IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.UTF8.GetBytes(jwtSettings.Secret))
-    };
-});
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+
+            ValidIssuer = jwtSettings!.Issuer,
+            ValidAudience = jwtSettings.Audience,
+
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Secret)),
+        };
+    });
 builder.Services.AddAuthorization();
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngular", policy =>
+    options.AddPolicy(
+        "AllowAngular",
+        policy =>
         {
-            policy.WithOrigins("http://localhost:4200")
-                  .AllowAnyHeader()
-                  .AllowAnyMethod()
-                  .AllowCredentials();
-        });
+            policy
+                .WithOrigins("http://localhost:4200")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        }
+    );
 });
 
 var app = builder.Build();

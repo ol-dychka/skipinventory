@@ -1,9 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Navbar } from '../../navbar/navbar';
+import { OrganizationService } from '../../../core/services/organization-service';
+import { AuthService } from '../../../core/services/auth-service';
 
 @Component({
   selector: 'app-dashboard',
-  imports: [Navbar],
+  imports: [],
   templateUrl: './dashboard.html',
 })
 export class Dashboard {}
