@@ -15,6 +15,7 @@ import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { LoginRequest, AuthResponse, RegisterRequest, RefreshRequest } from '../models/auth';
 import { UserModel, UserResponse } from '../models/user';
+import { OrganizationService } from './organization-service';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +23,7 @@ import { UserModel, UserResponse } from '../models/user';
 export class AuthService {
   private readonly api = environment.apiUrl;
   private readonly http = inject(HttpClient);
+  private readonly organizationService = inject(OrganizationService);
 
   readonly currentUser = signal<UserModel | null>(null);
 
@@ -76,6 +78,9 @@ export class AuthService {
       );
   }
 
+  // "refresh" should only called on page reload
+  // provides clean reset to plain token + user
+  // organization access reset is an intended behavior
   refresh(payload: RefreshRequest): Observable<string> {
     return this.http
       .post<AuthResponse>(`${this.api}/auth/refresh`, payload, { withCredentials: true })
@@ -96,8 +101,14 @@ export class AuthService {
       this.isRefreshing = true;
       this.refreshSubject.next(null);
 
+      // case: token expires mid-way into organization workflow
+      // this is the only method that refreshes token with organization data
+      const payload: RefreshRequest = {
+        organizationId: this.organizationService.currentOrganization()?.id,
+      };
+
       return this.http
-        .post<AuthResponse>(`${this.api}/auth/refresh`, {}, { withCredentials: true })
+        .post<AuthResponse>(`${this.api}/auth/refresh`, payload, { withCredentials: true })
         .pipe(
           switchMap(({ accessToken }) => {
             this.isRefreshing = false;

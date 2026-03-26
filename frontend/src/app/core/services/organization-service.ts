@@ -1,5 +1,10 @@
 import { inject, Injectable, signal } from '@angular/core';
-import { OrganizationModel } from '../models/organization';
+import {
+  CreateOrganizationRequest,
+  JoinOrganizationRequest,
+  OrganizationModel,
+  OrganizationResponse,
+} from '../models/organization';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -14,11 +19,11 @@ export class OrganizationService {
 
   readonly currentOrganization = signal<OrganizationModel | null>(null);
 
-  create(payload: createOrganizationRequest) {
+  create(payload: CreateOrganizationRequest) {
     return this.http.post<OrganizationResponse>(`${this.api}/auth/login`, payload);
   }
 
-  join(payload: joinOrganizationRequest) {
+  join(payload: JoinOrganizationRequest) {
     return;
   }
 }

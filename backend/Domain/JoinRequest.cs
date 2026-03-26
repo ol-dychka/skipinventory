@@ -3,9 +3,7 @@ using Domain.StaticClasses;
 
 namespace Domain;
 
-public class JoinRequest(
-    string userId,
-    string organizationId)
+public class JoinRequest(string userId, string organizationId)
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string UserId { get; set; } = userId;
