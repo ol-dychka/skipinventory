@@ -78,9 +78,6 @@ export class AuthService {
       );
   }
 
-  // "refresh" should only called on page reload
-  // provides clean reset to plain token + user
-  // organization access reset is an intended behavior
   refresh(payload: RefreshRequest): Observable<string> {
     return this.http
       .post<AuthResponse>(`${this.api}/auth/refresh`, payload, { withCredentials: true })

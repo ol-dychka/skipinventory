@@ -3,11 +3,11 @@ import {
   CreateOrganizationRequest,
   JoinOrganizationRequest,
   OrganizationModel,
-  OrganizationResponse,
+  CreateOrganizationResponse,
 } from '../models/organization';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { map, Observable, switchMap } from 'rxjs';
 import { AuthService } from './auth-service';
 
 @Injectable({
@@ -16,14 +16,27 @@ import { AuthService } from './auth-service';
 export class OrganizationService {
   private readonly api = environment.apiUrl;
   private readonly http = inject(HttpClient);
+  private authService = inject(AuthService);
 
   readonly currentOrganization = signal<OrganizationModel | null>(null);
 
-  create(payload: CreateOrganizationRequest) {
-    return this.http.post<OrganizationResponse>(`${this.api}/auth/login`, payload);
+  create(payload: CreateOrganizationRequest): Observable<OrganizationModel> {
+    return this.http.post<CreateOrganizationResponse>(`${this.api}/organization`, payload).pipe(
+      switchMap(({ organizationId }) =>
+        this.authService.refresh({ organizationId }).pipe(map(() => organizationId)),
+      ),
+      switchMap((organizationId) =>
+        this.http.get<OrganizationModel>(`${this.api}/organization/${organizationId}`),
+      ),
+    );
   }
 
-  join(payload: JoinOrganizationRequest) {
+  get(organizationId: string) {
+    return this.http.get<OrganizationModel>(`${this.api}/organization/${organizationId}`);
+  }
+
+  request(payload: JoinOrganizationRequest) {
+    //request to join
     return;
   }
 }

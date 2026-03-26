@@ -3,7 +3,7 @@ export interface OrganizationModel {
   name: string;
 }
 
-export interface OrganizationResponse {
+export interface CreateOrganizationResponse {
   organizationId: string;
 }
 
