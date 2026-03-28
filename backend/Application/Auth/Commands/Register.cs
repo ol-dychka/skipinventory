@@ -10,19 +10,25 @@ namespace Application.Auth.Commands;
 public class Register
 {
     public record Response(string AccessToken, RefreshTokenData RefreshTokenData);
+
     public record Command(string Email, string Password, string Name) : IRequest<Result<Response>>;
 
     public class Handler(
         IUserRepository userRepository,
         IRefreshTokenRepository refreshTokenRepository,
+        IUnitOfWork unitOfWork,
         ITokenGenerator tokenGenerator,
         IPasswordHasher passwordHasher
     ) : IRequestHandler<Command, Result<Response>>
     {
-        public async Task<Result<Response>> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Result<Response>> Handle(
+            Command request,
+            CancellationToken cancellationToken
+        )
         {
             var user = await userRepository.GetByEmailAsync(request.Email, cancellationToken);
-            if (user != null) return Result<Response>.Failure("Email already in use");
+            if (user != null)
+                return Result<Response>.Failure("Email already in use");
 
             // password validation
             // email validation
@@ -33,15 +39,19 @@ public class Register
 
             user = new User(request.Email, passwordHash, request.Name);
             userRepository.Add(user);
-            await userRepository.SaveChangesAsync(cancellationToken);
 
-            var refreshToken = new RefreshToken(user.Id, refreshTokenHash, refreshTokenData.ExpiresAt);
+            var refreshToken = new RefreshToken(
+                user.Id,
+                refreshTokenHash,
+                refreshTokenData.ExpiresAt
+            );
             refreshTokenRepository.Add(refreshToken);
-            await refreshTokenRepository.SaveChangesAsync(cancellationToken);
+
+            await unitOfWork.SaveChangesAsync(cancellationToken);
 
             var accessToken = tokenGenerator.GenerateAccessToken(user.Id, user.Email);
 
-            return Result<Response>.Success(new Response(accessToken, refreshTokenData)); 
+            return Result<Response>.Success(new Response(accessToken, refreshTokenData));
         }
     }
 }

@@ -13,26 +13,24 @@ public class OrganizationRepository(PsqlDbContext context) : IOrganizationReposi
     {
         _context.Organizations.Add(organization);
     }
-    
+
     public void Delete(Organization organization)
     {
         _context.Organizations.Remove(organization);
     }
 
-    public Task SaveChangesAsync(CancellationToken cancellationToken)
+    public Task<bool> ExistsWithNameAsync(string name, CancellationToken cancellationToken)
     {
-        return _context.SaveChangesAsync(cancellationToken);
+        return _context.Organizations.AnyAsync(o => o.Name == name, cancellationToken);
     }
 
-    public async Task<List<Organization>> GetAllAsync(CancellationToken cancellationToken)
+    public Task<List<Organization>> GetAllAsync(CancellationToken cancellationToken)
     {
-        return await _context.Organizations
-            .ToListAsync(cancellationToken);
+        return _context.Organizations.ToListAsync(cancellationToken);
     }
 
-    public async Task<Organization?> GetByIdAsync(string id, CancellationToken cancellationToken)
+    public Task<Organization?> GetByIdAsync(string id, CancellationToken cancellationToken)
     {
-        return await _context.Organizations
-            .FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
+        return _context.Organizations.FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
     }
 }

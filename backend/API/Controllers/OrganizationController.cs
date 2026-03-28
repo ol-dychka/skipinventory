@@ -1,4 +1,5 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
 using API.DTOs.Requests.Organizations;
 using Application.Organizations.Commands;
 using Application.Organizations.Queries;
@@ -24,21 +25,14 @@ public class OrganizationController : BaseAPIController
     [HttpPost]
     public async Task<ActionResult<string>> Create([FromBody] CreateRequest request)
     {
-        var id = await Mediator.Send(new Create.Command(request.Name, request.CreatedBy));
-        return Ok(id);
-    }
+        var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+        if (userId == null)
+            return Unauthorized("token does not exist");
 
-    [HttpPut]
-    public async Task<ActionResult> EditOrganization(Organization organization)
-    {
-        await Mediator.Send(new EditOrganization.Command(organization));
-        return NoContent();
-    }
+        var result = await Mediator.Send(new Create.Command(request.Name, userId));
+        if (!result.IsSuccess || result.Value == null)
+            return Unauthorized(result.Error);
 
-    [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteOrganization(string id)
-    {
-        await Mediator.Send(new DeleteOrganization.Command(id));
-        return Ok();
+        return Ok(new { organizationId = result.Value });
     }
 }

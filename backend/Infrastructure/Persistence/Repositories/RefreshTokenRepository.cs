@@ -19,21 +19,18 @@ public class RefreshTokenRepository(PsqlDbContext context) : IRefreshTokenReposi
         _context.RefreshTokens.Remove(token);
     }
 
-    public async Task<RefreshToken?> GetByHashWithUserAsync(string hash, CancellationToken cancellationToken)
+    public Task<RefreshToken?> GetByHashWithUserAsync(
+        string hash,
+        CancellationToken cancellationToken
+    )
     {
-        return await _context.RefreshTokens
-            .Include(rt => rt.User)
+        return _context
+            .RefreshTokens.Include(rt => rt.User)
             .FirstOrDefaultAsync(rt => rt.Hash == hash, cancellationToken);
     }
 
-    public async Task<RefreshToken?> GetByHashAsync(string hash, CancellationToken cancellationToken)
+    public Task<RefreshToken?> GetByHashAsync(string hash, CancellationToken cancellationToken)
     {
-        return await _context.RefreshTokens
-            .FirstOrDefaultAsync(rt => rt.Hash == hash, cancellationToken);
-    }
-
-    public Task SaveChangesAsync(CancellationToken cancellationToken)
-    {
-        return _context.SaveChangesAsync(cancellationToken);
+        return _context.RefreshTokens.FirstOrDefaultAsync(rt => rt.Hash == hash, cancellationToken);
     }
 }

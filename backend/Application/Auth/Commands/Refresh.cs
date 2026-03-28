@@ -16,6 +16,7 @@ public class Refresh
     public class Handler(
         IRefreshTokenRepository refreshTokenRepository,
         IMemberRepository memberRepository,
+        IUnitOfWork unitOfWork,
         ITokenGenerator tokenGenerator
     ) : IRequestHandler<Command, Result<Response>>
     {
@@ -51,7 +52,7 @@ public class Refresh
             refreshTokenRepository.Add(newRefreshToken);
 
             currentRefreshToken.IsRevoked = true;
-            await refreshTokenRepository.SaveChangesAsync(cancellationToken);
+            await unitOfWork.SaveChangesAsync(cancellationToken);
 
             string accessToken;
             if (request.OrganizationId != null)

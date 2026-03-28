@@ -8,16 +8,18 @@ public class DeleteOrganization
 {
     public record Command(string Id) : IRequest;
 
-    public class Handler(IOrganizationRepository repository) : IRequestHandler<Command>
+    public class Handler(IOrganizationRepository repository, IUnitOfWork unitOfWork)
+        : IRequestHandler<Command>
     {
         public async Task Handle(Command request, CancellationToken cancellationToken)
         {
-            var organization = await repository.GetByIdAsync(request.Id, cancellationToken)
+            var organization =
+                await repository.GetByIdAsync(request.Id, cancellationToken)
                 ?? throw new Exception("Cannot find this organization");
 
             repository.Delete(organization);
 
-            await repository.SaveChangesAsync(cancellationToken);
+            await unitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
 }

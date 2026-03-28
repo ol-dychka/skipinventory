@@ -19,22 +19,16 @@ public class UserRepository(PsqlDbContext context) : IUserRepository
         _context.Users.Remove(user);
     }
 
-    public async Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken)
+    public Task<User?> GetByEmailAsync(string email, CancellationToken cancellationToken)
     {
-        return await _context.Users
-            .FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
+        return _context.Users.FirstOrDefaultAsync(u => u.Email == email, cancellationToken);
     }
 
-    public async Task<User?> GetByIdAsync(string id, CancellationToken cancellationToken)
+    public Task<User?> GetByIdAsync(string id, CancellationToken cancellationToken)
     {
-        return await _context.Users
-            .Include(u => u.Memberships)
+        return _context
+            .Users.Include(u => u.Memberships)
                 .ThenInclude(m => m.Organization)
             .FirstOrDefaultAsync(u => u.Id == id, cancellationToken: cancellationToken);
-    }
-
-    public Task SaveChangesAsync(CancellationToken cancellationToken)
-    {
-        return _context.SaveChangesAsync(cancellationToken);
     }
 }

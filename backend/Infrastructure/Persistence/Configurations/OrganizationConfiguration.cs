@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
+
 public class OrganizationConfiguration : IEntityTypeConfiguration<Organization>
 {
     public void Configure(EntityTypeBuilder<Organization> builder)
@@ -16,19 +17,22 @@ public class OrganizationConfiguration : IEntityTypeConfiguration<Organization>
 
         builder.HasQueryFilter(o => o.DeletedAt == null);
 
-        builder.HasOne(o => o.Creator)
-               .WithMany(u => u.CreatedOrganizations)
-               .HasForeignKey(o => o.CreatorId)
-               .OnDelete(DeleteBehavior.Restrict);
+        builder
+            .HasOne(o => o.Creator)
+            .WithMany(u => u.CreatedOrganizations)
+            .HasForeignKey(o => o.CreatorId)
+            .OnDelete(DeleteBehavior.Restrict);
 
-        builder.HasMany(o => o.Members)
-               .WithOne(m => m.Organization)
-               .HasForeignKey(m => m.OrganizationId)
-               .OnDelete(DeleteBehavior.Cascade);
+        builder
+            .HasMany(o => o.Members)
+            .WithOne(m => m.Organization)
+            .HasForeignKey(m => m.OrganizationId)
+            .OnDelete(DeleteBehavior.Cascade);
 
-        builder.HasMany(o => o.JoinRequests)
-               .WithOne(j => j.Organization)
-               .HasForeignKey(j => j.OrganizationId)
-               .OnDelete(DeleteBehavior.Cascade);
+        builder
+            .HasMany(o => o.JoinRequests)
+            .WithOne(j => j.Organization)
+            .HasForeignKey(j => j.OrganizationId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

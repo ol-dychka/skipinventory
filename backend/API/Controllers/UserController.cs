@@ -10,17 +10,9 @@ namespace API.Controllers;
 public class UserController : BaseAPIController
 {
     [HttpGet("details")]
-    public async Task<IActionResult> Register()
+    public async Task<IActionResult> Details()
     {
         var id = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
-
-        Console.WriteLine($"[DEBUG] sub claim: {id}"); // prints to terminal
-        Console.WriteLine($"[DEBUG] all claims:");
-        foreach (var claim in User.Claims)
-        {
-            Console.WriteLine($"  {claim.Type} = {claim.Value}"); // dumps every claim
-        }
-
         if (id == null)
             return Unauthorized("token does not exist");
 

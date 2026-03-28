@@ -11,6 +11,7 @@ public class Logout
 
     public class Handler(
         IRefreshTokenRepository refreshTokenRepository,
+        IUnitOfWork unitOfWork,
         ITokenGenerator tokenGenerator
     ) : IRequestHandler<Command, Result<Unit>>
     {
@@ -18,17 +19,23 @@ public class Logout
         {
             var refreshTokenHash = tokenGenerator.HashRefreshToken(request.RefreshToken);
 
-            var refreshToken = await refreshTokenRepository.
-                GetByHashAsync(refreshTokenHash, cancellationToken);
+            var refreshToken = await refreshTokenRepository.GetByHashAsync(
+                refreshTokenHash,
+                cancellationToken
+            );
 
-            if (refreshToken == null || refreshToken.IsRevoked || refreshToken.ExpiresAt < DateTime.UtcNow)
+            if (
+                refreshToken == null
+                || refreshToken.IsRevoked
+                || refreshToken.ExpiresAt < DateTime.UtcNow
+            )
                 return Result<Unit>.Failure("Session is invalid or has expired");
 
             refreshToken.IsRevoked = true;
 
-            await refreshTokenRepository.SaveChangesAsync(cancellationToken);
+            await unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return Result<Unit>.Success(Unit.Value); 
+            return Result<Unit>.Success(Unit.Value);
         }
     }
 }
