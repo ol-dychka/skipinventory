@@ -10,6 +10,7 @@ namespace API.Controllers;
 
 public class OrganizationController : BaseAPIController
 {
+    // refactor
     [HttpGet]
     public async Task<ActionResult<List<Organization>>> GetOrganizations()
     {
@@ -19,7 +20,11 @@ public class OrganizationController : BaseAPIController
     [HttpGet("{id}")]
     public async Task<ActionResult<Organization>> GetOrganization(string id)
     {
-        return await Mediator.Send(new GetOrganization.Query(id));
+        var result = await Mediator.Send(new Details.Query(id));
+        if (!result.IsSuccess || result.Value == null)
+            return Unauthorized(result.Error);
+
+        return Ok(result.Value);
     }
 
     [HttpPost]
