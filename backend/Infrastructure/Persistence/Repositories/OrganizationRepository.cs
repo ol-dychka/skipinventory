@@ -32,7 +32,8 @@ public class OrganizationRepository(PsqlDbContext context) : IOrganizationReposi
     public Task<Organization?> GetByIdAsync(string id, CancellationToken cancellationToken)
     {
         return _context
-            .Organizations.Include(o => o.Creator)
+            .Organizations.AsNoTracking()
+            .Include(o => o.Creator)
             .FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
     }
 }

@@ -2,9 +2,11 @@ import { HttpInterceptorFn, HttpRequest } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { AuthService } from '../services/auth-service';
 import { catchError, switchMap, throwError } from 'rxjs';
+import { OrganizationService } from '../services/organization-service';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
   const authService = inject(AuthService);
+  const organizationService = inject(OrganizationService);
 
   if (
     req.url.includes('auth/refresh') ||
@@ -20,7 +22,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   return next(authReq).pipe(
     catchError((error) => {
       if (error.status === 401) {
-        return authService.handleUnauthorized().pipe(
+        return authService.handleUnauthorized(organizationService.currentOrganization()?.id).pipe(
           switchMap((newToken) => next(addToken(req, newToken))),
           catchError((refreshError) => {
             window.location.href = '/login';

@@ -1,13 +1,13 @@
 import { Component, inject, signal } from '@angular/core';
 import { AuthInput } from '../../../shared/components/auth-input/auth-input';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { OrganizationService } from '../../../core/services/organization-service';
 import { Router } from '@angular/router';
 import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-create-organization',
-  imports: [AuthInput],
+  imports: [AuthInput, ReactiveFormsModule],
   templateUrl: './create-organization.html',
 })
 export class CreateOrganization {
@@ -22,6 +22,8 @@ export class CreateOrganization {
   });
 
   onSubmit(): void {
+    console.log('lol');
+
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;

@@ -1,6 +1,13 @@
 <div class="centered-v">
-  <app-auth-input type="text" label="Name" placeholder="Organization Name" formControlName="name" />
-  <button class="btn w-full" type="submit" [disabled]="loading()">
-    {{ loading() ? 'Creating…' : 'Create' }}
-  </button>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <app-auth-input
+      type="text"
+      label="Name"
+      placeholder="Organization Name"
+      formControlName="name"
+    />
+    <button class="btn w-full" type="submit" [disabled]="loading()">
+      {{ loading() ? 'Creating…' : 'Create' }}
+    </button>
+  </form>
 </div>

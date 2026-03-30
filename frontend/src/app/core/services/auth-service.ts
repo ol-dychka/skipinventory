@@ -23,7 +23,7 @@ import { OrganizationService } from './organization-service';
 export class AuthService {
   private readonly api = environment.apiUrl;
   private readonly http = inject(HttpClient);
-  private readonly organizationService = inject(OrganizationService);
+  // private readonly organizationService = inject(OrganizationService);
 
   readonly currentUser = signal<UserModel | null>(null);
 
@@ -93,7 +93,7 @@ export class AuthService {
       .pipe(finalize(() => this.clearSession()));
   }
 
-  handleUnauthorized(): Observable<string> {
+  handleUnauthorized(organizationId?: string): Observable<string> {
     if (!this.isRefreshing) {
       this.isRefreshing = true;
       this.refreshSubject.next(null);
@@ -101,7 +101,7 @@ export class AuthService {
       // case: token expires mid-way into organization workflow
       // this is the only method that refreshes token with organization data
       const payload: RefreshRequest = {
-        organizationId: this.organizationService.currentOrganization()?.id,
+        organizationId: organizationId,
       };
 
       return this.http

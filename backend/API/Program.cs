@@ -14,7 +14,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<PsqlDbContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options
+        .UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
+        .UseLazyLoadingProxies(false);
 });
 builder.Services.AddMediatR(x =>
     x.RegisterServicesFromAssemblyContaining<GetOrganizationList.Handler>()

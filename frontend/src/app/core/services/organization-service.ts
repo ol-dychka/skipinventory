@@ -7,7 +7,7 @@ import {
 } from '../models/organization';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, switchMap } from 'rxjs';
+import { map, Observable, switchMap, tap } from 'rxjs';
 import { AuthService } from './auth-service';
 
 @Injectable({
@@ -25,14 +25,17 @@ export class OrganizationService {
       switchMap(({ organizationId }) =>
         this.authService.refresh({ organizationId }).pipe(map(() => organizationId)),
       ),
-      switchMap((organizationId) =>
-        this.http.get<OrganizationModel>(`${this.api}/organization/${organizationId}`),
-      ),
+      switchMap((organizationId) => this.get(organizationId)),
     );
   }
 
   get(organizationId: string) {
-    return this.http.get<OrganizationModel>(`${this.api}/organization/${organizationId}`);
+    return this.http.get<OrganizationModel>(`${this.api}/organization/${organizationId}`).pipe(
+      tap((organization) => {
+        this.currentOrganization.set(organization);
+        console.log(organization);
+      }),
+    );
   }
 
   request(payload: JoinOrganizationRequest) {

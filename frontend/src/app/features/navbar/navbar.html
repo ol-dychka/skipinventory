@@ -8,6 +8,7 @@
         {{ authService.currentUser()?.email }}
       </p>
     </div>
+    <p>{{ organizationService.currentOrganization()?.name }}</p>
     <app-logout-button />
   </div>
 </nav>
