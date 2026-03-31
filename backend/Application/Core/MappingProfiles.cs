@@ -1,13 +1,13 @@
-using System;
-using AutoMapper;
-using Domain;
+// using System;
+// using AutoMapper;
+// using Domain;
 
-namespace Application.Core;
+// namespace Application.Core;
 
-public class MappingProfiles : Profile
-{
-    public MappingProfiles()
-    {
-        CreateMap<Organization, Organization>();
-    }
-}
+// public class MappingProfiles : Profile
+// {
+//     public MappingProfiles()
+//     {
+//         CreateMap<Organization, Organization>();
+//     }
+// }

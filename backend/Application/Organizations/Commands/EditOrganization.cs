@@ -1,6 +1,6 @@
 using System;
 using Application.Interfaces;
-using AutoMapper;
+// using AutoMapper;
 using Domain;
 using MediatR;
 
@@ -10,8 +10,11 @@ public class EditOrganization
 {
     public record Command(Organization Organization) : IRequest;
 
-    public class Handler(IOrganizationRepository repository, IUnitOfWork unitOfWork, IMapper mapper)
-        : IRequestHandler<Command>
+    public class Handler(
+        IOrganizationRepository repository,
+        IUnitOfWork unitOfWork
+    // IMapper mapper
+    ) : IRequestHandler<Command>
     {
         public async Task Handle(Command request, CancellationToken cancellationToken)
         {
@@ -19,7 +22,8 @@ public class EditOrganization
                 await repository.GetByIdAsync(request.Organization.Id, cancellationToken)
                 ?? throw new Exception("Cannot find this organization");
 
-            mapper.Map(request.Organization, organization);
+            // edit fields via constructor??
+            // mapper.Map(request.Organization, organization);
 
             await unitOfWork.SaveChangesAsync(cancellationToken);
         }

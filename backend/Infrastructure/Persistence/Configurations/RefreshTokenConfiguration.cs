@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
+
 public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
 {
     public void Configure(EntityTypeBuilder<RefreshToken> builder)
@@ -15,9 +16,10 @@ public class RefreshTokenConfiguration : IEntityTypeConfiguration<RefreshToken>
         builder.Property(r => r.ExpiresAt).IsRequired();
         builder.Property(r => r.IsRevoked).IsRequired().HasDefaultValue(false);
 
-        builder.HasOne(r => r.User)
-               .WithMany(u => u.RefreshTokens)
-               .HasForeignKey(r => r.UserId)
-               .OnDelete(DeleteBehavior.Cascade);
+        builder
+            .HasOne(r => r.User)
+            .WithMany(u => u.RefreshTokens)
+            .HasForeignKey(r => r.UserId)
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

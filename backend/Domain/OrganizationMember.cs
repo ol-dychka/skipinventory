@@ -2,10 +2,7 @@ using System;
 
 namespace Domain;
 
-public class OrganizationMember(
-    string userId,
-    string organizationId,
-    string role)
+public class OrganizationMember(string userId, string organizationId, string role)
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string UserId { get; set; } = userId;

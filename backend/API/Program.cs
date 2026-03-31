@@ -14,14 +14,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<PsqlDbContext>(options =>
 {
-    options
-        .UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
-        .UseLazyLoadingProxies(false);
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddMediatR(x =>
     x.RegisterServicesFromAssemblyContaining<GetOrganizationList.Handler>()
 );
-builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+
+// builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
 builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();

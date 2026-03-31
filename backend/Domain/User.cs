@@ -13,5 +13,4 @@ public class User(string email, string passwordHash, string name)
     public List<OrganizationMember> Memberships { get; set; } = [];
     public List<JoinRequest> PendingRequests { get; set; } = [];
     public List<JoinRequest> ResolvedRequests { get; set; } = [];
-    public List<Organization> CreatedOrganizations { get; set; } = [];
 }

@@ -10,7 +10,6 @@ public class Organization(string name, string creatorId)
     public string SubscriptionTier { get; set; } = StaticClasses.SubscriptionTier.Free;
 
     // relationships
-    public User Creator { get; set; } = null!;
     public List<OrganizationMember> Members { get; set; } = [];
     public List<JoinRequest> JoinRequests { get; set; } = [];
 }

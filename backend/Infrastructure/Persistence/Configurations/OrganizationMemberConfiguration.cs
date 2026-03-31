@@ -19,10 +19,7 @@ public class OrgMemberConfiguration : IEntityTypeConfiguration<OrganizationMembe
 
         builder.HasQueryFilter(m => m.Organization.DeletedAt == null);
 
-        builder.Property(m => m.Role)
-               .IsRequired()
-               .HasConversion<string>()
-               .HasMaxLength(20);
+        builder.Property(m => m.Role).IsRequired().HasConversion<string>().HasMaxLength(20);
 
         builder.Property(m => m.JoinedAt).IsRequired();
     }

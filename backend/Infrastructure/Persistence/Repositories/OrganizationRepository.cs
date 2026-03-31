@@ -33,7 +33,8 @@ public class OrganizationRepository(PsqlDbContext context) : IOrganizationReposi
     {
         return _context
             .Organizations.AsNoTracking()
-            .Include(o => o.Creator)
+            .Include(o => o.Members)
+                .ThenInclude(m => m.User)
             .FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
     }
 }

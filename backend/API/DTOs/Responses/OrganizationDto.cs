@@ -3,10 +3,20 @@ using Domain;
 
 namespace API.DTOs.Responses;
 
+public record MemberDto(string Role, string UserId, string UserName, string UserEmail);
+
 public class OrganizationDto(Organization organization)
 {
     public string Id { get; set; } = organization.Id;
     public string Name { get; set; } = organization.Name;
     public string SubscriptionTier { get; set; } = organization.SubscriptionTier;
-    // public UserDto Creator { get; set; } = new(organization.Creator);
+    public List<MemberDto> Members { get; set; } =
+    [
+        .. organization.Members.Select(m => new MemberDto(
+            m.Role,
+            m.UserId,
+            m.User.Name,
+            m.User.Email
+        )),
+    ];
 }

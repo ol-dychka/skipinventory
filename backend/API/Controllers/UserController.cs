@@ -20,8 +20,8 @@ public class UserController : BaseAPIController
         if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
 
-        var userDTO = new UserDto(result.Value);
+        var userDto = new UserDto(result.Value);
 
-        return Ok(new { user = userDTO });
+        return Ok(new { user = userDto });
     }
 }

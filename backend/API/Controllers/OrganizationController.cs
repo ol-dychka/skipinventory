@@ -1,6 +1,7 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using API.DTOs.Requests.Organizations;
+using API.DTOs.Responses;
 using Application.Organizations.Commands;
 using Application.Organizations.Queries;
 using Domain;
@@ -24,7 +25,9 @@ public class OrganizationController : BaseAPIController
         if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
 
-        return Ok(result.Value);
+        var organizationDto = new OrganizationDto(result.Value);
+
+        return Ok(organizationDto);
     }
 
     [HttpPost]

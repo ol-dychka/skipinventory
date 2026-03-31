@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Persistence.Configurations;
+
 public class JoinRequestConfiguration : IEntityTypeConfiguration<JoinRequest>
 {
     public void Configure(EntityTypeBuilder<JoinRequest> builder)
@@ -16,14 +17,17 @@ public class JoinRequestConfiguration : IEntityTypeConfiguration<JoinRequest>
 
         builder.HasQueryFilter(j => j.Organization.DeletedAt == null);
 
-        builder.HasIndex(j => new { j.UserId, j.OrganizationId, j.Status })
-               .HasFilter("\"Status\" = 'Pending'")
-               .IsUnique();
+        builder
+            .HasIndex(j => new
+            {
+                j.UserId,
+                j.OrganizationId,
+                j.Status,
+            })
+            .HasFilter("\"Status\" = 'Pending'")
+            .IsUnique();
 
-        builder.Property(j => j.Status)
-               .IsRequired()
-               .HasConversion<string>()
-               .HasMaxLength(20);
+        builder.Property(j => j.Status).IsRequired().HasConversion<string>().HasMaxLength(20);
 
         builder.Property(j => j.RequestedAt).IsRequired();
     }

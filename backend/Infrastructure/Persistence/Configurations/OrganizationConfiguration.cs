@@ -18,12 +18,6 @@ public class OrganizationConfiguration : IEntityTypeConfiguration<Organization>
         builder.HasQueryFilter(o => o.DeletedAt == null);
 
         builder
-            .HasOne(o => o.Creator)
-            .WithMany(u => u.CreatedOrganizations)
-            .HasForeignKey(o => o.CreatorId)
-            .OnDelete(DeleteBehavior.Restrict);
-
-        builder
             .HasMany(o => o.Members)
             .WithOne(m => m.Organization)
             .HasForeignKey(m => m.OrganizationId)
