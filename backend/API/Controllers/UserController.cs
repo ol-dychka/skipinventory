@@ -22,6 +22,6 @@ public class UserController : BaseAPIController
 
         var userDto = new UserDto(result.Value);
 
-        return Ok(new { user = userDto });
+        return Ok(userDto);
     }
 }

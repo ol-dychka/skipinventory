@@ -57,8 +57,9 @@ public class Refresh
             string accessToken;
             if (request.OrganizationId != null)
             {
-                var membership = await memberRepository.GetByOrgIdAsync(
+                var membership = await memberRepository.GetAsync(
                     request.OrganizationId,
+                    currentRefreshToken.User.Id,
                     cancellationToken
                 );
                 if (membership == null)

@@ -6,5 +6,9 @@ namespace Application.Interfaces;
 public interface IMemberRepository
 {
     void Add(OrganizationMember member);
-    Task<OrganizationMember?> GetByOrgIdAsync(string id, CancellationToken cancellationToken);
+    Task<OrganizationMember?> GetAsync(
+        string organizationId,
+        string userId,
+        CancellationToken cancellationToken
+    );
 }

@@ -1,6 +1,7 @@
 using System;
 using Application.Interfaces;
 using Domain;
+using Infrastructure.Persistence.Configurations;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence.Repositories;
@@ -14,10 +15,14 @@ public class MemberRepository(PsqlDbContext context) : IMemberRepository
         _context.OrganizationMembers.Add(member);
     }
 
-    public Task<OrganizationMember?> GetByOrgIdAsync(string id, CancellationToken cancellationToken)
+    public Task<OrganizationMember?> GetAsync(
+        string organizationId,
+        string userId,
+        CancellationToken cancellationToken
+    )
     {
         return _context.OrganizationMembers.FirstOrDefaultAsync(
-            om => om.OrganizationId == id,
+            om => om.OrganizationId == organizationId && om.UserId == userId,
             cancellationToken
         );
     }

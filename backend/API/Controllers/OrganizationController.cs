@@ -19,7 +19,7 @@ public class OrganizationController : BaseAPIController
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Organization>> GetOrganization(string id)
+    public async Task<ActionResult<Organization>> Get(string id)
     {
         var result = await Mediator.Send(new Details.Query(id));
         if (!result.IsSuccess || result.Value == null)
