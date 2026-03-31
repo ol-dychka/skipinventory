@@ -1,7 +1,6 @@
 import { inject, Injectable, signal } from '@angular/core';
 import {
   CreateOrganizationRequest,
-  JoinOrganizationRequest,
   OrganizationModel,
   CreateOrganizationResponse,
 } from '../models/organization';
@@ -20,13 +19,19 @@ export class OrganizationService {
 
   readonly currentOrganization = signal<OrganizationModel | null>(null);
 
-  create(payload: CreateOrganizationRequest): Observable<OrganizationModel> {
+  create(payload: CreateOrganizationRequest): Observable<string> {
     return this.http.post<CreateOrganizationResponse>(`${this.api}/organization`, payload).pipe(
       switchMap(({ organizationId }) =>
-        this.authService.refresh({ organizationId }).pipe(map(() => organizationId)),
+        this.authService.refresh(organizationId).pipe(map(() => organizationId)),
       ),
-      switchMap((organizationId) => this.get(organizationId)),
+      switchMap((organizationId) => this.get(organizationId).pipe(map(() => organizationId))),
     );
+  }
+
+  access(organizationId: string): Observable<void> {
+    return this.authService
+      .refresh(organizationId)
+      .pipe(switchMap(() => this.get(organizationId).pipe(map(() => void 0))));
   }
 
   get(organizationId: string) {
@@ -38,8 +43,8 @@ export class OrganizationService {
     );
   }
 
-  request(payload: JoinOrganizationRequest) {
-    //request to join
+  request(organizationId: string) {
+    // TODO
     return;
   }
 }

@@ -1,6 +1,4 @@
-import { OrganizationModel } from './organization';
-
-interface Membership {
+interface MembershipModel {
   role: string;
   organizationId: string;
   organizationName: string;
@@ -10,9 +8,5 @@ export interface UserModel {
   id: string;
   name: string;
   email: string;
-  memberships: Membership[];
-}
-
-export interface UserResponse {
-  user: UserModel;
+  memberships: MembershipModel[];
 }

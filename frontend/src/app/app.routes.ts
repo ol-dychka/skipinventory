@@ -4,6 +4,7 @@ import { Register } from './features/auth/register/register';
 import { Dashboard } from './features/dashboard/dashboard/dashboard';
 import { authGuard } from './core/guards/auth-guard';
 import { noAuthGuard } from './core/guards/no-auth-guard';
+import { orgGuard } from './core/guards/org-guard';
 import { Layout } from './features/layout/layout';
 import { JoinOrganization } from './features/dashboard/join-organization/join-organization';
 import { CreateOrganization } from './features/dashboard/create-organization/create-organization';
@@ -17,7 +18,7 @@ export const routes: Routes = [
     component: Layout,
     canActivate: [authGuard],
     children: [
-      { path: 'dashboard', component: Dashboard }, // add organization-guard
+      { path: 'dashboard/:organizationId', component: Dashboard, canActivate: [orgGuard] }, // add organization-guard
       { path: 'join-organization', component: JoinOrganization },
       { path: 'create-organization', component: CreateOrganization },
       { path: 'choose-organization', component: ChooseOrganization },

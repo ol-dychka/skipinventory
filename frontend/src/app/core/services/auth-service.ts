@@ -13,8 +13,8 @@ import {
 } from 'rxjs';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { LoginRequest, AuthResponse, RegisterRequest, RefreshRequest } from '../models/auth';
-import { UserModel, UserResponse } from '../models/user';
+import { LoginRequest, AuthResponse, RegisterRequest } from '../models/auth';
+import { UserModel } from '../models/user';
 import { OrganizationService } from './organization-service';
 
 @Injectable({
@@ -46,8 +46,8 @@ export class AuthService {
   private applySession(token: string): Observable<string> {
     this.setAccessToken(token);
     console.log('token stored:', sessionStorage.getItem('access_token'));
-    return this.http.get<UserResponse>(`${this.api}/user/details`, { withCredentials: true }).pipe(
-      tap(({ user }) => {
+    return this.http.get<UserModel>(`${this.api}/user/details`, { withCredentials: true }).pipe(
+      tap((user) => {
         this.currentUser.set(user);
         console.log(user);
       }),
@@ -78,18 +78,18 @@ export class AuthService {
       );
   }
 
-  refresh(payload: RefreshRequest): Observable<string> {
+  refresh(organizationId?: string): Observable<string> {
     return this.http
-      .post<AuthResponse>(`${this.api}/auth/refresh`, payload, { withCredentials: true })
+      .post<AuthResponse>(`${this.api}/auth/refresh`, { organizationId }, { withCredentials: true })
       .pipe(
         switchMap(({ accessToken }) => this.applySession(accessToken)),
         catchError((err) => this.handleSessionError(err)),
       );
   }
 
-  logout() {
+  logout(): Observable<void> {
     return this.http
-      .post<AuthResponse>(`${this.api}/auth/logout`, {})
+      .post<void>(`${this.api}/auth/logout`, {})
       .pipe(finalize(() => this.clearSession()));
   }
 
@@ -98,14 +98,12 @@ export class AuthService {
       this.isRefreshing = true;
       this.refreshSubject.next(null);
 
-      // case: token expires mid-way into organization workflow
-      // this is the only method that refreshes token with organization data
-      const payload: RefreshRequest = {
-        organizationId: organizationId,
-      };
-
       return this.http
-        .post<AuthResponse>(`${this.api}/auth/refresh`, payload, { withCredentials: true })
+        .post<AuthResponse>(
+          `${this.api}/auth/refresh`,
+          { organizationId },
+          { withCredentials: true },
+        )
         .pipe(
           switchMap(({ accessToken }) => {
             this.isRefreshing = false;

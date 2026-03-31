@@ -11,7 +11,7 @@ export const authGuard: CanActivateFn = (route, state) => {
     return true;
   }
 
-  return authService.refresh({}).pipe(
+  return authService.refresh().pipe(
     map(() => true),
     catchError(() => {
       router.navigate(['/login'], {

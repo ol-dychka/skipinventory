@@ -10,7 +10,3 @@ export interface CreateOrganizationResponse {
 export interface CreateOrganizationRequest {
   name: string;
 }
-
-export interface JoinOrganizationRequest {
-  id: string;
-}
