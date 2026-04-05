@@ -3,6 +3,7 @@ import {
   CreateOrganizationRequest,
   OrganizationModel,
   CreateOrganizationResponse,
+  OrganizationPreviewModel,
 } from '../models/organization';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -18,6 +19,7 @@ export class OrganizationService {
   private authService = inject(AuthService);
 
   readonly currentOrganization = signal<OrganizationModel | null>(null);
+  readonly availableOrganizations = signal<OrganizationPreviewModel[]>([]);
 
   create(payload: CreateOrganizationRequest): Observable<string> {
     return this.http.post<CreateOrganizationResponse>(`${this.api}/organization`, payload).pipe(
@@ -43,8 +45,16 @@ export class OrganizationService {
     );
   }
 
+  getPreviews() {
+    return this.http.get<OrganizationPreviewModel[]>(`${this.api}/organization/list`).pipe(
+      tap((list) => {
+        this.availableOrganizations.set(list);
+        console.log(this.availableOrganizations);
+      }),
+    );
+  }
+
   request(organizationId: string) {
-    // TODO
-    return;
+    return this.http.post<void>(`${this.api}/organizations/${organizationId}/request`, {});
   }
 }

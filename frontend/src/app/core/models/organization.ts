@@ -3,6 +3,11 @@ export interface OrganizationModel {
   name: string;
 }
 
+export interface OrganizationPreviewModel {
+  id: string;
+  name: string;
+}
+
 export interface CreateOrganizationResponse {
   organizationId: string;
 }

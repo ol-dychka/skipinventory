@@ -1,1 +1,29 @@
-<div class="centered-v"></div>
+@let orgs = organizationService.availableOrganizations();
+
+<div class="centered-v">
+  <input type="text" label="Name" placeholder="Organization Name" />
+  @if (orgs.length > 0) {
+    @for (o of orgs; track o.id) {
+      <p
+        class="padding-4 border-b-primary hover: bg-secondary border-2"
+        (click)="this.chosenOrgId.set(o.id)"
+      >
+        {{ o.name }}
+      </p>
+    }
+  } @else {
+    <!-- No Organizations -->
+    @if (loadingList()) {
+      <p>Loading...</p>
+    } @else {
+      <p>No Organizations currently exist</p>
+    }
+  }
+  <button
+    class="btn w-full"
+    (click)="onSubmit()"
+    [disabled]="loadingSubmit() || this.chosenOrgId() === null"
+  >
+    {{ loadingSubmit() ? 'Submitting…' : 'Submit' }}
+  </button>
+</div>
