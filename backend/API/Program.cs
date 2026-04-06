@@ -16,9 +16,7 @@ builder.Services.AddDbContext<PsqlDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-builder.Services.AddMediatR(x =>
-    x.RegisterServicesFromAssemblyContaining<GetOrganizationList.Handler>()
-);
+builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<List.Handler>());
 
 // builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
@@ -26,6 +24,7 @@ builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();
 builder.Services.AddScoped<IMemberRepository, MemberRepository>();
+builder.Services.AddScoped<IJoinRequestRepository, JoinRequestRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();

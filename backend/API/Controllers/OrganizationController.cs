@@ -12,14 +12,20 @@ namespace API.Controllers;
 public class OrganizationController : BaseAPIController
 {
     // refactor
-    [HttpGet]
-    public async Task<ActionResult<List<Organization>>> GetOrganizations()
+    [HttpGet("list")]
+    public async Task<IActionResult> List()
     {
-        return await Mediator.Send(new GetOrganizationList.Query());
+        var result = await Mediator.Send(new List.Query());
+        if (!result.IsSuccess || result.Value == null)
+            return Unauthorized(result.Error);
+
+        var organizations = result.Value.Select(o => new OrganizationPreviewDto(o));
+
+        return Ok(organizations);
     }
 
     [HttpGet("{id}")]
-    public async Task<ActionResult<Organization>> Get(string id)
+    public async Task<IActionResult> Details(string id)
     {
         var result = await Mediator.Send(new Details.Query(id));
         if (!result.IsSuccess || result.Value == null)
@@ -31,13 +37,27 @@ public class OrganizationController : BaseAPIController
     }
 
     [HttpPost]
-    public async Task<ActionResult<string>> Create([FromBody] CreateRequest request)
+    public async Task<IActionResult> Create([FromBody] CreateRequest request)
     {
         var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
         if (userId == null)
             return Unauthorized("token does not exist");
 
         var result = await Mediator.Send(new Create.Command(request.Name, userId));
+        if (!result.IsSuccess || result.Value == null)
+            return Unauthorized(result.Error);
+
+        return Ok(new { organizationId = result.Value });
+    }
+
+    [HttpPost("{organizationId}/request")]
+    public async Task<IActionResult> RequestJoin(string organizationId)
+    {
+        var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+        if (userId == null)
+            return Unauthorized("token does not exist");
+
+        var result = await Mediator.Send(new Request.Command(organizationId, userId));
         if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
 
