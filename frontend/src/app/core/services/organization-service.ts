@@ -55,6 +55,6 @@ export class OrganizationService {
   }
 
   request(organizationId: string) {
-    return this.http.post<void>(`${this.api}/organizations/${organizationId}/request`, {});
+    return this.http.post<void>(`${this.api}/organization/${organizationId}/request`, {});
   }
 }

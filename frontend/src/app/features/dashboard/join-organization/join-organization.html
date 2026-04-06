@@ -1,12 +1,16 @@
-@let orgs = organizationService.availableOrganizations();
-
 <div class="centered-v">
-  <input type="text" label="Name" placeholder="Organization Name" />
-  @if (orgs.length > 0) {
-    @for (o of orgs; track o.id) {
+  <input
+    type="text"
+    label="Name"
+    placeholder="Organization Name"
+    [value]="filter()"
+    (input)="onInput($event)"
+  />
+  @if (visibleOrganizations().length > 0) {
+    @for (o of visibleOrganizations(); track o.id) {
       <p
-        class="padding-4 border-b-primary hover: bg-secondary border-2"
-        (click)="this.chosenOrgId.set(o.id)"
+        class="border-b-primary hover: bg-secondary w-full cursor-pointer rounded-lg border-2 p-2"
+        (click)="this.chosenOrganization.set(o)"
       >
         {{ o.name }}
       </p>
@@ -22,8 +26,14 @@
   <button
     class="btn w-full"
     (click)="onSubmit()"
-    [disabled]="loadingSubmit() || this.chosenOrgId() === null"
+    [disabled]="loadingSubmit() || !this.chosenOrganization()"
   >
-    {{ loadingSubmit() ? 'Submitting…' : 'Submit' }}
+    {{
+      loadingSubmit()
+        ? 'Submitting…'
+        : this.chosenOrganization()
+          ? `Apply to ${this.chosenOrganization()!.name}`
+          : 'Choose an Organization'
+    }}
   </button>
 </div>
