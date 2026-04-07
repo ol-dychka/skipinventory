@@ -1,10 +1,12 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using API.DTOs.Requests.Organizations;
 using API.DTOs.Responses;
 using Application.Organizations.Commands;
 using Application.Organizations.Queries;
 using Domain;
+using Domain.StaticClasses;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -58,9 +60,30 @@ public class OrganizationController : BaseAPIController
             return Unauthorized("token does not exist");
 
         var result = await Mediator.Send(new Request.Command(organizationId, userId));
-        if (!result.IsSuccess || result.Value == null)
+        if (!result.IsSuccess)
             return Unauthorized(result.Error);
 
-        return Ok(new { organizationId = result.Value });
+        return NoContent();
+    }
+
+    // accepts or denies the join request.
+    // accept: user gets a toast and updates
+    // deny: user get a toast
+    [HttpPost("{requestId}/resolve/{decision:bool}")]
+    public async Task<IActionResult> ResolveJoin(string requestId, bool decision)
+    {
+        var resolverId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+        if (resolverId == null)
+            return Unauthorized("token does not exist");
+
+        var role = User.FindFirstValue(ClaimTypes.Role);
+        if (role == null || !UserRole.HasResolveJoinRights(role))
+            return Unauthorized("unsufficient rights");
+
+        var result = await Mediator.Send(new Resolve.Command(requestId, decision, resolverId));
+        if (!result.IsSuccess)
+            return Unauthorized(result.Error);
+
+        return NoContent();
     }
 }

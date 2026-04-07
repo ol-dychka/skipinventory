@@ -8,10 +8,5 @@ public static class JoinRequestStatus
     public const string Accepted = "Accepted";
     public const string Rejected = "Rejected";
 
-    public static readonly string[] All =
-    [
-        Pending,
-        Accepted,
-        Rejected
-    ];
+    public static readonly string[] All = [Pending, Accepted, Rejected];
 }
