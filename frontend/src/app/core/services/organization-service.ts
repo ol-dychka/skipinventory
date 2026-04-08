@@ -1,4 +1,4 @@
-import { inject, Injectable, signal } from '@angular/core';
+import { computed, inject, Injectable, signal } from '@angular/core';
 import {
   CreateOrganizationRequest,
   OrganizationModel,
@@ -20,6 +20,15 @@ export class OrganizationService {
 
   readonly currentOrganization = signal<OrganizationModel | null>(null);
   readonly availableOrganizations = signal<OrganizationPreviewModel[]>([]);
+
+  readonly role = computed(() => {
+    const memberships = this.authService.currentUser()?.memberships;
+    const organizationId = this.currentOrganization()?.id;
+
+    if (memberships === undefined || organizationId === undefined) return '';
+
+    return memberships.find((m) => m.organizationId === organizationId)?.role;
+  });
 
   create(payload: CreateOrganizationRequest): Observable<string> {
     return this.http.post<CreateOrganizationResponse>(`${this.api}/organization`, payload).pipe(

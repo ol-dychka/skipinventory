@@ -50,6 +50,6 @@ export class Login {
     this.authService
       .login(this.form.getRawValue())
       .pipe(finalize(() => this.loading.set(false)))
-      .subscribe(() => this.router.navigate(['/dashboard']));
+      .subscribe(() => this.router.navigate(['/choose-organization']));
   }
 }

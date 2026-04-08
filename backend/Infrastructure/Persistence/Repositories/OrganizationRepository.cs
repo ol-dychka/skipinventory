@@ -1,6 +1,7 @@
 using System;
 using Application.Interfaces;
 using Domain;
+using Domain.StaticClasses;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Persistence.Repositories;
@@ -32,9 +33,12 @@ public class OrganizationRepository(PsqlDbContext context) : IOrganizationReposi
     public Task<Organization?> GetByIdAsync(string id, CancellationToken cancellationToken)
     {
         return _context
-            .Organizations.AsNoTracking()
+            .Organizations
+            // .AsNoTracking()
             .Include(o => o.Members)
                 .ThenInclude(m => m.User)
+            .Include(o => o.JoinRequests.Where(jr => jr.Status == JoinRequestStatus.Pending))
+                .ThenInclude(jr => jr.User)
             .FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
     }
 }

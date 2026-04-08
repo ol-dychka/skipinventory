@@ -1,6 +1,8 @@
 export interface OrganizationModel {
   id: string;
   name: string;
+  members: MemberModel[];
+  joinRequests: JoinRequestModel[];
 }
 
 export interface OrganizationPreviewModel {
@@ -14,4 +16,17 @@ export interface CreateOrganizationResponse {
 
 export interface CreateOrganizationRequest {
   name: string;
+}
+
+interface MemberModel {
+  role: string;
+  userId: string;
+  userName: string;
+  userEmail: string;
+}
+
+interface JoinRequestModel {
+  userId: string;
+  userName: string;
+  userEmail: string;
 }

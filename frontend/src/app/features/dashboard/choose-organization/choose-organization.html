@@ -7,7 +7,7 @@
     @for (m of memberships; track m.organizationId) {
       <p
         class="padding-4 border-b-primary hover: bg-secondary border-2"
-        [routerLink]="['/dashboard', m.organizationId]"
+        [routerLink]="['/', m.organizationId]"
       >
         {{ m.organizationName }} - {{ m.role }}
       </p>

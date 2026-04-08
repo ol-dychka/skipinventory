@@ -5,6 +5,8 @@ namespace API.DTOs.Responses;
 
 public record MemberDto(string Role, string UserId, string UserName, string UserEmail);
 
+public record JoinRequestDto(string UserId, string UserName, string UserEmail);
+
 public class OrganizationDto(Organization organization)
 {
     public string Id { get; set; } = organization.Id;
@@ -17,6 +19,14 @@ public class OrganizationDto(Organization organization)
             m.UserId,
             m.User.Name,
             m.User.Email
+        )),
+    ];
+    public List<JoinRequestDto> JoinRequests { get; set; } =
+    [
+        .. organization.JoinRequests.Select(jr => new JoinRequestDto(
+            jr.UserId,
+            jr.User.Name,
+            jr.User.Email
         )),
     ];
 }

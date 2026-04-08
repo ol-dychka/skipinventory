@@ -18,6 +18,7 @@ export const orgGuard: CanActivateFn = (route, state) => {
   return organizationService.access(organizationId).pipe(
     map(() => true),
     catchError(() => {
+      console.log('NIGA');
       router.navigate(['/choose-organization'], { queryParams: { returnUrl: state.url } });
       return of(false);
     }),

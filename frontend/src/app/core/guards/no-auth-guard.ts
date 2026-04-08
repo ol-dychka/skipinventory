@@ -8,13 +8,13 @@ export const noAuthGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
 
   if (authService.currentUser()) {
-    router.navigate(['/dashboard']);
+    router.navigate(['/choose-organization']);
     return false;
   }
 
   return authService.refresh().pipe(
     map(() => {
-      router.navigate(['/dashboard']);
+      router.navigate(['/choose-organization']);
       return false;
     }),
     catchError(() => of(true)),

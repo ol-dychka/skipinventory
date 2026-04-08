@@ -9,6 +9,8 @@ import { Layout } from './features/layout/layout';
 import { JoinOrganization } from './features/dashboard/join-organization/join-organization';
 import { CreateOrganization } from './features/dashboard/create-organization/create-organization';
 import { ChooseOrganization } from './features/dashboard/choose-organization/choose-organization';
+import { JoinRequests } from './features/dashboard/join-requests/join-requests';
+import { OrganizationLayout } from './features/dashboard/organization-layout/organization-layout';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noAuthGuard] },
@@ -18,12 +20,20 @@ export const routes: Routes = [
     component: Layout,
     canActivate: [authGuard],
     children: [
-      { path: 'dashboard/:organizationId', component: Dashboard, canActivate: [orgGuard] }, // add organization-guard
+      { path: '', redirectTo: 'choose-organization', pathMatch: 'full' },
       { path: 'join-organization', component: JoinOrganization },
       { path: 'create-organization', component: CreateOrganization },
       { path: 'choose-organization', component: ChooseOrganization },
-
-      { path: '', redirectTo: 'choose-organization', pathMatch: 'full' },
+      {
+        path: ':organizationId',
+        component: OrganizationLayout,
+        canActivate: [orgGuard],
+        children: [
+          { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+          { path: 'dashboard', component: Dashboard },
+          { path: 'join-requests', component: JoinRequests },
+        ],
+      },
     ],
   },
 ];

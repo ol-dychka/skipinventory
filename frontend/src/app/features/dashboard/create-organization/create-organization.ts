@@ -36,6 +36,6 @@ export class CreateOrganization {
     this.organizationService
       .create(this.form.getRawValue())
       .pipe(finalize(() => this.loading.set(false)))
-      .subscribe((organizationId) => this.router.navigate(['/dashboard', organizationId]));
+      .subscribe((organizationId) => this.router.navigate(['/', organizationId]));
   }
 }
