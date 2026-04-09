@@ -14,11 +14,23 @@ public class JoinRequestRepository(PsqlDbContext context) : IJoinRequestReposito
         _context.JoinRequests.Add(request);
     }
 
+    public Task<JoinRequest?> GetByCredentialsAsync(
+        string userId,
+        string organizationId,
+        CancellationToken cancellationToken
+    )
+    {
+        return _context.JoinRequests.FirstOrDefaultAsync(
+            jr => jr.UserId == userId && jr.OrganizationId == organizationId,
+            cancellationToken
+        );
+    }
+
     public Task<JoinRequest?> GetByIdAsync(string id, CancellationToken cancellationToken)
     {
         return _context.JoinRequests
         // .Include(jr => jr.User)
         // .Include(jr => jr.Organization)
-        .FirstOrDefaultAsync(jr => jr.Id == id, cancellationToken: cancellationToken);
+        .FirstOrDefaultAsync(jr => jr.Id == id, cancellationToken);
     }
 }
