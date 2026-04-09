@@ -26,6 +26,7 @@ interface MemberModel {
 }
 
 interface JoinRequestModel {
+  id: string;
   userId: string;
   userName: string;
   userEmail: string;

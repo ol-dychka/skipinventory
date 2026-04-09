@@ -69,7 +69,7 @@ public class OrganizationController : BaseAPIController
     // accepts or denies the join request.
     // accept: user gets a toast and updates
     // deny: user get a toast
-    [HttpPost("{requestId}/resolve/{decision:bool}")]
+    [HttpPost("{requestId}/{decision:bool}")]
     public async Task<IActionResult> ResolveJoin(string requestId, bool decision)
     {
         var resolverId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;

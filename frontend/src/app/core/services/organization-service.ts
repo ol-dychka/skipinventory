@@ -30,6 +30,10 @@ export class OrganizationService {
     return memberships.find((m) => m.organizationId === organizationId)?.role;
   });
 
+  isOwner() {
+    return this.role() === 'Owner';
+  }
+
   create(payload: CreateOrganizationRequest): Observable<string> {
     return this.http.post<CreateOrganizationResponse>(`${this.api}/organization`, payload).pipe(
       switchMap(({ organizationId }) =>
@@ -49,7 +53,7 @@ export class OrganizationService {
     return this.http.get<OrganizationModel>(`${this.api}/organization/${organizationId}`).pipe(
       tap((organization) => {
         this.currentOrganization.set(organization);
-        console.log(organization);
+        console.log(this.currentOrganization());
       }),
     );
   }
@@ -65,5 +69,9 @@ export class OrganizationService {
 
   request(organizationId: string) {
     return this.http.post<void>(`${this.api}/organization/${organizationId}/request`, {});
+  }
+
+  resolveRequest(requestId: string, decision: boolean) {
+    return this.http.post<void>(`${this.api}/organization/${requestId}/${decision}`, {});
   }
 }

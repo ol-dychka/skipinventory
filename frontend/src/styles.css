@@ -41,4 +41,8 @@ body {
   .centered-v {
     @apply flex flex-col items-center justify-center gap-4;
   }
+
+  .divided-h {
+    @apply flex items-center justify-between gap-4;
+  }
 }
