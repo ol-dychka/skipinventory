@@ -5,7 +5,7 @@ public class SaleRecord(
     string sku,
     string organizationId,
     string productId,
-    int? unitsReturned
+    int unitsReturned
 )
 {
     // core
@@ -15,7 +15,7 @@ public class SaleRecord(
 
     // numbers
     public int UnitsSold { get; set; } = unitsSold;
-    public int UnitsReturned { get; set; } = unitsReturned ?? 0;
+    public int UnitsReturned { get; set; } = unitsReturned;
 
     // relationships
     public string OrganizationId { get; set; } = organizationId;
