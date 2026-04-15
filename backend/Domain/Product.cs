@@ -1,18 +1,32 @@
 namespace Domain;
 
-public class Product
+public enum ProductUnit
+{
+    Each,
+    Kg,
+    Box,
+    Litre,
+}
+
+public class Product(
+    string name,
+    string sku,
+    string vendor,
+    string organizationId,
+    string? category
+)
 {
     // core
     public string Id { get; set; } = Guid.NewGuid().ToString();
-    public required string Name { get; set; }
-    public required string Sku { get; set; }
-    public required string Category { get; set; }
-    public required string Vendor { get; set; }
-    public required string Unit { get; set; }
+    public string Name { get; set; } = name;
+    public string Sku { get; set; } = sku;
+    public string? Category { get; set; } = category;
+    public string Vendor { get; set; } = vendor;
+    public ProductUnit Unit { get; set; }
 
     // price
-    public int CostPrice { get; set; }
-    public int SalePrice { get; set; }
+    public decimal CostPrice { get; set; }
+    public decimal SalePrice { get; set; }
     public string Currency { get; set; } = "CAD";
 
     // inventory
@@ -22,11 +36,11 @@ public class Product
     public int DeliveryDelay { get; set; }
 
     // history
-    public bool IsDiscontinued { get; set; }
+    public bool IsActive { get; set; } = true;
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 
     // relationships
-    public required string OrganizationId { get; set; }
-    public required Organization Organization { get; set; } = null!;
+    public string OrganizationId { get; set; } = organizationId;
+    public Organization Organization { get; set; } = null!;
 }

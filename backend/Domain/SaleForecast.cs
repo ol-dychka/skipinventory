@@ -1,12 +1,12 @@
 namespace Domain;
 
-public class SaleForecast
+public class SaleForecast(string sku, string modelVersion, string organizationId, string productId)
 {
     // core
     public string Id { get; set; } = Guid.NewGuid().ToString();
-    public required string Sku { get; set; }
-    public required string ModelVersion { get; set; }
-    public DateTime GeneratedAt { get; set; }
+    public string Sku { get; set; } = sku;
+    public string ModelVersion { get; set; } = modelVersion;
+    public DateTime GeneratedAt { get; set; } = DateTime.UtcNow;
     public DateTime ForecastStart { get; set; }
     public DateTime ForecastEnd { get; set; }
 
@@ -20,8 +20,8 @@ public class SaleForecast
     public bool SuggestReorder { get; set; }
 
     // relationships
-    public required string OrganizationId { get; set; }
-    public required Organization Organization { get; set; }
-    public required string ProductId { get; set; }
-    public required Product Product { get; set; }
+    public string OrganizationId { get; set; } = organizationId;
+    public Organization Organization { get; set; } = null!;
+    public string ProductId { get; set; } = productId;
+    public Product Product { get; set; } = null!;
 }
