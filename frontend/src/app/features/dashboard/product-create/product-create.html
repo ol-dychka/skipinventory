@@ -1,0 +1,86 @@
+<p class="text-primary text-center text-6xl font-bold">Create a new Product</p>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <app-auth-input
+    type="text"
+    formControlName="name"
+    label="Name *"
+    placeholder="Product Name"
+    [error]="fieldError('name')"
+  />
+
+  <app-auth-input
+    type="text"
+    formControlName="sku"
+    label="Sku"
+    placeholder="Sku Code"
+    [error]="fieldError('sku')"
+  />
+
+  <app-auth-input
+    type="text"
+    formControlName="vendor"
+    label="Vendor *"
+    placeholder="Name of the Vendor"
+    [error]="fieldError('vendor')"
+  />
+
+  <app-auth-input
+    type="number"
+    formControlName="costPrice"
+    label="Cost Price *"
+    placeholder="0.01"
+    [error]="fieldError('costPrice')"
+  />
+
+  <app-auth-input
+    type="number"
+    formControlName="salePrice"
+    label="Sale Price *"
+    placeholder="0.01"
+    [error]="fieldError('salePrice')"
+  />
+
+  <app-auth-input
+    type="number"
+    formControlName="currentStock"
+    label="Current Stock *"
+    placeholder="0"
+    [error]="fieldError('currentStock')"
+  />
+
+  <app-auth-input
+    type="number"
+    formControlName="reorderPoint"
+    label="Reorder Point"
+    placeholder="0"
+    [error]="fieldError('reorderPoint')"
+  />
+
+  <app-auth-input
+    type="number"
+    formControlName="baseReorderQuantity"
+    label="Base Reorder Quantity *"
+    placeholder="0"
+    [error]="fieldError('baseReorderQuantity')"
+  />
+
+  <app-auth-input
+    type="number"
+    formControlName="deliveryDelay"
+    label="Delivery Delay"
+    placeholder="0"
+    [error]="fieldError('deliveryDelay')"
+  />
+
+  <app-auth-input
+    type="text"
+    formControlName="category"
+    label="Category"
+    placeholder="Product Classification"
+    [error]="fieldError('category')"
+  />
+
+  <button class="btn w-full" type="submit" [disabled]="loading()">
+    {{ loading() ? 'Submitting…' : 'Submit' }}
+  </button>
+</form>

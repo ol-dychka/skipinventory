@@ -1,7 +1,7 @@
 import { Component, input, output, signal, computed, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, ReactiveFormsModule } from '@angular/forms';
 
-export type InputType = 'password' | 'text' | 'email';
+export type InputType = 'password' | 'text' | 'email' | 'number';
 
 @Component({
   selector: 'app-auth-input',

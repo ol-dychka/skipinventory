@@ -5,8 +5,8 @@ public class SaleForecast(
     string modelVersion,
     string organizationId,
     string productId,
-    DateTime forecastStarts,
-    DateTime forecastEnds,
+    DateTime forecastStart,
+    DateTime forecastEnd,
     int predictedQuantity,
     int lowerLimit,
     int upperLimit,
@@ -19,8 +19,8 @@ public class SaleForecast(
     public string Sku { get; set; } = sku;
     public string ModelVersion { get; set; } = modelVersion;
     public DateTime GeneratedAt { get; set; } = DateTime.UtcNow;
-    public DateTime ForecastStart { get; set; } = forecastStarts;
-    public DateTime ForecastEnd { get; set; } = forecastEnds;
+    public DateTime ForecastStart { get; set; } = forecastStart;
+    public DateTime ForecastEnd { get; set; } = forecastEnd;
 
     // numbers
     public int PredictedQuantity { get; set; } = predictedQuantity;

@@ -11,6 +11,10 @@ import { CreateOrganization } from './features/dashboard/create-organization/cre
 import { ChooseOrganization } from './features/dashboard/choose-organization/choose-organization';
 import { JoinRequests } from './features/dashboard/join-requests/join-requests';
 import { OrganizationLayout } from './features/dashboard/organization-layout/organization-layout';
+import { Members } from './features/dashboard/members/members';
+import { Products } from './features/dashboard/products/products';
+import { ProductCreate } from './features/dashboard/product-create/product-create';
+import { productGuard } from './core/guards/product-guard';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noAuthGuard] },
@@ -31,7 +35,10 @@ export const routes: Routes = [
         children: [
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
           { path: 'dashboard', component: Dashboard },
+          { path: 'members', component: Members },
           { path: 'join-requests', component: JoinRequests },
+          { path: 'products', component: Products, canActivate: [productGuard] },
+          { path: 'product-create', component: ProductCreate },
         ],
       },
     ],
