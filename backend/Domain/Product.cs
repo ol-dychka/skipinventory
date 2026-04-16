@@ -13,6 +13,12 @@ public class Product(
     string sku,
     string vendor,
     string organizationId,
+    decimal costPrice,
+    decimal salePrice,
+    int currentStock,
+    int reorderPoint,
+    int baseReorderQuantity,
+    int deliveryDelay,
     string? category
 )
 {
@@ -22,18 +28,18 @@ public class Product(
     public string Sku { get; set; } = sku;
     public string? Category { get; set; } = category;
     public string Vendor { get; set; } = vendor;
-    public ProductUnit Unit { get; set; }
+    public ProductUnit Unit { get; set; } = ProductUnit.Each; //maybe change later
 
     // price
-    public decimal CostPrice { get; set; }
-    public decimal SalePrice { get; set; }
+    public decimal CostPrice { get; set; } = costPrice;
+    public decimal SalePrice { get; set; } = salePrice;
     public string Currency { get; set; } = "CAD";
 
     // inventory
-    public int CurrentStock { get; set; }
-    public int ReorderPoint { get; set; }
-    public int BaseReorderQuantity { get; set; }
-    public int DeliveryDelay { get; set; }
+    public int CurrentStock { get; set; } = currentStock;
+    public int ReorderPoint { get; set; } = reorderPoint;
+    public int BaseReorderQuantity { get; set; } = baseReorderQuantity;
+    public int DeliveryDelay { get; set; } = deliveryDelay;
 
     // history
     public bool IsActive { get; set; } = true;
