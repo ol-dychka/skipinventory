@@ -2,7 +2,9 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using API.DTOs.Requests.Products;
+using API.DTOs.Responses;
 using Application.Products.Commands;
+using Application.Products.Queries;
 using Domain.StaticClasses;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,5 +48,21 @@ public class ProductController : BaseAPIController
             return Unauthorized(result.Error);
 
         return NoContent();
+    }
+
+    [HttpGet("list")]
+    public async Task<IActionResult> List()
+    {
+        var organizationId = User.FindFirst("org_id")?.Value;
+        if (organizationId == null)
+            return Unauthorized("current organization does not exist");
+
+        var result = await Mediator.Send(new List.Query(organizationId));
+        if (!result.IsSuccess || result.Value == null)
+            return Unauthorized(result.Error);
+
+        var products = result.Value.Select(o => new ProductDto(o));
+
+        return Ok(products);
     }
 }

@@ -17,6 +17,7 @@
   <ItemGroup>
     <Folder Include="Core/" />
     <Folder Include="Models/" />
+    <Folder Include="Products/Queries/" />
     <Folder Include="Users/" />
     <Folder Include="Users/Queries/" />
   </ItemGroup>

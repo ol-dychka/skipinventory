@@ -5,7 +5,7 @@ namespace API.DTOs.Responses;
 
 public record MemberDto(string Role, string UserId, string UserName, string UserEmail);
 
-public record JoinRequestDto(string id, string UserId, string UserName, string UserEmail);
+public record JoinRequestDto(string Id, string UserId, string UserName, string UserEmail);
 
 public class OrganizationDto(Organization organization)
 {
