@@ -24,9 +24,9 @@ export class ProductCreate {
     costPrice: [0, [Validators.required, Validators.min(0.01), Validators.pattern(/^\d+\.\d\d$/)]],
     salePrice: [0, [Validators.required, Validators.min(0.01), Validators.pattern(/^\d+\.\d\d$/)]],
     currentStock: [0, [Validators.required, Validators.min(1), Validators.pattern(/^\d+$/)]],
-    reorderPoint: [0, [Validators.min(1), Validators.pattern(/^\d+$/)]],
+    reorderPoint: [0, [Validators.pattern(/^\d+$/)]],
     baseReorderQuantity: [1, [Validators.required, Validators.min(1), Validators.pattern(/^\d+$/)]],
-    deliveryDelay: [0, [Validators.min(1), Validators.pattern(/^\d+$/)]],
+    deliveryDelay: [0, [Validators.pattern(/^\d+$/)]],
     category: [''],
   });
 

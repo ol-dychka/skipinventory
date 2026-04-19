@@ -10,3 +10,25 @@ export interface CreateProductRequest {
   deliveryDelay: number | undefined;
   category: string | undefined;
 }
+
+export interface ProductModel {
+  id: string;
+  name: string;
+  sku: string;
+  category: string | undefined;
+  vendor: string;
+  unit: string;
+
+  costPrice: number;
+  salePrice: number;
+  currency: string;
+
+  currentStock: number;
+  reorderPoint: number;
+  baseReorderQuantity: number;
+  deliveryDelay: number;
+
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}

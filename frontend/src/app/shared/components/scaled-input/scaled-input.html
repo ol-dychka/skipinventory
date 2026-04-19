@@ -1,0 +1,10 @@
+<label [for]="id">{{ label }}:</label>
+<input
+  [type]="type"
+  [id]="id"
+  [value]="value"
+  (input)="onInput($event)"
+  class="w-[calc(2ch*var(--n))] border-2 p-1"
+  [style.--n]="Math.max((value ?? '').toString().length, 2)"
+  [disabled]="disabled"
+/>

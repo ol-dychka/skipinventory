@@ -1,2 +1,108 @@
-<p>products works!</p>
 <button class="btn" [routerLink]="['../product-create']">Create a new Product</button>
+<div class="flex w-full flex-col gap-4">
+  @if (productService.products().length > 0) {
+    @for (p of productService.products(); track p.id) {
+      <div>
+        <!-- status -->
+        <div class="flex items-center justify-between">
+          <p class="font-bold">{{ p.isActive ? 'Active' : 'Disabled' }}</p>
+          <button class="cursor-pointer border-2 p-1">Edit</button>
+        </div>
+        <!-- name & sku -->
+        <div class="flex gap-4">
+          <app-scaled-input [value]="p.name" [disabled]="isDisabled()" id="name" label="name" />
+
+          <app-scaled-input [value]="p.sku" [disabled]="isDisabled()" id="sku" label="sku" />
+        </div>
+
+        <!-- description -->
+        <div class="flex gap-4">
+          <app-scaled-input
+            [value]="p.category"
+            [disabled]="isDisabled()"
+            id="category"
+            label="category"
+          />
+
+          <app-scaled-input [value]="p.vendor" [disabled]="isDisabled()" id="vendor" id="vendor" />
+        </div>
+
+        <!-- pricing -->
+        <div class="flex gap-4">
+          <app-scaled-input
+            [value]="p.costPrice"
+            [disabled]="isDisabled()"
+            id="costPrice"
+            label="costPrice"
+          />
+
+          <app-scaled-input
+            [value]="p.salePrice"
+            [disabled]="isDisabled()"
+            id="salePrice"
+            label="salePrice"
+          />
+
+          <app-scaled-input
+            [value]="p.currency"
+            [disabled]="isDisabled()"
+            id="currency"
+            label="currency"
+          />
+        </div>
+
+        <!-- order info -->
+        <div class="flex gap-4">
+          <app-scaled-input [value]="p.unit" [disabled]="isDisabled()" id="unit" label="unit" />
+
+          <app-scaled-input
+            [value]="p.currentStock"
+            [disabled]="isDisabled()"
+            id="currentStock"
+            label="currentStock"
+          />
+
+          <app-scaled-input
+            [value]="p.reorderPoint"
+            [disabled]="isDisabled()"
+            id="reorderPoint"
+            label="reorderPoint"
+          />
+
+          <app-scaled-input
+            [value]="p.baseReorderQuantity"
+            [disabled]="isDisabled()"
+            id="baseReorderQuantity"
+            label="baseReorderQuantity"
+          />
+
+          <app-scaled-input
+            [value]="p.deliveryDelay"
+            [disabled]="isDisabled()"
+            id="deliveryDelay"
+            label="deliveryDelay"
+          />
+        </div>
+
+        <!-- metadata -->
+        <div class="flex gap-4">
+          <app-scaled-input
+            [value]="p.createdAt"
+            [disabled]="isDisabled()"
+            id="createdAt"
+            label="createdAt"
+          />
+
+          <app-scaled-input
+            [value]="p.updatedAt"
+            [disabled]="isDisabled()"
+            id="updatedAt"
+            label="updatedAt"
+          />
+        </div>
+      </div>
+    }
+  } @else {
+    <p>There are no Products for this Organization</p>
+  }
+</div>
