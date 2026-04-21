@@ -10,7 +10,7 @@ export class ScaledInput {
   @Input() label = '';
   @Input() value?: string | number;
   @Input() id = '';
-  @Input() disabled = true;
+  @Input() disabled = false;
   @Input() type: 'text' | 'number' = 'text';
 
   @Output() valueChange = new EventEmitter<string | number | undefined>();

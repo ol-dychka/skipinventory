@@ -14,6 +14,8 @@ export class ProductService {
 
   readonly products = signal<ProductModel[]>([]);
 
+  readonly selectedProduct = signal<ProductModel | undefined>(undefined);
+
   create(payload: CreateProductRequest): Observable<void> {
     return this.http.post<void>(`${this.api}/product`, payload);
   }

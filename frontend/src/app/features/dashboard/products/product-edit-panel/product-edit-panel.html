@@ -1,0 +1,35 @@
+<!-- input edits check github -->
+<div>
+  <!-- description -->
+  <app-scaled-input [value]="product.name" id="name" label="name" />
+  <app-scaled-input [value]="product.sku" id="sku" label="sku" />
+  <app-scaled-input [value]="product.category" id="category" label="category" />
+
+  <!-- pricing -->
+  <app-scaled-input [value]="product.costPrice" id="costPrice" label="costPrice" />
+  <app-scaled-input [value]="product.salePrice" id="salePrice" label="salePrice" />
+  <app-scaled-input [value]="product.currency" id="currency" label="currency" />
+
+  <!-- order info -->
+  <app-scaled-input [value]="product.unit" id="unit" label="unit" />
+  <app-scaled-input [value]="product.currentStock" id="currentStock" label="currentStock" />
+  <app-scaled-input [value]="product.reorderPoint" id="reorderPoint" label="reorderPoint" />
+  <app-scaled-input
+    [value]="product.baseReorderQuantity"
+    id="baseReorderQuantity"
+    label="baseReorderQuantity"
+  />
+
+  <!-- delivery info -->
+  <app-scaled-input [value]="product.vendor" id="vendor" id="vendor" />
+  <app-scaled-input [value]="product.deliveryDelay" id="deliveryDelay" label="deliveryDelay" />
+
+  <!-- metadata -->
+  <app-scaled-input [value]="product.createdAt" id="createdAt" label="createdAt" />
+  <app-scaled-input [value]="product.updatedAt" id="updatedAt" label="updatedAt" />
+
+  <!-- status -->
+  <input type="checkbox" id="isActive" [value]="product.isActive" />
+
+  <button class="cursor-pointer border-2 p-1">Save</button>
+</div>
