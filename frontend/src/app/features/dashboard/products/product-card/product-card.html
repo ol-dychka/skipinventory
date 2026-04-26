@@ -1,32 +1,32 @@
 <div>
-  <div class="flex gap-4">
+  <div class="flex-left">
     <p>{{ product.name }}</p>
     <p>{{ product.isActive ? 'Active' : 'Not Active' }}</p>
-    <button class="bg-primary p-2 text-white" (click)="productSelect.emit(product)">Edit</button>
+    <button class="btn" (click)="productSelect.emit(product)">Edit</button>
   </div>
-  <div class="flex gap-4">
+  <div class="flex-left">
     <p>Sku: {{ product.sku }}</p>
     @if (product.category) {
       <p>Category: {{ product.category }}</p>
     }
   </div>
-  <div class="flex gap-4">
+  <div class="flex-left">
     <p>{{ product.vendor }}</p>
     <p>Delay: {{ product.deliveryDelay }} days</p>
   </div>
-  <div class="flex gap-4">
+  <div class="flex-left">
     <p>Cost: {{ product.costPrice }} {{ product.currency }}</p>
     <p>Sale: {{ product.salePrice }} {{ product.currency }}</p>
   </div>
 
-  <div class="flex gap-4">
+  <div class="flex-left">
     <p>Stock: {{ product.currentStock }}</p>
     <p>Reorder at: {{ product.reorderPoint }}</p>
     <p>Base reorder: {{ product.baseReorderQuantity }}</p>
     <p>Unit: {{ product.unit }}</p>
   </div>
 
-  <div class="flex gap-4">
+  <div class="flex-left">
     <p>Created: {{ formatDate(product.createdAt) }}</p>
     <p>Last Updated: {{ formatDate(product.updatedAt) }}</p>
   </div>

@@ -31,18 +31,22 @@ body {
 
 @layer components {
   .btn {
-    @apply bg-primary hover:bg-primary-d cursor-pointer rounded-lg p-4 text-center text-white transition-colors duration-300;
+    @apply bg-primary hover:bg-primary-d cursor-pointer rounded-lg p-2 text-center text-white transition-colors duration-300;
   }
 
-  .centered-h {
+  .flex-center {
     @apply flex items-center justify-center gap-4;
   }
 
-  .centered-v {
+  .flex-center {
     @apply flex flex-col items-center justify-center gap-4;
   }
 
-  .divided-h {
+  .flex-between {
     @apply flex items-center justify-between gap-4;
+  }
+
+  .flex-left {
+    @apply flex items-center justify-start gap-8;
   }
 }

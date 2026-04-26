@@ -2,7 +2,7 @@ import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
-import { CreateProductRequest, ProductModel } from '../models/product';
+import { CreateProductRequest, EditProductRequest, ProductModel } from '../models/product';
 import { OrganizationService } from './organization-service';
 
 @Injectable({
@@ -18,6 +18,10 @@ export class ProductService {
 
   create(payload: CreateProductRequest): Observable<void> {
     return this.http.post<void>(`${this.api}/product`, payload);
+  }
+
+  edit(payload: EditProductRequest): Observable<void> {
+    return this.http.put<void>(`${this.api}/product`, payload);
   }
 
   getList() {

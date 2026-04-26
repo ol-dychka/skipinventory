@@ -16,6 +16,6 @@ export class Products {
 
   onProductSelect(p: ProductModel) {
     this.productService.selectedProduct.set(p);
-    console.log('a');
+    console.log(this.productService.selectedProduct());
   }
 }

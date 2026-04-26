@@ -11,6 +11,19 @@ export interface CreateProductRequest {
   category: string | undefined;
 }
 
+export interface EditProductRequest {
+  name: string;
+  sku: string | undefined;
+  vendor: string;
+  costPrice: number;
+  salePrice: number;
+  currentStock: number;
+  reorderPoint: number | undefined;
+  baseReorderQuantity: number;
+  deliveryDelay: number | undefined;
+  category: string | undefined;
+}
+
 export interface ProductModel {
   id: string;
   name: string;

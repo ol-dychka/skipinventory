@@ -1,10 +1,10 @@
 @let requests = this.organizationService.currentOrganization()!.joinRequests;
 @let isOwner = this.organizationService.isOwner();
 
-<div class="centered-v">
+<div class="flex-center flex-col">
   @if (requests.length > 0) {
     @for (r of requests; track r.id) {
-      <div class="divided-h padding-4 border-b-primary border-2">
+      <div class="flex-between padding-4 border-b-primary border-2">
         <p>{{ r.userName }} - {{ r.userEmail }}</p>
         @if (isOwner) {
           <p>Pending</p>

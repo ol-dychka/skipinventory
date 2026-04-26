@@ -2,7 +2,7 @@
 <!-- Protected endpoint, user is never null -->
 @let memberships = authService.currentUser()!.memberships;
 
-<div class="centered-v gap-2">
+<div class="flex-center flex-col gap-2">
   @if (memberships.length > 0) {
     @for (m of memberships; track m.organizationId) {
       <p

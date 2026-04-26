@@ -2,9 +2,10 @@
 <input
   [type]="type"
   [id]="id"
-  [value]="value"
+  [value]="value()"
   (input)="onInput($event)"
   class="block w-[calc(2ch*var(--n))] border-2 p-1"
-  [style.--n]="Math.max((value ?? '').toString().length, 2)"
+  [style.--n]="Math.max(value().toString().length, 2)"
   [disabled]="disabled"
+  (blur)="onBlur()"
 />
