@@ -4,8 +4,11 @@
   [id]="id"
   [value]="value()"
   (input)="onInput($event)"
-  class="block w-[calc(2ch*var(--n))] border-2 p-1"
+  class="block w-[calc(2ch*var(--n))] max-w-3xs border-2 p-1"
   [style.--n]="Math.max(value().toString().length, 2)"
   [disabled]="disabled"
   (blur)="onBlur()"
 />
+@if (error()) {
+  <p class="bg-error-l text-error rounded-lg p-1">{{ error() }}</p>
+}

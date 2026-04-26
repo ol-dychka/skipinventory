@@ -24,8 +24,14 @@ export class ProductEditPanel implements OnInit {
     name: ['', [Validators.required]],
     sku: [''],
     vendor: ['', [Validators.required]],
-    costPrice: [0, [Validators.required, Validators.min(0.01), Validators.pattern(/^\d+\.\d\d$/)]],
-    salePrice: [0, [Validators.required, Validators.min(0.01), Validators.pattern(/^\d+\.\d\d$/)]],
+    costPrice: [
+      0,
+      [Validators.required, Validators.min(0.01), Validators.pattern(/^\d+(?:\.\d{1,2})?$/)],
+    ],
+    salePrice: [
+      0,
+      [Validators.required, Validators.min(0.01), Validators.pattern(/^\d+(?:\.\d{1,2})?$/)],
+    ],
     currentStock: [0, [Validators.required, Validators.min(1), Validators.pattern(/^\d+$/)]],
     reorderPoint: [0, [Validators.pattern(/^\d+$/)]],
     baseReorderQuantity: [1, [Validators.required, Validators.min(1), Validators.pattern(/^\d+$/)]],
@@ -69,8 +75,11 @@ export class ProductEditPanel implements OnInit {
   onSubmit(): void {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
+      console.log('invalid form');
       return;
     }
+
+    console.log('a');
 
     this.loading.set(true);
 

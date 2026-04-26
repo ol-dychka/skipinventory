@@ -1,7 +1,7 @@
 import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { CreateProductRequest, EditProductRequest, ProductModel } from '../models/product';
 import { OrganizationService } from './organization-service';
 
@@ -21,7 +21,7 @@ export class ProductService {
   }
 
   edit(payload: EditProductRequest): Observable<void> {
-    return this.http.put<void>(`${this.api}/product`, payload);
+    return this.http.put<ProductModel>(`${this.api}/product`, payload).pipe(map(() => void 0));
   }
 
   getList() {

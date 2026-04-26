@@ -2,16 +2,31 @@
 <div>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <!-- description -->
-    <app-scaled-input id="name" label="name" formControlName="name" />
+    <app-scaled-input id="name" label="name" formControlName="name" [error]="fieldError('name')" />
     <div class="flex-left">
-      <app-scaled-input formControlName="sku" id="sku" label="sku" />
-      <app-scaled-input formControlName="category" id="category" label="category" />
+      <app-scaled-input formControlName="sku" id="sku" label="sku" [error]="fieldError('sku')" />
+      <app-scaled-input
+        formControlName="category"
+        id="category"
+        label="category"
+        [error]="fieldError('category')"
+      />
     </div>
 
     <!-- pricing -->
     <div class="flex-left">
-      <app-scaled-input formControlName="costPrice" id="costPrice" label="costPrice" />
-      <app-scaled-input formControlName="salePrice" id="salePrice" label="salePrice" />
+      <app-scaled-input
+        formControlName="costPrice"
+        id="costPrice"
+        label="costPrice"
+        [error]="fieldError('costPrice')"
+      />
+      <app-scaled-input
+        formControlName="salePrice"
+        id="salePrice"
+        label="salePrice"
+        [error]="fieldError('salePrice')"
+      />
       <p>Currency: {{ product().currency }}</p>
     </div>
     <!-- <app-scaled-input formControlName="currency" id="currency" label="currency" /> -->
@@ -19,29 +34,50 @@
     <!-- order info -->
     <!-- <app-scaled-input formControlName="unit" id="unit" label="unit" /> -->
     <div class="flex-left">
-      <app-scaled-input formControlName="currentStock" id="currentStock" label="currentStock" />
+      <app-scaled-input
+        formControlName="currentStock"
+        id="currentStock"
+        label="currentStock"
+        [error]="fieldError('currentStock')"
+      />
       <p>Unit: {{ product().unit }}</p>
     </div>
     <div class="flex-left">
-      <app-scaled-input formControlName="reorderPoint" id="reorderPoint" label="reorderPoint" />
+      <app-scaled-input
+        formControlName="reorderPoint"
+        id="reorderPoint"
+        label="reorderPoint"
+        [error]="fieldError('reorderPoint')"
+      />
       <app-scaled-input
         formControlName="baseReorderQuantity"
         id="baseReorderQuantity"
         label="baseReorderQuantity"
+        [error]="fieldError('baseReorderQuantity')"
       />
     </div>
 
     <!-- delivery info -->
     <div class="flex-left">
-      <app-scaled-input formControlName="vendor" id="vendor" label="vendor" />
-      <app-scaled-input formControlName="deliveryDelay" id="deliveryDelay" label="deliveryDelay" />
+      <app-scaled-input
+        formControlName="vendor"
+        id="vendor"
+        label="vendor"
+        [error]="fieldError('vendor')"
+      />
+      <app-scaled-input
+        formControlName="deliveryDelay"
+        id="deliveryDelay"
+        label="deliveryDelay"
+        [error]="fieldError('deliveryDelay')"
+      />
     </div>
 
     <!-- status -->
     <p>Currently Active:</p>
-    <input type="checkbox" id="isActive" formControlName="isActive" class="block" />
+    <input type="checkbox" id="isActive" formControlName="isActive" class="accent-primary block" />
 
-    <button class="btn mt-8">Save</button>
+    <button class="btn mt-8" type="submit">Save</button>
   </form>
 
   <p>Created at: {{ product().createdAt }}</p>

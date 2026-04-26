@@ -18,10 +18,13 @@ export interface EditProductRequest {
   costPrice: number;
   salePrice: number;
   currentStock: number;
-  reorderPoint: number | undefined;
+  reorderPoint: number;
   baseReorderQuantity: number;
-  deliveryDelay: number | undefined;
+  deliveryDelay: number;
   category: string | undefined;
+  isActive: boolean;
+  // unit
+  // currency
 }
 
 export interface ProductModel {

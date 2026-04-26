@@ -3,6 +3,7 @@ import {
   Component,
   EventEmitter,
   forwardRef,
+  input,
   Input,
   Output,
   signal,
@@ -25,6 +26,7 @@ export class ScaledInput implements ControlValueAccessor {
   @Input() type: 'text' | 'number' = 'text';
   @Input() disabled = false;
 
+  error = input<string | null>(null);
   value = signal<string | number>('');
   @Output() valueChange = new EventEmitter<string | number | undefined>();
 
