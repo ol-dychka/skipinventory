@@ -12,18 +12,33 @@ export class ProductService {
   private readonly api = environment.apiUrl;
   private readonly http = inject(HttpClient);
 
+  readonly selectedProduct = signal<ProductModel | undefined>(undefined);
+
   readonly products = signal<ProductModel[]>([]);
 
-  readonly selectedProduct = signal<ProductModel | undefined>(undefined);
+  replaceInList(product: ProductModel) {
+    this.products.update((products) => {
+      const index = products.findIndex((p) => p.id === product.id);
+      if (index === -1) return products;
+
+      const updated = [...products];
+      updated[index] = product;
+      return updated;
+    });
+  }
 
   create(payload: CreateProductRequest): Observable<void> {
     return this.http.post<void>(`${this.api}/product`, payload);
   }
 
   edit(payload: EditProductRequest, id: string): Observable<void> {
-    return this.http
-      .put<ProductModel>(`${this.api}/product/${id}`, payload)
-      .pipe(map(() => void 0));
+    return this.http.put<ProductModel>(`${this.api}/product/${id}`, payload).pipe(
+      tap((product) => {
+        console.log(product);
+        this.replaceInList(product);
+      }),
+      map(() => void 0),
+    );
   }
 
   getList() {

@@ -96,6 +96,7 @@ public class ProductController : BaseAPIController
                 ReorderPoint = request.ReorderPoint,
                 BaseReorderQuantity = request.BaseReorderQuantity,
                 DeliveryDelay = request.DeliveryDelay,
+                IsActive = request.IsActive,
                 Category = request.Category,
             }
         );

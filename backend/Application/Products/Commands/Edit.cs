@@ -66,6 +66,8 @@ public class Edit
             product.BaseReorderQuantity = request.BaseReorderQuantity;
             product.DeliveryDelay = request.DeliveryDelay;
             product.Category = request.Category;
+            product.IsActive = request.IsActive;
+            product.UpdatedAt = DateTime.UtcNow;
 
             await unitOfWork.SaveChangesAsync(cancellationToken);
 
