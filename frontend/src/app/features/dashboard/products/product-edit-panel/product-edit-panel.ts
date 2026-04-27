@@ -20,6 +20,10 @@ export class ProductEditPanel implements OnInit {
 
   readonly loading = signal(false);
 
+  close() {
+    this.productService.selectedProduct.set(undefined);
+  }
+
   form = this.fb.nonNullable.group({
     name: ['', [Validators.required]],
     sku: ['', [Validators.required]],
@@ -85,7 +89,12 @@ export class ProductEditPanel implements OnInit {
 
     this.productService
       .edit(this.form.getRawValue(), this.product().id)
-      .pipe(finalize(() => this.loading.set(false)))
+      .pipe(
+        finalize(() => {
+          this.loading.set(false);
+          this.close();
+        }),
+      )
       .subscribe();
   }
 }

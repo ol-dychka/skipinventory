@@ -38,15 +38,15 @@ body {
     @apply flex items-center justify-center gap-4;
   }
 
-  .flex-center {
-    @apply flex flex-col items-center justify-center gap-4;
-  }
-
   .flex-between {
     @apply flex items-center justify-between gap-4;
   }
 
   .flex-left {
     @apply flex items-center justify-start gap-8;
+  }
+
+  .flex-right {
+    @apply flex items-center justify-end gap-8;
   }
 }

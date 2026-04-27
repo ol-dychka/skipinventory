@@ -1,5 +1,6 @@
 <!-- input edits check github -->
 <div>
+  <div class="flex-right cursor-pointer font-bold" (click)="this.close()">X</div>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <!-- description -->
     <app-scaled-input id="name" label="name" formControlName="name" [error]="fieldError('name')" />
@@ -77,7 +78,7 @@
     <p>Currently Active:</p>
     <input type="checkbox" id="isActive" formControlName="isActive" class="accent-primary block" />
 
-    <button class="btn mt-8" type="submit">Save</button>
+    <button class="btn mt-8" type="submit">{{ this.loading() ? 'Saving...' : 'Save' }}</button>
   </form>
 
   <p>Created at: {{ product().createdAt }}</p>
