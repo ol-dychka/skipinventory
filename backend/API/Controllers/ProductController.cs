@@ -65,4 +65,44 @@ public class ProductController : BaseAPIController
 
         return Ok(products);
     }
+
+    [HttpPut("{id}")]
+    public async Task<IActionResult> Edit([FromBody] EditRequest request, string id)
+    {
+        var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
+        if (userId == null)
+            return Unauthorized("token does not exist");
+
+        var role = User.FindFirstValue(ClaimTypes.Role);
+        if (role == null || !UserRole.HasResolveJoinRights(role))
+            return Unauthorized("unsufficient rights");
+
+        var organizationId = User.FindFirst("org_id")?.Value;
+        if (organizationId == null)
+            return Unauthorized("organization does not exist");
+
+        var result = await Mediator.Send(
+            new Edit.Command
+            {
+                UserId = userId,
+                ProductId = id,
+                Name = request.Name,
+                Sku = request.Sku,
+                Vendor = request.Vendor,
+                OrganizationId = organizationId,
+                CostPrice = request.CostPrice,
+                SalePrice = request.SalePrice,
+                CurrentStock = request.CurrentStock,
+                ReorderPoint = request.ReorderPoint,
+                BaseReorderQuantity = request.BaseReorderQuantity,
+                DeliveryDelay = request.DeliveryDelay,
+                Category = request.Category,
+            }
+        );
+        if (!result.IsSuccess || result.Value == null)
+            return Unauthorized(result.Error);
+
+        var productDto = new ProductDto(result.Value);
+        return Ok(productDto);
+    }
 }

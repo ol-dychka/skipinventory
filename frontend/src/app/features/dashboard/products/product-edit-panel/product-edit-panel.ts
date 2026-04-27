@@ -22,7 +22,7 @@ export class ProductEditPanel implements OnInit {
 
   form = this.fb.nonNullable.group({
     name: ['', [Validators.required]],
-    sku: [''],
+    sku: ['', [Validators.required]],
     vendor: ['', [Validators.required]],
     costPrice: [
       0,
@@ -33,9 +33,9 @@ export class ProductEditPanel implements OnInit {
       [Validators.required, Validators.min(0.01), Validators.pattern(/^\d+(?:\.\d{1,2})?$/)],
     ],
     currentStock: [0, [Validators.required, Validators.min(1), Validators.pattern(/^\d+$/)]],
-    reorderPoint: [0, [Validators.pattern(/^\d+$/)]],
+    reorderPoint: [0, [Validators.required, Validators.pattern(/^\d+$/)]],
     baseReorderQuantity: [1, [Validators.required, Validators.min(1), Validators.pattern(/^\d+$/)]],
-    deliveryDelay: [0, [Validators.pattern(/^\d+$/)]],
+    deliveryDelay: [0, [Validators.required, Validators.pattern(/^\d+$/)]],
     category: [''],
     isActive: [true],
   });
@@ -84,7 +84,7 @@ export class ProductEditPanel implements OnInit {
     this.loading.set(true);
 
     this.productService
-      .edit(this.form.getRawValue())
+      .edit(this.form.getRawValue(), this.product().id)
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe();
   }

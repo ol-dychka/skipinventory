@@ -23,4 +23,9 @@ public class ProductRepository(PsqlDbContext context) : IProductRepository
             .Products.Where(p => p.OrganizationId == organizationId)
             .ToListAsync(cancellationToken);
     }
+
+    public Task<Product?> GetByIdAsync(string id, CancellationToken cancellationToken)
+    {
+        return _context.Products.FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
+    }
 }

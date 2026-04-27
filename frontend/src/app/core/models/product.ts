@@ -13,7 +13,7 @@ export interface CreateProductRequest {
 
 export interface EditProductRequest {
   name: string;
-  sku: string | undefined;
+  sku: string;
   vendor: string;
   costPrice: number;
   salePrice: number;

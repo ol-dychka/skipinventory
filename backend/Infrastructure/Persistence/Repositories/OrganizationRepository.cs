@@ -33,9 +33,7 @@ public class OrganizationRepository(PsqlDbContext context) : IOrganizationReposi
     public Task<Organization?> GetByIdAsync(string id, CancellationToken cancellationToken)
     {
         return _context
-            .Organizations
-            // .AsNoTracking()
-            .Include(o => o.Members)
+            .Organizations.Include(o => o.Members)
                 .ThenInclude(m => m.User)
             .Include(o => o.JoinRequests.Where(jr => jr.Status == JoinRequestStatus.Pending))
                 .ThenInclude(jr => jr.User)

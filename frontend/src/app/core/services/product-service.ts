@@ -20,8 +20,10 @@ export class ProductService {
     return this.http.post<void>(`${this.api}/product`, payload);
   }
 
-  edit(payload: EditProductRequest): Observable<void> {
-    return this.http.put<ProductModel>(`${this.api}/product`, payload).pipe(map(() => void 0));
+  edit(payload: EditProductRequest, id: string): Observable<void> {
+    return this.http
+      .put<ProductModel>(`${this.api}/product/${id}`, payload)
+      .pipe(map(() => void 0));
   }
 
   getList() {
