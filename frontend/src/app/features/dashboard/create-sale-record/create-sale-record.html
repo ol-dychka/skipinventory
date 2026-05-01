@@ -1,0 +1,19 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="flex w-full flex-col gap-4" formArrayName="items">
+    @for (item of itemControls; track $index) {
+      <div [formGroupName]="$index">
+        <label>{{ item.get('name')?.value }} [{{ item.get('sku')?.value }}] :</label>
+        <input type="number" formControlName="quantity" class="ml-4 border-2" />
+        <p class="text-black-l inline">
+          {{
+            item.get('quantity')?.value < 0
+              ? 'Warning: quantity can be negative only on item return'
+              : ''
+          }}
+        </p>
+      </div>
+    }
+  </div>
+
+  <button type="submit" class="btn" [disabled]="form.invalid">Submit</button>
+</form>
