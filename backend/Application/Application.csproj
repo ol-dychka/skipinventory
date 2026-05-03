@@ -18,6 +18,8 @@
     <Folder Include="Core/" />
     <Folder Include="Models/" />
     <Folder Include="Products/Queries/" />
+    <Folder Include="SaleRecords/" />
+    <Folder Include="SaleRecords/Commands/" />
     <Folder Include="Users/" />
     <Folder Include="Users/Queries/" />
   </ItemGroup>

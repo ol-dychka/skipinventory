@@ -1,7 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ProductService } from '../../../core/services/product-service';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { NgForOf } from '@angular/common';
 
 @Component({
   selector: 'app-create-sale-record',
