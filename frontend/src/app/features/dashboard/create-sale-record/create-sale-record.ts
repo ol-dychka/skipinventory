@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, Input, OnInit, signal } from '@angular/core';
 import { ProductService } from '../../../core/services/product-service';
 import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SaleRecordService } from '../../../core/services/sale-record-service';
@@ -11,6 +11,8 @@ import { finalize } from 'rxjs';
   templateUrl: './create-sale-record.html',
 })
 export class CreateSaleRecord implements OnInit {
+  @Input() date: string | null = null;
+
   private productService = inject(ProductService);
   private saleRecordService = inject(SaleRecordService);
   private fb = inject(FormBuilder);
@@ -45,13 +47,15 @@ export class CreateSaleRecord implements OnInit {
       return;
     }
 
+    if (!this.date) return;
+
     console.log('a');
 
     this.loading.set(true);
 
     const payload: SaleBatchCreateRequest = {
       data: this.form.value.items,
-      date: undefined,
+      date: this.date,
     };
 
     this.saleRecordService

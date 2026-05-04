@@ -14,4 +14,8 @@ export class SaleRecordService {
   create(payload: SaleBatchCreateRequest): Observable<void> {
     return this.http.post<void>(`${this.api}/salerecord`, payload);
   }
+
+  exists(date: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.api}/salerecord/${date}`);
+  }
 }

@@ -1,6 +1,6 @@
 export interface SaleBatchCreateRequest {
   data: SaleRecordInput[];
-  date?: Date;
+  date: string;
 }
 
 export interface SaleRecordInput {

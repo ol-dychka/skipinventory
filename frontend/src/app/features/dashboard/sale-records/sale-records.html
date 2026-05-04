@@ -1,0 +1,11 @@
+<input type="date" [formControl]="selectedDate" />
+
+@if (loading()) {
+  <p>Loading...</p>
+}
+
+@if (exists()) {
+  <p>Sales data has been submitted for this day</p>
+} @else {
+  <app-create-sale-record [date]="selectedDate.value" />
+}

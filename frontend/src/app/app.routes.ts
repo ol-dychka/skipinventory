@@ -16,6 +16,7 @@ import { Products } from './features/dashboard/products/products';
 import { ProductCreate } from './features/dashboard/product-create/product-create';
 import { productGuard } from './core/guards/product-guard';
 import { CreateSaleRecord } from './features/dashboard/create-sale-record/create-sale-record';
+import { SaleRecords } from './features/dashboard/sale-records/sale-records';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noAuthGuard] },
@@ -40,7 +41,7 @@ export const routes: Routes = [
           { path: 'join-requests', component: JoinRequests },
           { path: 'products', component: Products, canActivate: [productGuard] },
           { path: 'product-create', component: ProductCreate },
-          { path: 'sale-record-create', component: CreateSaleRecord, canActivate: [productGuard] },
+          { path: 'sale-records', component: SaleRecords, canActivate: [productGuard] },
         ],
       },
     ],
