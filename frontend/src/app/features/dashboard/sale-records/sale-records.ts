@@ -24,7 +24,7 @@ export class SaleRecords implements OnInit {
       .pipe(
         filter((date) => !!date),
         tap(() => {
-          console.log('jais');
+          console.log('nigga', this.selectedDate);
           this.loading.set(true);
           this.error.set(null);
         }),
@@ -41,6 +41,9 @@ export class SaleRecords implements OnInit {
         ),
         tap(() => this.loading.set(false)),
       )
-      .subscribe((result) => (result ? this.exists.set(result) : this.exists.set(false)));
+      .subscribe((result) => {
+        console.log(result);
+        this.exists.set(result ? true : false);
+      });
   }
 }

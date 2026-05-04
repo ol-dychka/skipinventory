@@ -20,6 +20,7 @@
     <Folder Include="Products/Queries/" />
     <Folder Include="SaleRecords/" />
     <Folder Include="SaleRecords/Commands/" />
+    <Folder Include="SaleRecords/Queries/" />
     <Folder Include="Users/" />
     <Folder Include="Users/Queries/" />
   </ItemGroup>

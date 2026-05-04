@@ -20,10 +20,10 @@ public class SaleRecordRepository(PsqlDbContext context) : ISaleRecordRepository
         CancellationToken cancellationToken
     )
     {
-        var floor = date.Date;
-        var ceiling = date.Date.AddDays(1);
+        var floor = DateTime.SpecifyKind(date.Date, DateTimeKind.Utc);
+        var ceiling = DateTime.SpecifyKind(date.Date.AddDays(1), DateTimeKind.Utc);
         return _context.SaleRecords.AnyAsync(
-            sr => sr.OrganizationId == organizationId && date >= floor && date < ceiling,
+            sr => sr.OrganizationId == organizationId && sr.Date >= floor && sr.Date < ceiling,
             cancellationToken
         );
     }

@@ -3,6 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using API.DTOs.Requests.SaleRecords;
 using Application.SaleRecords.Commands;
+using Application.SaleRecords.Queries;
 using Domain.StaticClasses;
 using Microsoft.AspNetCore.Mvc;
 
@@ -45,5 +46,19 @@ public class SaleRecordController : BaseAPIController
             return Unauthorized(result.Error);
 
         return NoContent();
+    }
+
+    [HttpGet("{date}")]
+    public async Task<IActionResult> Exists(DateOnly date)
+    {
+        var organizationId = User.FindFirst("org_id")?.Value;
+        if (organizationId == null)
+            return Unauthorized("organization does not exist");
+
+        var result = await Mediator.Send(new Exists.Query(organizationId, date));
+        if (!result.IsSuccess)
+            return Unauthorized(result.Error);
+
+        return Ok(result.Value);
     }
 }

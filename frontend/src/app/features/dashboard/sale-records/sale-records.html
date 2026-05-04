@@ -7,5 +7,10 @@
 @if (exists()) {
   <p>Sales data has been submitted for this day</p>
 } @else {
-  <app-create-sale-record [date]="selectedDate.value" />
+  @if (selectedDate.value) {
+    <p>Date: {{ selectedDate.value }}</p>
+    <app-create-sale-record [date]="selectedDate.value" />
+  } @else {
+    <p>Select the date</p>
+  }
 }
