@@ -3,14 +3,24 @@
     @for (item of itemControls; track $index) {
       <div [formGroupName]="$index">
         <label>{{ item.get('name')?.value }} [{{ item.get('sku')?.value }}] :</label>
-        <input type="number" formControlName="quantity" class="ml-4 border-2" />
-        <p class="text-black-l inline">
+        <input type="number" formControlName="quantity" class="ml-4 border-2" step="1" />
+        @if (item.get('quantity'); as q) {
+          @if (q.invalid && q.touched) {
+            @if (q.errors?.['required']) {
+              <span>Quantity is required.</span>
+            }
+            @if (q.errors?.['pattern']) {
+              <span>Must be a whole number.</span>
+            }
+          }
+        }
+        <span class="text-black-l">
           {{
             item.get('quantity')?.value < 0
               ? 'Warning: quantity can be negative only on item return'
               : ''
           }}
-        </p>
+        </span>
       </div>
     }
   </div>

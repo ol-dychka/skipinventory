@@ -27,7 +27,7 @@ export class CreateSaleRecord implements OnInit {
             id: [product.id],
             name: [product.name],
             sku: [product.sku],
-            quantity: [0, [Validators.required]],
+            quantity: [0, [Validators.required, Validators.pattern(/^(?:\-)?\d+$/)]],
           }),
         ),
       ),
