@@ -5,13 +5,14 @@ public class SaleRecord(
     string sku,
     string organizationId,
     string productId,
-    int unitsReturned
+    int unitsReturned,
+    DateOnly date
 )
 {
     // core
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public string Sku { get; set; } = sku;
-    public DateTime Date { get; set; } = DateTime.UtcNow;
+    public DateOnly Date { get; set; } = date;
 
     // numbers
     public int UnitsSold { get; set; } = unitsSold;

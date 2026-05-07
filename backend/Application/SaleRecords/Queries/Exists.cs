@@ -15,7 +15,7 @@ public class Exists
         {
             var exists = await repository.ExistsFromDateAsync(
                 request.OrganizationId,
-                request.Date.ToDateTime(TimeOnly.MinValue),
+                request.Date,
                 cancellationToken
             );
 

@@ -16,30 +16,24 @@ public class SaleRecordRepository(PsqlDbContext context) : ISaleRecordRepository
 
     public Task<bool> ExistsFromDateAsync(
         string organizationId,
-        DateTime date,
+        DateOnly date,
         CancellationToken cancellationToken
     )
     {
-        var floor = DateTime.SpecifyKind(date.Date, DateTimeKind.Utc);
-        var ceiling = DateTime.SpecifyKind(date.Date.AddDays(1), DateTimeKind.Utc);
         return _context.SaleRecords.AnyAsync(
-            sr => sr.OrganizationId == organizationId && sr.Date >= floor && sr.Date < ceiling,
+            sr => sr.OrganizationId == organizationId && sr.Date == date,
             cancellationToken
         );
     }
 
     public Task<List<SaleRecord>> GetFromDateAsync(
         string organizationId,
-        DateTime date,
+        DateOnly date,
         CancellationToken cancellationToken
     )
     {
-        var floor = date.Date;
-        var ceiling = date.Date.AddDays(1);
         return _context
-            .SaleRecords.Where(sr =>
-                sr.OrganizationId == organizationId && date >= floor && date < ceiling
-            )
+            .SaleRecords.Where(sr => sr.OrganizationId == organizationId && sr.Date == date)
             .ToListAsync(cancellationToken);
     }
 }
