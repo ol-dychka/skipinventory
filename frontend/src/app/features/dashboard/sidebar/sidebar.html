@@ -1,6 +1,58 @@
-<p class="cursor-pointer" [routerLink]="['dashboard']">dashboard</p>
-<p class="cursor-pointer" [routerLink]="['join-requests']">join requests</p>
-<p class="cursor-pointer" [routerLink]="['members']">members</p>
-<p class="cursor-pointer" [routerLink]="['products']">products</p>
-<p class="cursor-pointer" [routerLink]="['sale-records']">sale records</p>
-<p class="cursor-pointer" [routerLink]="['model-training']">ml model training</p>
+<div
+  class="space-y-1 *:cursor-pointer *:rounded-lg *:p-4 *:transition-colors *:duration-300 *:ease-in-out"
+>
+  <p
+    [routerLink]="['dashboard']"
+    [ngClass]="{
+      'bg-primary-l': isCurrent('dashboard'),
+    }"
+    (click)="switchPage('dashboard')"
+  >
+    dashboard
+  </p>
+  <p
+    [routerLink]="['join-requests']"
+    [ngClass]="{
+      'bg-primary-l': isCurrent('join-requests'),
+    }"
+    (click)="switchPage('join-requests')"
+  >
+    join requests
+  </p>
+  <p
+    [routerLink]="['members']"
+    [ngClass]="{
+      'bg-primary-l': isCurrent('members'),
+    }"
+    (click)="switchPage('members')"
+  >
+    members
+  </p>
+  <p
+    [routerLink]="['products']"
+    [ngClass]="{
+      'bg-primary-l': isCurrent('products'),
+    }"
+    (click)="switchPage('products')"
+  >
+    products
+  </p>
+  <p
+    [routerLink]="['sale-records']"
+    [ngClass]="{
+      'bg-primary-l': isCurrent('sale-records'),
+    }"
+    (click)="switchPage('sale-records')"
+  >
+    sale records
+  </p>
+  <p
+    [routerLink]="['model-training']"
+    [ngClass]="{
+      'bg-primary-l': isCurrent('model-training'),
+    }"
+    (click)="switchPage('model-training')"
+  >
+    ml model training
+  </p>
+</div>
