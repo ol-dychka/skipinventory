@@ -1,7 +1,7 @@
 import numpy as np
 
 class RidgeRegressionGD:
-    def __init__(self, lr=0.01, epochs=1000, lambda_=0.01):
+    def __init__(self, lr=0.001, epochs=1000, lambda_=0.01):
         self.lr = lr
         self.epochs = epochs
         self.lambda_ = lambda_

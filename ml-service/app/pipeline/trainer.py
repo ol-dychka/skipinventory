@@ -4,6 +4,7 @@ from schemas.sale_record import SaleRecord
 from schemas.product import Product
 from pipeline.features import build_features
 from models.linear import RidgeRegressionGD
+from pipeline.preprocessor import Preprocessor
 
 def load_data(path: str) -> tuple[np.ndarray, np.ndarray]:
     with open(path) as f:
@@ -19,18 +20,27 @@ def load_data(path: str) -> tuple[np.ndarray, np.ndarray]:
 
     return np.array(X_rows), np.array(y_rows)
 
-def train(data_path, weights_path):
+def train(data_path, weights_path, preprocessing_path):
     X, y = load_data(data_path)
+
+    print("X shape:", X.shape)
+    print("X NaNs:", np.isnan(X).sum())
+    print("y NaNs:", np.isnan(y).sum())
+    print("y sample:", y[:5])
 
     split = int(len(X) * 0.8)
     X_train, X_test = X[:split], X[split:]
     y_train, y_test = y[:split], y[split:]
 
+    preprocessor = Preprocessor()
+    X_train_scaled = preprocessor.fit_transform(X_train)
+    X_test_scaled = preprocessor.transform(X_test)
+
     model = RidgeRegressionGD()
-    model.fit(X_train, y_train)
+    model.fit(X_train_scaled, y_train)
 
     # Evaluation metrics — implemented manually
-    y_pred = model.predict(X_test)
+    y_pred = model.predict(X_test_scaled)
     mae = np.abs(y_pred - y_test).mean()
     rmse = np.sqrt(((y_pred - y_test) ** 2).mean())
     ss_res = ((y_test - y_pred) ** 2).sum()
@@ -40,4 +50,5 @@ def train(data_path, weights_path):
     print(f"MAE: {mae:.2f} | RMSE: {rmse:.2f} | R²: {r2:.4f}")
 
     model.save(weights_path)
+    preprocessor.save(preprocessing_path)
     print("Artifacts saved.")
