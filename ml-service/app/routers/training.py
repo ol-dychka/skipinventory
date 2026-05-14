@@ -1,14 +1,17 @@
 import os
+from pathlib import Path
 
-from fastapi import APIRouter, BackgroundTasks, HTTPException
+from fastapi import APIRouter
 
-from models.linear import RidgeRegressionGD
-from schemas.prediction_payload import PredictionPayload
-from pipeline.features import build_features
-from forecasting.reorder import calculate_order_quantity
+
 from scripts.generate_synthetic_data import write
+from pipeline.trainer import train
 
 router = APIRouter(prefix="/train", tags=["training"])
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+DATA_PATH = BASE_DIR / "data" / "training_data.json"
+WEIGHTS_PATH = BASE_DIR / "aftifacts" / "weights.npy"
 
 training_state = {
     "status": "idle",       # idle | running | done | failed
@@ -22,33 +25,8 @@ def generate_training_data():
 
     return
 
-# @router.post("/file/async")
-# def train_from_file_async(req: TrainFromFileRequest, background_tasks: BackgroundTasks):
-#     """
-#     Non-blocking version — returns immediately, trains in background.
-#     Poll /train/status to check progress.
-#     Use this if training takes more than a few seconds.
-#     """
-#     if training_state["status"] == "running":
-#         raise HTTPException(status_code=409, detail="Training already in progress")
+@router.post("/data")
+def train_on_generated_data():
+    train()
 
-#     if not os.path.exists("data/training_data.json"):
-#         raise HTTPException(status_code=404, detail=f"File not found: {req.data_path}")
-
-#     def _task():
-#         training_state.update({"status": "running", "metrics": None, "error": None})
-#         try:
-#             X, y = load_training_data("data/training_data.json")
-#             metrics = run_training(X, y, 0.01, 2000, 0.01)
-#             training_state.update({"status": "done", "metrics": metrics.model_dump()})
-#         except Exception as e:
-#             training_state.update({"status": "failed", "error": str(e)})
-
-#     background_tasks.add_task(_task)
-#     return {"status": "started", "message": "Poll /train/status for updates"}
-
-
-# @router.get("/status")
-# def training_status():
-#     """Check the result of an async training run."""
-#     return training_state
+    return

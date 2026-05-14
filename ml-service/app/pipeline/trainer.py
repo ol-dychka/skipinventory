@@ -1,15 +1,11 @@
 import numpy as np
 import json
-from app.schemas import SaleRecord, Product
-from app.pipeline.features import build_features
-from app.pipeline.preprocessor import Preprocessor
-from app.models.linear import RidgeRegressionGD
+from schemas.sale_record import SaleRecord
+from schemas.product import Product
+from pipeline.features import build_features
+from models.linear import RidgeRegressionGD
 
-def load_training_data(path: str) -> tuple[np.ndarray, np.ndarray]:
-    """
-    Expects data/training_data.json to be a list of:
-    { "sales": [...], "product": {...}, "actual_order_quantity": 42 }
-    """
+def load_data(path: str) -> tuple[np.ndarray, np.ndarray]:
     with open(path) as f:
         records = json.load(f)
 
@@ -19,27 +15,22 @@ def load_training_data(path: str) -> tuple[np.ndarray, np.ndarray]:
         product = Product(**record["product"])
         features = build_features(sales, product)
         X_rows.append(features)
-        y_rows.append(record["actual_order_quantity"])
+        y_rows.append(record["orderQuantity"])
 
     return np.array(X_rows), np.array(y_rows)
 
-def train_evaluate(data_path="data/training_data.json"):
-    X, y = load_training_data(data_path)
+def train(data_path, weights_path):
+    X, y = load_data(data_path)
 
-    # Train/test split (no sklearn — manual slice)
     split = int(len(X) * 0.8)
     X_train, X_test = X[:split], X[split:]
     y_train, y_test = y[:split], y[split:]
 
-    preprocessor = Preprocessor()
-    X_train_norm = preprocessor.fit_transform(X_train)
-    X_test_norm = preprocessor.transform(X_test)
-
     model = RidgeRegressionGD()
-    model.fit(X_train_norm, y_train)
+    model.fit(X_train, y_train)
 
     # Evaluation metrics — implemented manually
-    y_pred = model.predict(X_test_norm)
+    y_pred = model.predict(X_test)
     mae = np.abs(y_pred - y_test).mean()
     rmse = np.sqrt(((y_pred - y_test) ** 2).mean())
     ss_res = ((y_test - y_pred) ** 2).sum()
@@ -48,9 +39,5 @@ def train_evaluate(data_path="data/training_data.json"):
 
     print(f"MAE: {mae:.2f} | RMSE: {rmse:.2f} | R²: {r2:.4f}")
 
-    model.save("artifacts/weights.npy")
-    preprocessor.save("artifacts/preprocessor.npy")
+    model.save(weights_path)
     print("Artifacts saved.")
-
-if __name__ == "__main__":
-    train_evaluate()

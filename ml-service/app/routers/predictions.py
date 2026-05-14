@@ -1,15 +1,20 @@
+from pathlib import Path
+
 from fastapi import APIRouter, HTTPException
 
 from models.linear import RidgeRegressionGD
 from schemas.prediction_payload import PredictionPayload
 from pipeline.features import build_features
-from forecasting.reorder import calculate_order_quantity
+from pipeline.order_quantity import calculate_order_quantity
+
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
+WEIGHTS_PATH = BASE_DIR / "aftifacts" / "weights.json"
 
 router = APIRouter(prefix="/predict", tags=["predictions"])
 model = RidgeRegressionGD()
 
 try:    
-    model.load("artifacts/weights.npy")
+    model.load(WEIGHTS_PATH)
 except FileNotFoundError:
     pass
 
