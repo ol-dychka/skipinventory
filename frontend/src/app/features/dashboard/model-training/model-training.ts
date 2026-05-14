@@ -11,6 +11,7 @@ export class ModelTraining {
   private modelTrainingService = inject(ModelTrainingService);
 
   generating = signal(false);
+  training = signal(false);
 
   generate(): void {
     this.generating.set(true);
@@ -18,6 +19,15 @@ export class ModelTraining {
     this.modelTrainingService
       .generate()
       .pipe(finalize(() => this.generating.set(false)))
+      .subscribe();
+  }
+
+  train(): void {
+    this.training.set(true);
+
+    this.modelTrainingService
+      .train()
+      .pipe(finalize(() => this.training.set(false)))
       .subscribe();
   }
 }

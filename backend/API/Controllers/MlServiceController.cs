@@ -21,4 +21,19 @@ public class MlServiceController(IHttpClientFactory factory) : BaseAPIController
 
         return Content(responseBody, "application/json");
     }
+
+    [HttpPost("train/data")]
+    public async Task<IActionResult> Train()
+    {
+        var response = await _client.PostAsync("/train/data", null);
+
+        if (!response.IsSuccessStatusCode)
+        {
+            return StatusCode((int)response.StatusCode);
+        }
+
+        var responseBody = await response.Content.ReadAsStringAsync();
+
+        return Content(responseBody, "application/json");
+    }
 }

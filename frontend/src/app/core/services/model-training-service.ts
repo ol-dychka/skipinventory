@@ -15,4 +15,10 @@ export class ModelTrainingService {
       .post<void>(`${this.api}/mlservice/train/generate`, {})
       .pipe(tap(() => console.log('generating training data is done')));
   }
+
+  train(): Observable<void> {
+    return this.http
+      .post<void>(`${this.api}/mlservice/train/data`, {})
+      .pipe(tap(() => console.log('training is done')));
+  }
 }

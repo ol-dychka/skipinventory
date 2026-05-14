@@ -4,7 +4,7 @@ class RidgeRegressionGD:
     def __init__(self, lr=0.01, epochs=1000, lambda_=0.01):
         self.lr = lr
         self.epochs = epochs
-        self.lamdba_ = lambda_
+        self.lambda_ = lambda_
         self.weights = None
         self.bias = 0.0
         self.loss_history = []
@@ -23,7 +23,7 @@ class RidgeRegressionGD:
             self.weights -= self.lr * dw
             self.bias -= self.lr * db
 
-            loss = (error ** 2).mean() + self.lamdba_ * (self.weights ** 2).sum()
+            loss = (error ** 2).mean() + self.lambda_ * (self.weights ** 2).sum()
             self.loss_history.append(loss)
 
     def predict(self, X:np.ndarray) -> np.ndarray:
