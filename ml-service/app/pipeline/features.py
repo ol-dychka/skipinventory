@@ -25,7 +25,8 @@ def build_features(sales: list[SaleRecord], product: Product) -> np.ndarray:
 
     avg_4w = weekly.tail(4).mean()
     avg_8w = weekly.tail(8).mean() if len(weekly) >= 8 else avg_4w
-    std_4w = weekly.tail(4).std() or 0.0
+    std_4w = weekly.tail(4).std()
+    std_4w = 0 if np.isnan(std_4w) else std_4w
 
     return np.array([
         avg_4w,

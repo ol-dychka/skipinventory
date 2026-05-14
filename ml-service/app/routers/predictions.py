@@ -22,22 +22,23 @@ try:
 except FileNotFoundError:
     pass
 
-# @router.post("/single")
-# def predict_single(payload: PredictionPayload) -> dict:
-#     if model.weights is None:
-#         raise HTTPException(status_code=503, detail="Model not trained yet")
+@router.post("/single")
+def predict_single(payload: PredictionPayload) -> dict:
+    if model.weights is None:
+        raise HTTPException(status_code=503, detail="Model not trained yet")
     
-#     features = build_features(payload.sales, payload.product)
-#     predicted_demand = float(model.predict(features.reshape(1, -1))[0])
-#     demand_std = features[3]
+    features = build_features(payload.sales, payload.product)
+    features_scaled = preprocessor.transform(features.reshape(1, -1))
+    predicted_demand = float(model.predict(features_scaled)[0])
+    demand_std = features[3]
 
-#     order_quantity = calculate_order_quantity(predicted_demand, payload.product, demand_std)
+    order_quantity = calculate_order_quantity(predicted_demand, payload.product, demand_std)
 
-#     return {
-#         "sku": payload.product.sku,
-#         "predicted_weekly_demand": round(predicted_demand, 2),
-#         "recommended_order_quantity": order_quantity
-#     }
+    return {
+        "sku": payload.product.sku,
+        "predicted_weekly_demand": round(predicted_demand, 2),
+        "recommended_order_quantity": order_quantity
+    }
 
 @router.post("/batch")
 def predict_batch(payload: list[PredictionPayload]):
