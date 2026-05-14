@@ -1,9 +1,12 @@
+import os
+
 from fastapi import APIRouter, BackgroundTasks, HTTPException
 
 from models.linear import RidgeRegressionGD
 from schemas.prediction_payload import PredictionPayload
 from pipeline.features import build_features
 from forecasting.reorder import calculate_order_quantity
+from scripts.generate_synthetic_data import write
 
 router = APIRouter(prefix="/train", tags=["training"])
 
@@ -15,7 +18,9 @@ training_state = {
 
 @router.post("/generate")
 def generate_training_data():
-    return {"status": "complete"}
+    write()
+
+    return
 
 @router.post("/file/async")
 def train_from_file_async(req: TrainFromFileRequest, background_tasks: BackgroundTasks):

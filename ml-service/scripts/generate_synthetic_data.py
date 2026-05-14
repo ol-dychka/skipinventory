@@ -3,7 +3,7 @@ import uuid
 from faker import Faker
 import numpy as np
 import json
-from datetime import date, timedelta
+from datetime import timedelta
 import random
 from app.schemas.product import Product
 from app.schemas.sale_record import SaleRecord

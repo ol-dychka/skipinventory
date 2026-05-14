@@ -77,6 +77,14 @@ builder.Services.AddCors(options =>
     );
 });
 
+builder.Services.AddHttpClient(
+    "mlservice",
+    client =>
+    {
+        client.BaseAddress = new Uri("http://localhost:8000");
+    }
+);
+
 var app = builder.Build();
 
 app.UseCors("AllowAngular");
