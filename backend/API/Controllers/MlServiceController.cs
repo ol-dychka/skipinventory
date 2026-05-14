@@ -7,10 +7,10 @@ public class MlServiceController(IHttpClientFactory factory) : BaseAPIController
 {
     private readonly HttpClient _client = factory.CreateClient("mlservice");
 
-    [HttpPost("generate")]
+    [HttpPost("train/generate")]
     public async Task<IActionResult> Generate()
     {
-        var response = await _client.PostAsync("/generate", null);
+        var response = await _client.PostAsync("/train/generate", null);
 
         if (!response.IsSuccessStatusCode)
         {
