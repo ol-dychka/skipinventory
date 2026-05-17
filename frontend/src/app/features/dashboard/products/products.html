@@ -1,4 +1,4 @@
-<button class="btn" [routerLink]="['../product-create']">Create a new Product</button>
+<button class="btn" (click)="isCreateOpen.set(true)">Create a new Product</button>
 <div class="flex">
   <div class="flex w-full basis-1/2 flex-col gap-4">
     @if (productService.products().length > 0) {
@@ -12,6 +12,9 @@
   <div class="w-full basis-1/2">
     @if (productService.selectedProduct(); as product) {
       <app-product-edit-panel [product]="product" />
+    }
+    @if (isCreateOpen()) {
+      <app-product-create-panel (close)="isCreateOpen.set(false)" />
     }
   </div>
 </div>

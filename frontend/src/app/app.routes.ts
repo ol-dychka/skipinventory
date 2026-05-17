@@ -13,9 +13,7 @@ import { JoinRequests } from './features/dashboard/join-requests/join-requests';
 import { OrganizationLayout } from './features/dashboard/organization-layout/organization-layout';
 import { Members } from './features/dashboard/members/members';
 import { Products } from './features/dashboard/products/products';
-import { ProductCreate } from './features/dashboard/product-create/product-create';
 import { productGuard } from './core/guards/product-guard';
-import { CreateSaleRecord } from './features/dashboard/create-sale-record/create-sale-record';
 import { SaleRecords } from './features/dashboard/sale-records/sale-records';
 import { ModelTraining } from './features/dashboard/model-training/model-training';
 
@@ -41,7 +39,6 @@ export const routes: Routes = [
           { path: 'members', component: Members },
           { path: 'join-requests', component: JoinRequests },
           { path: 'products', component: Products, canActivate: [productGuard] },
-          { path: 'product-create', component: ProductCreate },
           { path: 'sale-records', component: SaleRecords, canActivate: [productGuard] },
           { path: 'model-training', component: ModelTraining },
         ],

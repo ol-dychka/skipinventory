@@ -1,5 +1,5 @@
 <div>
-  <div class="flex-right cursor-pointer font-bold" (click)="this.close()">X</div>
+  <div class="flex-right cursor-pointer font-bold" (click)="close.emit()">X</div>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <!-- description -->
     <app-scaled-input id="name" label="name" formControlName="name" [error]="fieldError('name')" />
@@ -27,7 +27,7 @@
         label="salePrice"
         [error]="fieldError('salePrice')"
       />
-      <p>Currency: {{ product().currency }}</p>
+      <p>Currency: CAD</p>
     </div>
     <!-- <app-scaled-input formControlName="currency" id="currency" label="currency" /> -->
 
@@ -40,7 +40,7 @@
         label="currentStock"
         [error]="fieldError('currentStock')"
       />
-      <p>Unit: {{ product().unit }}</p>
+      <p>Unit: Each</p>
     </div>
     <div class="flex-left">
       <app-scaled-input
@@ -73,13 +73,6 @@
       />
     </div>
 
-    <!-- status -->
-    <p>Currently Active:</p>
-    <input type="checkbox" id="isActive" formControlName="isActive" class="accent-primary block" />
-
-    <button class="btn mt-8" type="submit">{{ this.loading() ? 'Saving...' : 'Save' }}</button>
+    <button class="btn mt-8" type="submit">{{ this.loading() ? 'Creating...' : 'Create' }}</button>
   </form>
-
-  <p>Created at: {{ product().createdAt }}</p>
-  <p>Last Updated at: {{ product().updatedAt }}</p>
 </div>
