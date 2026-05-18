@@ -1,5 +1,8 @@
 <div>
-  <div class="flex-right cursor-pointer font-bold" (click)="close.emit()">X</div>
+  <div class="flex-between">
+    <p class="font-bold">Create New Product</p>
+    <p class="cursor-pointer font-bold" (click)="close.emit()">X</p>
+  </div>
   <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <!-- description -->
     <app-scaled-input id="name" label="name" formControlName="name" [error]="fieldError('name')" />

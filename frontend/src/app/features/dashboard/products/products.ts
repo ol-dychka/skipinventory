@@ -22,4 +22,9 @@ export class Products {
     this.productService.selectedProduct.set(p);
     console.log(this.productService.selectedProduct());
   }
+
+  onProductCreate() {
+    this.isCreateOpen.set(true);
+    this.productService.selectedProduct.set(undefined);
+  }
 }

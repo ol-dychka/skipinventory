@@ -1,6 +1,6 @@
-<button class="btn" (click)="isCreateOpen.set(true)">Create a new Product</button>
-<div class="flex">
-  <div class="flex w-full basis-1/2 flex-col gap-4">
+<button class="btn" (click)="onProductCreate()">Create a new Product</button>
+<div class="grid grid-cols-2 gap-8">
+  <div class="flex flex-col gap-4">
     @if (productService.products().length > 0) {
       @for (p of productService.products(); track p.id) {
         <app-product-card [product]="p" (productSelect)="onProductSelect($event)" />
@@ -9,7 +9,7 @@
       <p>There are no Products for this Organization</p>
     }
   </div>
-  <div class="w-full basis-1/2">
+  <div>
     @if (productService.selectedProduct(); as product) {
       <app-product-edit-panel [product]="product" />
     }
