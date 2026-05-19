@@ -35,11 +35,11 @@ body {
   }
 
   .flex-center {
-    @apply flex items-center justify-center gap-4;
+    @apply flex items-center justify-center gap-8;
   }
 
   .flex-between {
-    @apply flex items-center justify-between gap-4;
+    @apply flex items-center justify-between gap-8;
   }
 
   .flex-left {

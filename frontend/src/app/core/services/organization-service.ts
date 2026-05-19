@@ -49,6 +49,13 @@ export class OrganizationService {
       .pipe(switchMap(() => this.get(organizationId).pipe(map(() => void 0))));
   }
 
+  exit(): Observable<void> {
+    return this.authService.refresh().pipe(
+      tap(() => this.currentOrganization.set(null)),
+      map(() => void 0),
+    );
+  }
+
   get(organizationId: string) {
     return this.http.get<OrganizationModel>(`${this.api}/organization/${organizationId}`).pipe(
       tap((organization) => {

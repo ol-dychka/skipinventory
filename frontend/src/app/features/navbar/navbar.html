@@ -1,14 +1,22 @@
 <nav class="fixed top-0 w-full">
-  <div class="bg-secondary flex justify-between gap-4 p-2">
-    <div>
-      <p>
-        {{ authService.currentUser()?.name }}
-      </p>
-      <p class="text-black-l">
-        {{ authService.currentUser()?.email }}
-      </p>
+  <div class="bg-secondary flex-between p-2">
+    <div class="flex-center">
+      <div class="text-center">
+        <p>{{ organizationService.currentOrganization()?.name }}</p>
+        <p class="text-black-l">{{ organizationService.role() }}</p>
+      </div>
+      <button (click)="handleOrganizationLogout()" class="btn">Log Out of Org</button>
     </div>
-    <p>{{ organizationService.currentOrganization()?.name }}</p>
-    <app-logout-button />
+    <div class="flex-center">
+      <div>
+        <p>
+          {{ authService.currentUser()?.name }}
+        </p>
+        <p class="text-black-l">
+          {{ authService.currentUser()?.email }}
+        </p>
+      </div>
+      <app-logout-button />
+    </div>
   </div>
 </nav>
