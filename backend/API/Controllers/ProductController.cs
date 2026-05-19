@@ -44,10 +44,11 @@ public class ProductController : BaseAPIController
                 Category = request.Category,
             }
         );
-        if (!result.IsSuccess)
+        if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
 
-        return NoContent();
+        var productDto = new ProductDto(result.Value);
+        return Ok(productDto);
     }
 
     [HttpGet("list")]

@@ -27,16 +27,20 @@ export class ProductService {
     });
   }
 
+  addToList(product: ProductModel) {
+    this.products.update((products) => [product, ...products]);
+  }
+
   create(payload: CreateProductRequest): Observable<void> {
-    return this.http.post<void>(`${this.api}/product`, payload);
+    return this.http.post<ProductModel>(`${this.api}/product`, payload).pipe(
+      tap((product) => this.addToList(product)),
+      map(() => void 0),
+    );
   }
 
   edit(payload: EditProductRequest, id: string): Observable<void> {
     return this.http.put<ProductModel>(`${this.api}/product/${id}`, payload).pipe(
-      tap((product) => {
-        console.log(product);
-        this.replaceInList(product);
-      }),
+      tap((product) => this.replaceInList(product)),
       map(() => void 0),
     );
   }

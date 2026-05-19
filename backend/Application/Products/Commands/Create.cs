@@ -10,7 +10,7 @@ namespace Application.Products.Commands;
 
 public class Create
 {
-    public class Command : IRequest<Result<Unit>>
+    public class Command : IRequest<Result<Product>>
     {
         public required string UserId { get; set; }
         public required string Name { get; set; }
@@ -30,19 +30,22 @@ public class Create
         IUserRepository userRepository,
         IProductRepository productRepository,
         IUnitOfWork unitOfWork
-    ) : IRequestHandler<Command, Result<Unit>>
+    ) : IRequestHandler<Command, Result<Product>>
     {
-        public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Result<Product>> Handle(
+            Command request,
+            CancellationToken cancellationToken
+        )
         {
             var user = await userRepository.GetByIdAsync(request.UserId, cancellationToken);
             if (user == null)
-                return Result<Unit>.Failure("User not found");
+                return Result<Product>.Failure("User not found");
 
             var hasRight = user.Memberships.Any(m =>
                 m.OrganizationId == request.OrganizationId && UserRole.HasResolveJoinRights(m.Role)
             );
             if (!hasRight)
-                return Result<Unit>.Failure("Current user has no rights to perform this action");
+                return Result<Product>.Failure("Current user has no rights to perform this action");
 
             var generatedSku = GenerateSku(request.Name, request.Sku);
 
@@ -64,7 +67,7 @@ public class Create
 
             await unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return Result<Unit>.Success(Unit.Value);
+            return Result<Product>.Success(product);
         }
     }
 
