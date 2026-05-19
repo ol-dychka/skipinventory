@@ -1,4 +1,5 @@
 using System;
+using System.Text.RegularExpressions;
 using Application.Core;
 using Application.Interfaces;
 using Domain;
@@ -43,9 +44,11 @@ public class Create
             if (!hasRight)
                 return Result<Unit>.Failure("Current user has no rights to perform this action");
 
+            var generatedSku = GenerateSku(request.Name, request.Sku);
+
             var product = new Product(
                 request.Name,
-                request.Sku ?? request.Name,
+                generatedSku,
                 request.Vendor,
                 request.OrganizationId,
                 request.CostPrice,
@@ -63,5 +66,27 @@ public class Create
 
             return Result<Unit>.Success(Unit.Value);
         }
+    }
+
+    private static string GenerateSku(string name, string? sku)
+    {
+        string suffix = Guid.NewGuid().ToString("N")[..6].ToUpperInvariant();
+
+        if (!string.IsNullOrWhiteSpace(sku))
+        {
+            return $"{sku.Trim().ToUpperInvariant()}-{suffix}";
+        }
+
+        // replaces everything that's not a capital, number or some kind of space
+        string normalized = Regex.Replace(name.Trim().ToUpperInvariant(), @"[^A-Z0-9\s]", "");
+        normalized = Regex.Replace(normalized, @"\s+", " ").Trim();
+
+        // get first 3 letters of first 3 words
+        string prefix = string.Join(
+            "-",
+            normalized.Split(" ").Take(3).Select(w => w.Length >= 3 ? w[..3] : w)
+        );
+
+        return $"{prefix}-{suffix}";
     }
 }
