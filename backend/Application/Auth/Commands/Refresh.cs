@@ -9,7 +9,7 @@ namespace Application.Auth.Commands;
 
 public class Refresh
 {
-    public record Response(string AccessToken, RefreshTokenData RefreshTokenData);
+    public record Response(string UserId, string AccessToken, RefreshTokenData RefreshTokenData);
 
     public record Command(string RefreshToken, string? OrganizationId) : IRequest<Result<Response>>;
 
@@ -80,7 +80,9 @@ public class Refresh
                 );
             }
 
-            return Result<Response>.Success(new Response(accessToken, newRefreshTokenData));
+            return Result<Response>.Success(
+                new Response(currentRefreshToken.User.Id, accessToken, newRefreshTokenData)
+            );
         }
     }
 }

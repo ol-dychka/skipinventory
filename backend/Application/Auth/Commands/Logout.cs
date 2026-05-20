@@ -7,15 +7,20 @@ namespace Application.Auth.Commands;
 
 public class Logout
 {
-    public record Command(string RefreshToken) : IRequest<Result<Unit>>;
+    public record Response(string UserId);
+
+    public record Command(string RefreshToken) : IRequest<Result<Response>>;
 
     public class Handler(
         IRefreshTokenRepository refreshTokenRepository,
         IUnitOfWork unitOfWork,
         ITokenGenerator tokenGenerator
-    ) : IRequestHandler<Command, Result<Unit>>
+    ) : IRequestHandler<Command, Result<Response>>
     {
-        public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Result<Response>> Handle(
+            Command request,
+            CancellationToken cancellationToken
+        )
         {
             var refreshTokenHash = tokenGenerator.HashRefreshToken(request.RefreshToken);
 
@@ -29,13 +34,13 @@ public class Logout
                 || refreshToken.IsRevoked
                 || refreshToken.ExpiresAt < DateTime.UtcNow
             )
-                return Result<Unit>.Failure("Session is invalid or has expired");
+                return Result<Response>.Failure("Session is invalid or has expired");
 
             refreshToken.IsRevoked = true;
 
             await unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return Result<Unit>.Success(Unit.Value);
+            return Result<Response>.Success(new Response(refreshToken.UserId));
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Application.Auth.Commands;
 
 public class Login
 {
-    public record Response(string AccessToken, RefreshTokenData RefreshTokenData);
+    public record Response(string UserId, string AccessToken, RefreshTokenData RefreshTokenData);
 
     public record Command(string Email, string Password) : IRequest<Result<Response>>;
 
@@ -50,7 +50,7 @@ public class Login
 
             var accessToken = tokenGenerator.GenerateAccessToken(user.Id, user.Email);
 
-            return Result<Response>.Success(new Response(accessToken, refreshTokenData));
+            return Result<Response>.Success(new Response(user.Id, accessToken, refreshTokenData));
         }
     }
 }

@@ -4,12 +4,14 @@ using API.DTOs.Requests.Auth;
 using API.DTOs.Responses;
 using API.Middleware;
 using Application.Auth.Commands;
+using Application.Interfaces;
+using Infrastructure.Auth;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-public class AuthController : BaseAPIController
+public class AuthController(IRedisTokenService tokenService) : BaseAPIController
 {
     [HttpPost("register")]
     [AllowAnonymous]
@@ -20,6 +22,8 @@ public class AuthController : BaseAPIController
         );
         if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
+
+        await tokenService.IssueTokenAsync(result.Value.UserId, result.Value.AccessToken);
 
         Response.Cookies.SetRefreshToken(result.Value.RefreshTokenData);
         return Ok(new { accessToken = result.Value.AccessToken });
@@ -32,6 +36,8 @@ public class AuthController : BaseAPIController
         var result = await Mediator.Send(new Login.Command(request.Email, request.Password));
         if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
+
+        await tokenService.IssueTokenAsync(result.Value.UserId, result.Value.AccessToken);
 
         Response.Cookies.SetRefreshToken(result.Value.RefreshTokenData);
         return Ok(new { accessToken = result.Value.AccessToken });
@@ -49,6 +55,8 @@ public class AuthController : BaseAPIController
         if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
 
+        await tokenService.IssueTokenAsync(result.Value.UserId, result.Value.AccessToken);
+
         Response.Cookies.SetRefreshToken(result.Value.RefreshTokenData);
         return Ok(new { accessToken = result.Value.AccessToken });
     }
@@ -61,8 +69,10 @@ public class AuthController : BaseAPIController
             return Unauthorized("Refresh cookie is invalid");
 
         var result = await Mediator.Send(new Logout.Command(refreshToken));
-        if (!result.IsSuccess)
+        if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
+
+        await tokenService.RevokeTokenAsync(result.Value.UserId);
 
         Response.Cookies.DeleteRefreshToken();
         return NoContent();
