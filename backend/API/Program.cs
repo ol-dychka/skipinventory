@@ -14,15 +14,16 @@ using StackExchange.Redis;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
-builder.Services.AddDbContext<PsqlDbContext>(options =>
-{
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
-});
 builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<List.Handler>());
 
 // builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 
 // postgresql
+
+builder.Services.AddDbContext<PsqlDbContext>(options =>
+{
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
 builder.Services.AddScoped<IOrganizationRepository, OrganizationRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IRefreshTokenRepository, RefreshTokenRepository>();

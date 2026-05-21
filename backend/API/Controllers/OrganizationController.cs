@@ -26,10 +26,13 @@ public class OrganizationController : BaseAPIController
         return Ok(organizations);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> Details(string id)
+    [HttpGet("{organizationId}")]
+    public async Task<IActionResult> Details(string organizationId)
     {
-        var result = await Mediator.Send(new Details.Query(id));
+        if (UserId == null)
+            return Unauthorized("token does not exist");
+
+        var result = await Mediator.Send(new Details.Query(organizationId, UserId));
         if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
 
