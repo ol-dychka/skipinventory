@@ -47,11 +47,10 @@ public class AuthController(IRedisTokenService tokenService) : BaseAPIController
     [AllowAnonymous]
     public async Task<IActionResult> Refresh([FromBody] RefreshRequest request)
     {
-        var refreshToken = Request.Cookies["refreshToken"];
-        if (string.IsNullOrEmpty(refreshToken))
+        if (string.IsNullOrEmpty(RefreshToken))
             return Unauthorized("Refresh cookie is invalid");
 
-        var result = await Mediator.Send(new Refresh.Command(refreshToken, request.OrganizationId));
+        var result = await Mediator.Send(new Refresh.Command(RefreshToken, request.OrganizationId));
         if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
 
@@ -64,11 +63,10 @@ public class AuthController(IRedisTokenService tokenService) : BaseAPIController
     [HttpPost("logout")]
     public async Task<IActionResult> Logout()
     {
-        var refreshToken = Request.Cookies["refreshToken"];
-        if (string.IsNullOrEmpty(refreshToken))
+        if (string.IsNullOrEmpty(RefreshToken))
             return Unauthorized("Refresh cookie is invalid");
 
-        var result = await Mediator.Send(new Logout.Command(refreshToken));
+        var result = await Mediator.Send(new Logout.Command(RefreshToken));
         if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
 

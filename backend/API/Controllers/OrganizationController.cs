@@ -41,11 +41,10 @@ public class OrganizationController : BaseAPIController
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateRequest request)
     {
-        var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
-        if (userId == null)
+        if (UserId == null)
             return Unauthorized("token does not exist");
 
-        var result = await Mediator.Send(new Create.Command(request.Name, userId));
+        var result = await Mediator.Send(new Create.Command(request.Name, UserId));
         if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
 
@@ -55,11 +54,10 @@ public class OrganizationController : BaseAPIController
     [HttpPost("{organizationId}/request")]
     public async Task<IActionResult> RequestJoin(string organizationId)
     {
-        var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
-        if (userId == null)
+        if (UserId == null)
             return Unauthorized("token does not exist");
 
-        var result = await Mediator.Send(new Request.Command(organizationId, userId));
+        var result = await Mediator.Send(new Request.Command(organizationId, UserId));
         if (!result.IsSuccess)
             return Unauthorized(result.Error);
 
@@ -72,15 +70,13 @@ public class OrganizationController : BaseAPIController
     [HttpPost("{requestId}/{decision:bool}")]
     public async Task<IActionResult> ResolveJoin(string requestId, bool decision)
     {
-        var resolverId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
-        if (resolverId == null)
+        if (UserId == null)
             return Unauthorized("token does not exist");
 
-        var role = User.FindFirstValue(ClaimTypes.Role);
-        if (role == null || !UserRole.HasResolveJoinRights(role))
+        if (Role == null || !UserRole.HasResolveJoinRights(Role))
             return Unauthorized("unsufficient rights");
 
-        var result = await Mediator.Send(new Resolve.Command(requestId, decision, resolverId));
+        var result = await Mediator.Send(new Resolve.Command(requestId, decision, UserId));
         if (!result.IsSuccess)
             return Unauthorized(result.Error);
 

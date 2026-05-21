@@ -15,26 +15,23 @@ public class ProductController : BaseAPIController
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateRequest request)
     {
-        var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
-        if (userId == null)
+        if (UserId == null)
             return Unauthorized("token does not exist");
 
-        var role = User.FindFirstValue(ClaimTypes.Role);
-        if (role == null || !UserRole.HasResolveJoinRights(role))
+        if (Role == null || !UserRole.HasResolveJoinRights(Role))
             return Unauthorized("unsufficient rights");
 
-        var organizationId = User.FindFirst("org_id")?.Value;
-        if (organizationId == null)
+        if (OrganizationId == null)
             return Unauthorized("organization does not exist");
 
         var result = await Mediator.Send(
             new Create.Command
             {
-                UserId = userId,
+                UserId = UserId,
                 Name = request.Name,
                 Sku = request.Sku,
                 Vendor = request.Vendor,
-                OrganizationId = organizationId,
+                OrganizationId = OrganizationId,
                 CostPrice = request.CostPrice,
                 SalePrice = request.SalePrice,
                 CurrentStock = request.CurrentStock,
@@ -54,11 +51,10 @@ public class ProductController : BaseAPIController
     [HttpGet("list")]
     public async Task<IActionResult> List()
     {
-        var organizationId = User.FindFirst("org_id")?.Value;
-        if (organizationId == null)
+        if (OrganizationId == null)
             return Unauthorized("current organization does not exist");
 
-        var result = await Mediator.Send(new List.Query(organizationId));
+        var result = await Mediator.Send(new List.Query(OrganizationId));
         if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
 
@@ -70,27 +66,24 @@ public class ProductController : BaseAPIController
     [HttpPut("{id}")]
     public async Task<IActionResult> Edit([FromBody] EditRequest request, string id)
     {
-        var userId = User.FindFirst(JwtRegisteredClaimNames.Sub)?.Value;
-        if (userId == null)
+        if (UserId == null)
             return Unauthorized("token does not exist");
 
-        var role = User.FindFirstValue(ClaimTypes.Role);
-        if (role == null || !UserRole.HasResolveJoinRights(role))
+        if (Role == null || !UserRole.HasResolveJoinRights(Role))
             return Unauthorized("unsufficient rights");
 
-        var organizationId = User.FindFirst("org_id")?.Value;
-        if (organizationId == null)
+        if (OrganizationId == null)
             return Unauthorized("organization does not exist");
 
         var result = await Mediator.Send(
             new Edit.Command
             {
-                UserId = userId,
+                UserId = UserId,
                 ProductId = id,
                 Name = request.Name,
                 Sku = request.Sku,
                 Vendor = request.Vendor,
-                OrganizationId = organizationId,
+                OrganizationId = OrganizationId,
                 CostPrice = request.CostPrice,
                 SalePrice = request.SalePrice,
                 CurrentStock = request.CurrentStock,
