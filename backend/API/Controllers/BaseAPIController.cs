@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using Application.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +14,6 @@ namespace API.Controllers
     public class BaseAPIController : ControllerBase
     {
         private IMediator? _mediator;
-
         protected IMediator Mediator =>
             _mediator ??=
                 HttpContext.RequestServices.GetService<IMediator>()

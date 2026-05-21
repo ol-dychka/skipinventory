@@ -1,4 +1,5 @@
 using System.Text;
+using API.Filters;
 using Application.Core;
 using Application.Interfaces;
 using Application.Organizations.Queries;
@@ -36,6 +37,11 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(
     ConnectionMultiplexer.Connect("localhost:6379")
 );
 builder.Services.AddScoped<IRedisTokenService, RedisTokenService>();
+builder.Services.AddScoped<RedisTokenValidationFilter>();
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<RedisTokenValidationFilter>();
+});
 
 builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
