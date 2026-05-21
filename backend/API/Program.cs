@@ -1,6 +1,7 @@
 using System.Text;
 using API.Filters;
 using Application.Core;
+using Application.Hubs;
 using Application.Interfaces;
 using Application.Organizations.Queries;
 using Infrastructure.Auth;
@@ -15,11 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<List.Handler>());
-
-// builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
+builder.Services.AddSignalR();
 
 // postgresql
-
 builder.Services.AddDbContext<PsqlDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -44,11 +43,12 @@ builder.Services.AddControllers(options =>
     options.Filters.Add<RedisTokenValidationFilter>();
 });
 
+// token + hashing
 builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
-
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
+// auth
 builder
     .Services.AddAuthentication(options =>
     {
@@ -76,6 +76,7 @@ builder
     });
 builder.Services.AddAuthorization();
 
+// interlayer communication (frontend, ml service)
 builder.Services.AddCors(options =>
 {
     options.AddPolicy(
@@ -90,7 +91,6 @@ builder.Services.AddCors(options =>
         }
     );
 });
-
 builder.Services.AddHttpClient(
     "mlservice",
     client =>
@@ -105,5 +105,9 @@ app.UseCors("AllowAngular");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
+// signal r
+app.MapHub<ChatHub>("/hubs/chat");
+app.MapHub<NotificationsHub>("/hubs/notifications");
 
 app.Run();
