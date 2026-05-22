@@ -1,6 +1,7 @@
+using API.Hubs;
 using Microsoft.AspNetCore.SignalR;
 
-namespace Application.Hubs;
+namespace API.Hubs;
 
 public class JoinRequestService(IHubContext<NotificationsHub> hub)
 {

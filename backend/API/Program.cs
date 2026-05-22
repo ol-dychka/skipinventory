@@ -1,7 +1,6 @@
 using System.Text;
 using API.Filters;
-using Application.Core;
-using Application.Hubs;
+using API.Hubs;
 using Application.Interfaces;
 using Application.Organizations.Queries;
 using Infrastructure.Auth;
