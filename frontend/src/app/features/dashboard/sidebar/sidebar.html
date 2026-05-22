@@ -55,4 +55,13 @@
   >
     ml model training
   </p>
+  <p
+    [routerLink]="['chat']"
+    [ngClass]="{
+      'bg-primary-l': isCurrent('chat'),
+    }"
+    (click)="switchPage('chat')"
+  >
+    chat
+  </p>
 </div>
