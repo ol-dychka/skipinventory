@@ -14,14 +14,14 @@ public class ChatMessageController : BaseAPIController
     [HttpGet("list")]
     public async Task<IActionResult> GetChatMessages()
     {
-        if (OrganizationId == null)
+        if (OrganizationId == null || UserId == null)
             return Unauthorized("token does not exist");
 
         var result = await Mediator.Send(new List.Query(OrganizationId));
         if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
 
-        var chatMessages = result.Value.Select(cm => new ChatMessageDto(cm));
+        var chatMessages = result.Value.Select(cm => new ChatMessageDto(cm, UserId));
         return Ok(chatMessages);
     }
 }

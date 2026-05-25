@@ -17,6 +17,7 @@ import { productGuard } from './core/guards/product-guard';
 import { SaleRecords } from './features/dashboard/sale-records/sale-records';
 import { ModelTraining } from './features/dashboard/model-training/model-training';
 import { Chat } from './features/dashboard/chat/chat';
+import { chatMessageGuard } from './core/guards/chat-message-guard';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noAuthGuard] },
@@ -42,7 +43,7 @@ export const routes: Routes = [
           { path: 'products', component: Products, canActivate: [productGuard] },
           { path: 'sale-records', component: SaleRecords, canActivate: [productGuard] },
           { path: 'model-training', component: ModelTraining },
-          { path: 'chat', component: Chat },
+          { path: 'chat', component: Chat, canActivate: [chatMessageGuard] },
         ],
       },
     ],

@@ -10,15 +10,10 @@ export class Chat implements OnInit {
   chatService = inject(ChatService);
 
   ngOnInit(): void {
-    this.chatService.joinRoom('1');
+    this.chatService.joinRoom();
   }
 
-  messages = [
-    { id: 1, text: 'Hello!', mine: false },
-    { id: 2, text: 'Hey 👋', mine: true },
-  ];
-
   handleMessage() {
-    this.chatService.sendMessage('1', 'a');
+    this.chatService.sendMessage('new message');
   }
 }

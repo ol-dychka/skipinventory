@@ -4,6 +4,7 @@ import { environment } from '../../../environments/environment';
 import { ChatMessage } from '../models/chat-message';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
+import { AuthService } from './auth-service';
 
 @Injectable({
   providedIn: 'root',
@@ -12,6 +13,8 @@ export class ChatService {
   private readonly hubs = environment.hubsUrl;
   private readonly api = environment.apiUrl;
   private readonly http = inject(HttpClient);
+
+  private authService = inject(AuthService);
 
   messages = signal<ChatMessage[]>([]);
 
@@ -31,12 +34,17 @@ export class ChatService {
 
   // signal R methods
   private hub = new SignalR.HubConnectionBuilder()
-    .withUrl(`${this.hubs}/chat`)
+    .withUrl(`${this.hubs}/chat`, {
+      accessTokenFactory: () => this.authService.getAccessToken() ?? '',
+    })
     .withAutomaticReconnect()
     .build();
 
   constructor() {
-    this.onMessage((m) => console.log(m));
+    this.onMessage((message: ChatMessage) => {
+      console.log(message);
+      this.addToList(message);
+    });
   }
 
   private connectionPromise: Promise<void> | null = null;
@@ -52,7 +60,7 @@ export class ChatService {
     return this.hub.invoke('JoinRoom');
   }
 
-  onMessage(cb: (message: string) => void) {
+  onMessage(cb: (message: ChatMessage) => void) {
     this.hub.on('ReceiveMessage', cb);
   }
 
