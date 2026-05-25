@@ -4,5 +4,5 @@ export interface ChatMessage {
   senderId: string;
   content: string;
   sentAt: Date;
-  isMine: boolean;
+  senderName: string;
 }

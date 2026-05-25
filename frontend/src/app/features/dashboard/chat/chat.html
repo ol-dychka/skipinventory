@@ -6,10 +6,13 @@
     @for (message of chatService.messages(); track message.id) {
       <div
         class="w-max rounded-lg p-2 text-white"
-        [class.bg-primary-l]="message.isMine"
-        [class.bg-primary-d]="!message.isMine"
+        [class.bg-primary-l]="message.senderId === chatService.getCurrentUserId()"
+        [class.bg-primary-d]="message.senderId !== chatService.getCurrentUserId()"
       >
-        {{ message.content }}
+        <p>
+          <span class="font-bold"> {{ message.senderName }} : </span>
+          {{ message.content }}
+        </p>
       </div>
     }
   </div>

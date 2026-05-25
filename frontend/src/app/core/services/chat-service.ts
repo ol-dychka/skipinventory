@@ -19,7 +19,7 @@ export class ChatService {
   messages = signal<ChatMessage[]>([]);
 
   addToList(message: ChatMessage) {
-    this.messages.update((messages) => [message, ...messages]);
+    this.messages.update((messages) => [...messages, message]);
   }
 
   // rest api methods
@@ -30,6 +30,10 @@ export class ChatService {
         console.log(this.messages());
       }),
     );
+  }
+
+  getCurrentUserId() {
+    return this.authService.currentUser()?.id;
   }
 
   // signal R methods

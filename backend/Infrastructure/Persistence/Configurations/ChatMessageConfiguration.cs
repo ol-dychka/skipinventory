@@ -16,5 +16,7 @@ public class ChatMessageConfiguration : IEntityTypeConfiguration<ChatMessage>
         builder.Property(cm => cm.SentAt).IsRequired();
 
         builder.HasIndex(j => j.RoomId);
+
+        builder.HasOne(m => m.Sender).WithMany().HasForeignKey(m => m.SenderId);
     }
 }

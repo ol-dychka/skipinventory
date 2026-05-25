@@ -7,4 +7,6 @@ public class ChatMessage(string roomId, string senderId, string content)
     public string SenderId { get; set; } = senderId;
     public string Content { get; set; } = content;
     public DateTime SentAt { get; set; } = DateTime.UtcNow;
+
+    public User Sender { get; set; } = null!;
 }

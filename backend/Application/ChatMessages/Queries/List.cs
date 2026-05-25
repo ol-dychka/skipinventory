@@ -9,7 +9,7 @@ public class List
 {
     public record Query(string RoomId) : IRequest<Result<List<ChatMessage>>>;
 
-    public class Handler(IChatMessageRepository repository)
+    public class Handler(IChatMessageRepository chatMessageRepository)
         : IRequestHandler<Query, Result<List<ChatMessage>>>
     {
         public async Task<Result<List<ChatMessage>>> Handle(
@@ -17,7 +17,10 @@ public class List
             CancellationToken cancellationToken
         )
         {
-            var chatMessages = await repository.GetAllAsync(request.RoomId, cancellationToken);
+            var chatMessages = await chatMessageRepository.GetAllAsync(
+                request.RoomId,
+                cancellationToken
+            );
 
             return Result<List<ChatMessage>>.Success(chatMessages);
         }

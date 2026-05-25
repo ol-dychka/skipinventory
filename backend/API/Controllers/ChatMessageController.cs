@@ -21,7 +21,7 @@ public class ChatMessageController : BaseAPIController
         if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
 
-        var chatMessages = result.Value.Select(cm => new ChatMessageDto(cm, UserId));
+        var chatMessages = result.Value.Select(cm => new ChatMessageDto(cm));
         return Ok(chatMessages);
     }
 }

@@ -16,7 +16,8 @@ public class ChatMessageRepository(PsqlDbContext context) : IChatMessageReposito
     public Task<List<ChatMessage>> GetAllAsync(string roomId, CancellationToken cancellationToken)
     {
         return _context
-            .ChatMessages.Where(cm => cm.RoomId == roomId)
+            .ChatMessages.Include(cm => cm.Sender)
+            .Where(cm => cm.RoomId == roomId)
             .ToListAsync(cancellationToken);
     }
 }

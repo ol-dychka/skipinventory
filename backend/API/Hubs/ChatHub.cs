@@ -31,7 +31,7 @@ public class ChatHub : BaseHub
             return;
         }
 
-        var message = new ChatMessageDto(result.Value, UserId);
+        var message = new ChatMessageDto(result.Value);
 
         await Clients.Group(OrganizationId).SendAsync("ReceiveMessage", message);
     }
