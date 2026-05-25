@@ -1,13 +1,35 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import * as SignalR from '@microsoft/signalr';
 import { environment } from '../../../environments/environment';
+import { ChatMessage } from '../models/chat-message';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatService {
   private readonly hubs = environment.hubsUrl;
+  private readonly api = environment.apiUrl;
+  private readonly http = inject(HttpClient);
 
+  messages = signal<ChatMessage[]>([]);
+
+  addToList(message: ChatMessage) {
+    this.messages.update((messages) => [message, ...messages]);
+  }
+
+  // rest api methods
+  getList() {
+    return this.http.get<ChatMessage[]>(`${this.api}/chatmessage/list`).pipe(
+      tap((list) => {
+        this.messages.set(list);
+        console.log(this.messages());
+      }),
+    );
+  }
+
+  // signal R methods
   private hub = new SignalR.HubConnectionBuilder()
     .withUrl(`${this.hubs}/chat`)
     .withAutomaticReconnect()
@@ -25,16 +47,16 @@ export class ChatService {
     return this.connectionPromise;
   }
 
-  async joinRoom(roomId: string): Promise<void> {
+  async joinRoom(): Promise<void> {
     await this.connect();
-    return this.hub.invoke('JoinRoom', roomId);
+    return this.hub.invoke('JoinRoom');
   }
 
-  onMessage(cb: (msg: string) => void) {
+  onMessage(cb: (message: string) => void) {
     this.hub.on('ReceiveMessage', cb);
   }
 
-  sendMessage(roomId: string, message: string) {
-    this.hub.invoke('SendMessage', roomId, message);
+  sendMessage(content: string) {
+    this.hub.invoke('SendMessage', content);
   }
 }

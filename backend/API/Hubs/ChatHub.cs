@@ -6,28 +6,50 @@ namespace API.Hubs;
 
 public class ChatHub : BaseHub
 {
-    public async Task SendMessage(string roomId, string content)
+    // room id is just an organization id, because chat-organization is a 1-to-1 relationship
+
+    // in the future, topic subdivision or chat creation will be followed by using a more specified
+    // room-id - (e.g. "org_id-main") or chat entity creation on a db level
+    public async Task SendMessage(string content)
     {
-        var result = await Mediator.Send(new Create.Command(UserId, roomId, content));
+        if (OrganizationId == null)
+        {
+            await Clients.Caller.SendAsync("Error", "token doesn't have organization info");
+            return;
+        }
+
+        var result = await Mediator.Send(new Create.Command(UserId, OrganizationId, content));
         if (!result.IsSuccess)
         {
             await Clients.Caller.SendAsync("Error", result.Error);
             return;
         }
 
-        await Clients.Group(roomId).SendAsync("ReceiveMessage", result.Value);
+        await Clients.Group(OrganizationId).SendAsync("ReceiveMessage", result.Value);
     }
 
-    public async Task JoinRoom(string roomId)
+    public async Task JoinRoom()
     {
-        await Groups.AddToGroupAsync(Context.ConnectionId, roomId);
-        await Clients.Group(roomId).SendAsync("UserJoined", UserId);
+        if (OrganizationId == null)
+        {
+            await Clients.Caller.SendAsync("Error", "token doesn't have organization info");
+            return;
+        }
+
+        await Groups.AddToGroupAsync(Context.ConnectionId, OrganizationId);
+        await Clients.Group(OrganizationId).SendAsync("UserJoined", UserId);
     }
 
-    public async Task LeaveRoom(string roomId)
+    public async Task LeaveRoom()
     {
-        await Groups.RemoveFromGroupAsync(Context.ConnectionId, roomId);
-        await Clients.Group(roomId).SendAsync("UserLeft", UserId);
+        if (OrganizationId == null)
+        {
+            await Clients.Caller.SendAsync("Error", "token doesn't have organization info");
+            return;
+        }
+
+        await Groups.RemoveFromGroupAsync(Context.ConnectionId, OrganizationId);
+        await Clients.Group(OrganizationId).SendAsync("UserLeft", UserId);
     }
 
     public override async Task OnDisconnectedAsync(Exception? ex)

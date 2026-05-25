@@ -14,4 +14,5 @@ public class BaseHub : Hub
             ?? throw new InvalidOperationException("IMediator service is not available");
 
     protected string UserId => Context.UserIdentifier!; //always there with [Authorize] flag
+    protected string OrganizationId => Context.User!.FindFirst("org_id")?.Value;
 }
