@@ -9,39 +9,42 @@ namespace Application.Organizations.Commands;
 
 public class Resolve
 {
-    public record Command(string RequestId, bool decision, string ResolverId)
-        : IRequest<Result<Unit>>;
+    public record Command(string RequestId, bool Decision, string ResolverId)
+        : IRequest<Result<string>>;
 
     public class Handler(
         IUserRepository userRepository,
         IJoinRequestRepository requestRepository,
         IMemberRepository memberRepository,
         IUnitOfWork unitOfWork
-    ) : IRequestHandler<Command, Result<Unit>>
+    ) : IRequestHandler<Command, Result<string>>
     {
-        public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
+        public async Task<Result<string>> Handle(
+            Command request,
+            CancellationToken cancellationToken
+        )
         {
             var joinRequest = await requestRepository.GetByIdAsync(
                 request.RequestId,
                 cancellationToken
             );
             if (joinRequest == null)
-                return Result<Unit>.Failure("request does not exist");
+                return Result<string>.Failure("request does not exist");
 
             var resolver = await userRepository.GetByIdAsync(request.ResolverId, cancellationToken);
             if (resolver == null)
-                return Result<Unit>.Failure("Current user does not exist");
+                return Result<string>.Failure("Current user does not exist");
 
             var hasRight = resolver.Memberships.Any(m =>
                 m.OrganizationId == joinRequest.OrganizationId
                 && UserRole.HasResolveJoinRights(m.Role)
             );
             if (!hasRight)
-                return Result<Unit>.Failure("Current user has no rights to resolve a request");
+                return Result<string>.Failure("Current user has no rights to resolve a request");
 
-            // true or false. method return Result<Unit> for now because request is resolved anyway
+            // true or false. method return Result<string> for now because request is resolved anyway
             // later with SignalR, user will get a toast with resolve information
-            if (request.decision)
+            if (request.Decision)
             {
                 var membership = new OrganizationMember(
                     joinRequest.UserId,
@@ -62,7 +65,7 @@ public class Resolve
 
             await unitOfWork.SaveChangesAsync(cancellationToken);
 
-            return Result<Unit>.Success(Unit.Value);
+            return Result<string>.Success(joinRequest.UserId);
         }
     }
 }

@@ -3,16 +3,22 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using API.DTOs.Requests.Organizations;
 using API.DTOs.Responses;
+using API.Hubs;
 using Application.Organizations.Commands;
 using Application.Organizations.Queries;
 using Domain;
 using Domain.StaticClasses;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace API.Controllers;
 
-public class OrganizationController : BaseAPIController
+public class OrganizationController(IHubContext<NotificationsHub> notificationsHubContext)
+    : BaseAPIController
 {
+    private readonly IHubContext<NotificationsHub> _notificationsHubContext =
+        notificationsHubContext;
+
     // refactor
     [HttpGet("list")]
     public async Task<IActionResult> List()
@@ -80,8 +86,15 @@ public class OrganizationController : BaseAPIController
             return Unauthorized("unsufficient rights");
 
         var result = await Mediator.Send(new Resolve.Command(requestId, decision, UserId));
-        if (!result.IsSuccess)
+        if (!result.IsSuccess || result.Value == null)
             return Unauthorized(result.Error);
+
+        // result.value is id of the user who made a request
+        // it's a roomId of their signalR notifications hub
+        Console.WriteLine(result.Value);
+        await _notificationsHubContext
+            .Clients.Group(result.Value)
+            .SendAsync("ReceiveNotification", "success");
 
         return NoContent();
     }

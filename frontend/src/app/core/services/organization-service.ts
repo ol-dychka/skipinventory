@@ -75,6 +75,7 @@ export class OrganizationService {
   }
 
   request(organizationId: string) {
+    console.log(this.authService.currentUser()!.id);
     return this.http.post<void>(`${this.api}/organization/${organizationId}/request`, {});
   }
 
