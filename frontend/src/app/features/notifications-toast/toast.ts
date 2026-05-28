@@ -1,9 +1,10 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { NotificationsService } from '../../core/services/notifications-service';
+import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-toast',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './toast.html',
 })
 export class Toast implements OnInit {

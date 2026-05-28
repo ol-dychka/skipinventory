@@ -1,0 +1,14 @@
+<div class="fixed right-4 bottom-4 z-50 space-y-4">
+  @for (notification of notificationsService.notifications(); track $index) {
+    <div
+      class="rounded-lg p-4 text-white shadow-xl backdrop-blur-lg"
+      [ngClass]="{
+        'bg-error/80': notification.type === 'error',
+        'bg-info/80': notification.type === 'info',
+        'bg-success/80': notification.type === 'success',
+      }"
+    >
+      {{ notification.message }}
+    </div>
+  }
+</div>

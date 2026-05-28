@@ -1,3 +1,4 @@
+using API.DTOs.Responses;
 using Microsoft.AspNetCore.SignalR;
 
 namespace API.Hubs;
@@ -8,25 +9,39 @@ public class NotificationsHub : BaseHub
     {
         if (Context.User?.Identity?.IsAuthenticated != true)
         {
-            await Clients.Caller.SendAsync("Error", "User is not authenticated");
+            await Clients.Caller.SendAsync(
+                "ReceiveNotification",
+                new NotificationDto(NotificationType.error, "Not Authenticated", true)
+            );
             return;
         }
 
         if (UserId == null)
         {
-            await Clients.Caller.SendAsync("Error", "token doesn't have User info");
+            await Clients.Caller.SendAsync(
+                "ReceiveNotification",
+                new NotificationDto(NotificationType.error, "Not Authenticated", true)
+            );
             return;
         }
 
         await Groups.AddToGroupAsync(Context.ConnectionId, UserId);
-        await Clients.Group(UserId).SendAsync("ReceiveNotification", "connected");
+        await Clients
+            .Group(UserId)
+            .SendAsync(
+                "ReceiveNotification",
+                new NotificationDto(NotificationType.info, "Connected Successfully", true)
+            );
     }
 
     public async Task LeaveRoom()
     {
         if (UserId == null)
         {
-            await Clients.Caller.SendAsync("Error", "token doesn't have user info");
+            await Clients.Caller.SendAsync(
+                "ReceiveNotification",
+                new NotificationDto(NotificationType.error, "Not Authenticated", true)
+            );
             return;
         }
 

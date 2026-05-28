@@ -28,9 +28,10 @@ public class JoinRequestRepository(PsqlDbContext context) : IJoinRequestReposito
 
     public Task<JoinRequest?> GetByIdAsync(string id, CancellationToken cancellationToken)
     {
-        return _context.JoinRequests
-        // .Include(jr => jr.User)
-        // .Include(jr => jr.Organization)
-        .FirstOrDefaultAsync(jr => jr.Id == id, cancellationToken);
+        return _context
+            .JoinRequests
+            // .Include(jr => jr.User)
+            .Include(jr => jr.Organization)
+            .FirstOrDefaultAsync(jr => jr.Id == id, cancellationToken);
     }
 }

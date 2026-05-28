@@ -93,8 +93,15 @@ public class OrganizationController(IHubContext<NotificationsHub> notificationsH
         // it's a roomId of their signalR notifications hub
         Console.WriteLine(result.Value);
         await _notificationsHubContext
-            .Clients.Group(result.Value)
-            .SendAsync("ReceiveNotification", "success");
+            .Clients.Group(result.Value.UserId)
+            .SendAsync(
+                "ReceiveNotification",
+                new NotificationDto(
+                    NotificationType.success,
+                    $"Your join request to {result.Value.OrganizationName} was accepted",
+                    true
+                )
+            );
 
         return NoContent();
     }

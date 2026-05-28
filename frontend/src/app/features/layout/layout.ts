@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Navbar } from '../navbar/navbar';
 import { RouterOutlet } from '@angular/router';
-import { Toast } from '../toast/toast';
+import { Toast } from '../notifications-toast/toast';
 
 @Component({
   selector: 'app-layout',

@@ -5,6 +5,7 @@ import { ChatMessage } from '../models/chat-message';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs';
 import { AuthService } from './auth-service';
+import { Notification } from '../models/notification';
 
 @Injectable({
   providedIn: 'root',
@@ -14,10 +15,26 @@ export class NotificationsService {
 
   private authService = inject(AuthService);
 
-  notifications = signal<string[]>([]);
+  notifications = signal<Notification[]>([]);
+  private nextId = 0;
 
-  addToList(notification: string) {
-    this.notifications.update((notifications) => [...notifications, notification]);
+  addToList(notification: Notification) {
+    notification.id = this.nextId;
+    this.nextId++;
+
+    this.notifications.update((list) => [...list, notification]);
+    if (notification.isDisappearing) {
+      console.log('mmm');
+      setTimeout(() => {
+        console.log('lll');
+        this.clearFromList(notification.id);
+      }, 5000);
+    }
+    // if isDissapearing is false user has to get rid of the notification himself
+  }
+
+  clearFromList(id?: number) {
+    this.notifications.update((list) => list.filter((n) => n.id !== id));
   }
 
   // signal R methods
@@ -29,7 +46,7 @@ export class NotificationsService {
     .build();
 
   constructor() {
-    this.onNotification((notification: string) => {
+    this.onNotification((notification: Notification) => {
       console.log(notification);
       this.addToList(notification);
     });
@@ -48,7 +65,7 @@ export class NotificationsService {
     return this.hub.invoke('JoinRoom');
   }
 
-  onNotification(cb: (notification: string) => void) {
+  onNotification(cb: (notification: Notification) => void) {
     this.hub.on('ReceiveNotification', cb);
   }
 }

@@ -18,6 +18,12 @@
 
   --color-error-l: #ef7674;
   --color-error: #d91e36;
+
+  --color-success-l: #76ef74;
+  --color-success: #1ed936;
+
+  --color-info-l: #7674ef;
+  --color-info: #1e36d9;
 }
 
 html,
