@@ -17,8 +17,19 @@
     }
   </div>
 
-  <div class="flex gap-2">
-    <input class="w-full" />
-    <button class="btn" (click)="handleMessage()">Send</button>
+  <div class="flex">
+    <input
+      class="border-primary-l focus:border-primary-d w-full rounded-l-lg border-2 px-4 py-2 transition outline-none"
+      [ngModel]="content()"
+      (ngModelChange)="updateContent($event)"
+      placeholder="Type here..."
+    />
+    <button
+      class="bg-primary-l cursor-pointer rounded-r-lg p-2 font-semibold text-white"
+      (click)="handleMessage()"
+      [disabled]="!isContent()"
+    >
+      Send
+    </button>
   </div>
 </div>
