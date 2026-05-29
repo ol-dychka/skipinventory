@@ -79,6 +79,8 @@ export class AuthService {
   }
 
   refresh(organizationId?: string): Observable<string> {
+    console.log('refreshing token + user');
+
     return this.http
       .post<AuthResponse>(`${this.api}/auth/refresh`, { organizationId }, { withCredentials: true })
       .pipe(

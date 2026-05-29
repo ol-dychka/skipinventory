@@ -1,0 +1,9 @@
+<div
+  class="cursor-pointer rounded-lg p-4 font-semibold transition-colors duration-300 ease-in-out"
+  [ngClass]="{
+    'bg-primary-l text-white': isActive,
+    'text-primary-d': !isActive,
+  }"
+>
+  {{ name }}
+</div>

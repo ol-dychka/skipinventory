@@ -1,67 +1,58 @@
-<div
-  class="space-y-1 *:cursor-pointer *:rounded-lg *:p-4 *:transition-colors *:duration-300 *:ease-in-out"
->
-  <p
+<div class="space-y-1">
+  <app-sidebar-link
     [routerLink]="['dashboard']"
-    [ngClass]="{
-      'bg-primary-l': isCurrent('dashboard'),
-    }"
     (click)="switchPage('dashboard')"
+    name="Dashboard"
+    [isActive]="isCurrent('dashboard')"
   >
     dashboard
-  </p>
-  <p
+  </app-sidebar-link>
+  <app-sidebar-link
     [routerLink]="['join-requests']"
-    [ngClass]="{
-      'bg-primary-l': isCurrent('join-requests'),
-    }"
     (click)="switchPage('join-requests')"
+    name="Join Requests"
+    [isActive]="isCurrent('join-requests')"
   >
     join requests
-  </p>
-  <p
+  </app-sidebar-link>
+  <app-sidebar-link
     [routerLink]="['members']"
-    [ngClass]="{
-      'bg-primary-l': isCurrent('members'),
-    }"
     (click)="switchPage('members')"
+    name="Members"
+    [isActive]="isCurrent('members')"
   >
     members
-  </p>
-  <p
+  </app-sidebar-link>
+  <app-sidebar-link
     [routerLink]="['products']"
-    [ngClass]="{
-      'bg-primary-l': isCurrent('products'),
-    }"
     (click)="switchPage('products')"
+    name="Products"
+    [isActive]="isCurrent('products')"
   >
     products
-  </p>
-  <p
+  </app-sidebar-link>
+  <app-sidebar-link
     [routerLink]="['sale-records']"
-    [ngClass]="{
-      'bg-primary-l': isCurrent('sale-records'),
-    }"
     (click)="switchPage('sale-records')"
+    name="Sale Records"
+    [isActive]="isCurrent('sale-records')"
   >
     sale records
-  </p>
-  <p
+  </app-sidebar-link>
+  <app-sidebar-link
     [routerLink]="['model-training']"
-    [ngClass]="{
-      'bg-primary-l': isCurrent('model-training'),
-    }"
     (click)="switchPage('model-training')"
+    name="Model Training"
+    [isActive]="isCurrent('model-training')"
   >
     ml model training
-  </p>
-  <p
+  </app-sidebar-link>
+  <app-sidebar-link
     [routerLink]="['chat']"
-    [ngClass]="{
-      'bg-primary-l': isCurrent('chat'),
-    }"
     (click)="switchPage('chat')"
+    name="Chat"
+    [isActive]="isCurrent('chat')"
   >
     chat
-  </p>
+  </app-sidebar-link>
 </div>

@@ -1,20 +1,20 @@
-<!-- @let organization = organizationService.currentOrganization(); -->
-<!-- Protected endpoint, user is never null -->
-@let memberships = authService.currentUser()!.memberships;
-
 <div class="flex-center flex-col gap-2">
-  @if (memberships.length > 0) {
-    @for (m of memberships; track m.organizationId) {
-      <p
-        class="padding-4 border-b-primary hover: bg-secondary border-2"
+  <div class="flex-between">
+    <button class="btn" routerLink="/join-organization">Join an Organization</button>
+    <button class="btn" routerLink="/create-organization">Create an Organization</button>
+  </div>
+  <p class="text-primary-d text-2xl font-semibold">List of Available Organizations:</p>
+  @if (authService.currentUser()!.memberships.length > 0) {
+    @for (m of authService.currentUser()!.memberships; track m.organizationId) {
+      <div
+        class="hover:bg-primary-d bg-primary flex-between cursor-pointer rounded-lg px-8 py-4"
         [routerLink]="['/', m.organizationId]"
       >
-        {{ m.organizationName }} - {{ m.role }}
-      </p>
+        <p class="font-semibold text-white">Name: {{ m.organizationName }}</p>
+        <p class="text-secondary">Role: {{ m.role }}</p>
+      </div>
     }
   } @else {
     <p>You are currently not in any Organization.</p>
   }
-  <button class="btn" routerLink="/join-organization">Join an Organization</button>
-  <button class="btn" routerLink="/create-organization">Create an Organization</button>
 </div>

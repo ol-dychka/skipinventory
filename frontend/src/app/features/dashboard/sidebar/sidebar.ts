@@ -1,10 +1,11 @@
 import { NgClass } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { SidebarLink } from './sidebar-link/sidebar-link';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [RouterLink, NgClass],
+  imports: [RouterLink, SidebarLink],
   templateUrl: './sidebar.html',
 })
 export class Sidebar implements OnInit {

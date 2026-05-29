@@ -49,6 +49,7 @@ export class NotificationsService {
     this.onNotification((notification: Notification) => {
       console.log(notification);
       this.addToList(notification);
+      // this.authService.refresh(); doesn't work for some reason
     });
   }
 
