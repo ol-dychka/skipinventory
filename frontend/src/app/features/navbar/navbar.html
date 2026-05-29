@@ -1,12 +1,14 @@
 <nav class="fixed top-0 w-full">
   <div class="bg-secondary flex-between p-2">
-    <div class="flex-center">
-      <div class="text-center">
-        <p>{{ organizationService.currentOrganization()?.name }}</p>
-        <p class="text-black-l">{{ organizationService.role() }}</p>
+    @if (organizationService.currentOrganization()) {
+      <div class="flex-center">
+        <div class="text-center">
+          <p>{{ organizationService.currentOrganization()?.name }}</p>
+          <p class="text-black-l">{{ organizationService.role() }}</p>
+        </div>
+        <button (click)="handleOrganizationLogout()" class="btn">Log Out of Org</button>
       </div>
-      <button (click)="handleOrganizationLogout()" class="btn">Log Out of Org</button>
-    </div>
+    }
     <div class="flex-center">
       <div>
         <p>
