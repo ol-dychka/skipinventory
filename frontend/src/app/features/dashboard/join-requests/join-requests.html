@@ -1,12 +1,9 @@
-@let requests = this.organizationService.currentOrganization()!.joinRequests;
-@let isOwner = this.organizationService.isOwner();
-
 <div class="flex-center flex-col">
-  @if (requests.length > 0) {
-    @for (r of requests; track r.id) {
+  @if (this.organizationService.currentOrganization()!.joinRequests.length > 0) {
+    @for (r of this.organizationService.currentOrganization()!.joinRequests; track r.id) {
       <div class="flex-between padding-4 border-b-primary border-2">
         <p>{{ r.userName }} - {{ r.userEmail }}</p>
-        @if (isOwner) {
+        @if (this.organizationService.isOwner()) {
           <p>Pending</p>
           <button class="btn" (click)="onAccept(r.id)">Accept</button>
           <button class="btn" (click)="onDeny(r.id)">Deny</button>
@@ -16,6 +13,6 @@
       </div>
     }
   } @else {
-    <p>You are currently not in any Organization.</p>
+    <p>There are currently no pending requests</p>
   }
 </div>

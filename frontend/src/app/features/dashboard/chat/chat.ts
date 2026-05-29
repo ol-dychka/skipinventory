@@ -1,11 +1,10 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ChatService } from '../../../core/services/chat-service';
 import { FormsModule } from '@angular/forms';
-import { NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-chat',
-  imports: [FormsModule, NgClass],
+  imports: [FormsModule],
   templateUrl: './chat.html',
 })
 export class Chat implements OnInit {

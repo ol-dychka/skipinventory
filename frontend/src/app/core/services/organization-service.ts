@@ -7,7 +7,7 @@ import {
 } from '../models/organization';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import { map, Observable, switchMap, tap } from 'rxjs';
+import { catchError, map, Observable, switchMap, tap, throwError } from 'rxjs';
 import { AuthService } from './auth-service';
 
 @Injectable({
@@ -80,6 +80,26 @@ export class OrganizationService {
   }
 
   resolveRequest(requestId: string, decision: boolean) {
-    return this.http.post<void>(`${this.api}/organization/${requestId}/${decision}`, {});
+    return this.http.post(`${this.api}/organization/${requestId}/${decision}`, {}).pipe(
+      tap(() => this.updateJoinRequests(requestId)),
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => err);
+      }),
+    );
+  }
+
+  updateJoinRequests(requestId: string) {
+    this.currentOrganization.update((org) => {
+      if (!org) return org;
+
+      const updated = org.joinRequests.filter((r) => r.id !== requestId);
+      return {
+        ...org,
+        joinRequests: updated,
+      };
+    });
+
+    console.log(this.currentOrganization());
   }
 }
