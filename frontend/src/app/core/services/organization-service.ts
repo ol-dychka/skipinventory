@@ -102,4 +102,38 @@ export class OrganizationService {
 
     console.log(this.currentOrganization());
   }
+
+  updateMembers(userId: string, newRole: string) {
+    this.currentOrganization.update((org) => {
+      if (!org) return org;
+
+      const updated = org.members.map((m) => (m.userId === userId ? { ...m, role: newRole } : m));
+      return {
+        ...org,
+        members: updated,
+      };
+    });
+
+    console.log(this.currentOrganization());
+  }
+
+  promote(userId: string) {
+    return this.http.post<string>(`${this.api}/organization/promote/${userId}`, {}).pipe(
+      tap((role) => this.updateMembers(userId, role)),
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => err);
+      }),
+    );
+  }
+
+  demote(userId: string) {
+    return this.http.post<string>(`${this.api}/organization/demote/${userId}`, {}).pipe(
+      tap((role) => this.updateMembers(userId, role)),
+      catchError((err) => {
+        console.log(err);
+        return throwError(() => err);
+      }),
+    );
+  }
 }

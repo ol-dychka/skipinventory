@@ -1,1 +1,18 @@
-<p>members works!</p>
+<div class="grid grid-cols-3 gap-y-6 divide-y divide-black">
+  @if (this.organizationService.currentOrganization()!.members.length > 0) {
+    @for (m of this.organizationService.currentOrganization()!.members; track m.userId) {
+      <p>{{ m.userName }} - {{ m.userEmail }}</p>
+
+      <p class="font-semibold">{{ m.role }}</p>
+
+      <div class="flex gap-4">
+        @if (this.organizationService.isOwner() && m.role !== 'Owner') {
+          <button class="btn" (click)="onPromote(m.userId)">Promote</button>
+          <button class="btn" (click)="onDemote(m.userId)">Demote</button>
+        }
+      </div>
+    }
+  } @else {
+    <p>There are currently no other members</p>
+  }
+</div>
