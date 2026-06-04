@@ -12,4 +12,9 @@ public static class UserRole
     {
         return role == Manager || role == Owner;
     }
+
+    public static bool HasPromoteRights(string role)
+    {
+        return role == Owner;
+    }
 }

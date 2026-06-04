@@ -105,4 +105,56 @@ public class OrganizationController(IHubContext<NotificationsHub> notificationsH
 
         return NoContent();
     }
+
+    [HttpPost("promote/{targetId}")]
+    public async Task<IActionResult> Promote(string targetId)
+    {
+        if (UserId == null || OrganizationId == null)
+            return Unauthorized("token does not exist");
+
+        if (Role == null || !UserRole.HasPromoteRights(Role))
+            return Unauthorized("unsufficient rights");
+
+        var result = await Mediator.Send(
+            new Promote.Command(targetId, UserId, OrganizationId, true)
+        );
+        if (!result.IsSuccess || result.Value == null)
+            return Unauthorized(result.Error);
+
+        Console.WriteLine(result.Value);
+        await _notificationsHubContext
+            .Clients.Group(targetId)
+            .SendAsync(
+                "ReceiveNotification",
+                new NotificationDto(NotificationType.success, $"Your were promoted", true)
+            );
+
+        return Ok(new { role = result.Value.NewRole });
+    }
+
+    [HttpPost("demote/{targetId}")]
+    public async Task<IActionResult> Demote(string targetId)
+    {
+        if (UserId == null || OrganizationId == null)
+            return Unauthorized("token does not exist");
+
+        if (Role == null || !UserRole.HasPromoteRights(Role))
+            return Unauthorized("unsufficient rights");
+
+        var result = await Mediator.Send(
+            new Promote.Command(targetId, UserId, OrganizationId, false)
+        );
+        if (!result.IsSuccess || result.Value == null)
+            return Unauthorized(result.Error);
+
+        Console.WriteLine(result.Value);
+        await _notificationsHubContext
+            .Clients.Group(targetId)
+            .SendAsync(
+                "ReceiveNotification",
+                new NotificationDto(NotificationType.success, $"Your were demoted", true)
+            );
+
+        return Ok(new { role = result.Value.NewRole });
+    }
 }
