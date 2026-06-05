@@ -18,6 +18,10 @@ export interface CreateOrganizationRequest {
   name: string;
 }
 
+export interface PromoteResponse {
+  role: string;
+}
+
 interface MemberModel {
   role: string;
   userId: string;

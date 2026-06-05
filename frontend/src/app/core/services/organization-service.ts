@@ -4,6 +4,7 @@ import {
   OrganizationModel,
   CreateOrganizationResponse,
   OrganizationPreviewModel,
+  PromoteResponse,
 } from '../models/organization';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -32,6 +33,10 @@ export class OrganizationService {
 
   isOwner() {
     return this.role() === 'Owner';
+  }
+
+  isManager() {
+    return this.role() === 'Owner' || this.role() === 'Manager';
   }
 
   create(payload: CreateOrganizationRequest): Observable<string> {
@@ -118,8 +123,8 @@ export class OrganizationService {
   }
 
   promote(userId: string) {
-    return this.http.post<string>(`${this.api}/organization/promote/${userId}`, {}).pipe(
-      tap((role) => this.updateMembers(userId, role)),
+    return this.http.post<PromoteResponse>(`${this.api}/organization/promote/${userId}`, {}).pipe(
+      tap(({ role }) => this.updateMembers(userId, role)),
       catchError((err) => {
         console.log(err);
         return throwError(() => err);
@@ -128,8 +133,8 @@ export class OrganizationService {
   }
 
   demote(userId: string) {
-    return this.http.post<string>(`${this.api}/organization/demote/${userId}`, {}).pipe(
-      tap((role) => this.updateMembers(userId, role)),
+    return this.http.post<PromoteResponse>(`${this.api}/organization/demote/${userId}`, {}).pipe(
+      tap(({ role }) => this.updateMembers(userId, role)),
       catchError((err) => {
         console.log(err);
         return throwError(() => err);
