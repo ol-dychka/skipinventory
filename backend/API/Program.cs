@@ -116,6 +116,7 @@ builder.Services.AddHttpClient(
 
 var app = builder.Build();
 
+// http
 app.UseCors("AllowAngular");
 app.UseAuthentication();
 app.UseAuthorization();
@@ -124,5 +125,22 @@ app.MapControllers();
 // signal r
 app.MapHub<ChatHub>("/hubs/chat");
 app.MapHub<NotificationsHub>("/hubs/notifications");
+
+// seed data
+using var scope = app.Services.CreateScope();
+var services = scope.ServiceProvider;
+try
+{
+    var context = services.GetRequiredService<PsqlDbContext>();
+    var passwordHasher = services.GetRequiredService<IPasswordHasher>();
+    await context.Database.MigrateAsync();
+    await Seed.SeedData(context, passwordHasher);
+}
+catch (Exception ex)
+{
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "Error occured during migration");
+    throw;
+}
 
 app.Run();
