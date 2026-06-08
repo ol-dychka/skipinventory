@@ -12,7 +12,7 @@ public class Create
     public class Command : IRequest<Result<Unit>>
     {
         public List<CreateSaleRecord> Data { get; set; } = [];
-        public DateOnly? Date { get; set; }
+        public DateTime? Date { get; set; }
         public required string UserId { get; set; }
         public required string OrganizationId { get; set; }
     }
@@ -45,7 +45,7 @@ public class Create
                     request.OrganizationId,
                     record.Id,
                     record.Quantity < 0 ? record.Quantity : 0,
-                    request.Date ?? DateOnly.FromDateTime(DateTime.UtcNow)
+                    request.Date ?? DateTime.UtcNow
                 );
 
                 saleRepository.Add(newSaleRecord);

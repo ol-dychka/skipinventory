@@ -16,24 +16,32 @@ public class SaleRecordRepository(PsqlDbContext context) : ISaleRecordRepository
 
     public Task<bool> ExistsFromDateAsync(
         string organizationId,
-        DateOnly date,
+        DateTime date,
         CancellationToken cancellationToken
     )
     {
+        DateTime start = date.Date;
+        DateTime end = date.Date.AddDays(1);
+
         return _context.SaleRecords.AnyAsync(
-            sr => sr.OrganizationId == organizationId && sr.Date == date,
+            sr => sr.OrganizationId == organizationId && sr.Date >= start && sr.Date < end,
             cancellationToken
         );
     }
 
     public Task<List<SaleRecord>> GetFromDateAsync(
         string organizationId,
-        DateOnly date,
+        DateTime date,
         CancellationToken cancellationToken
     )
     {
+        DateTime start = date.Date;
+        DateTime end = date.Date.AddDays(1);
+
         return _context
-            .SaleRecords.Where(sr => sr.OrganizationId == organizationId && sr.Date == date)
+            .SaleRecords.Where(sr =>
+                sr.OrganizationId == organizationId && sr.Date >= start && sr.Date < end
+            )
             .ToListAsync(cancellationToken);
     }
 
@@ -46,7 +54,7 @@ public class SaleRecordRepository(PsqlDbContext context) : ISaleRecordRepository
         return _context
             .SaleRecords.Where(sr =>
                 sr.OrganizationId == organizationId
-                && sr.Date > DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1 * numberOfDays))
+                && sr.Date > DateTime.UtcNow.AddDays(-1 * numberOfDays)
             )
             .ToListAsync(cancellationToken);
     }

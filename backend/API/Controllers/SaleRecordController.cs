@@ -47,7 +47,7 @@ public class SaleRecordController : BaseAPIController
     }
 
     [HttpGet("{date}")]
-    public async Task<IActionResult> Exists(DateOnly date)
+    public async Task<IActionResult> Exists(DateTime date)
     {
         if (OrganizationId == null)
             return Unauthorized("organization does not exist");

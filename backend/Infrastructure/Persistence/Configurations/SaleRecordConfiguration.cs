@@ -14,6 +14,7 @@ public class SaleRecordConfiguration : IEntityTypeConfiguration<SaleRecord>
         builder.Property(s => s.OrganizationId).HasMaxLength(36).IsRequired();
         builder.Property(s => s.ProductId).HasMaxLength(36).IsRequired();
         builder.Property(s => s.Sku).IsRequired().HasMaxLength(100);
+        builder.Property(s => s.Date).IsRequired().HasColumnType("date");
 
         // Relationship — restrict so you can't delete a product that has sales
         builder

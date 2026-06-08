@@ -8,13 +8,13 @@ public interface ISaleRecordRepository
     void Add(SaleRecord saleRecord);
     Task<List<SaleRecord>> GetFromDateAsync(
         string organizationId,
-        DateOnly date,
+        DateTime date,
         CancellationToken cancellationToken
     );
 
     Task<bool> ExistsFromDateAsync(
         string organizationId,
-        DateOnly date,
+        DateTime date,
         CancellationToken cancellationToken
     );
 

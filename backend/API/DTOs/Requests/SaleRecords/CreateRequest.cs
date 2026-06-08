@@ -5,7 +5,7 @@ namespace API.DTOs.Requests.SaleRecords;
 public class CreateRequest
 {
     public List<CreateRequestSaleRecord> Data { get; set; } = [];
-    public DateOnly? Date { get; set; }
+    public DateTime? Date { get; set; }
 }
 
 public class CreateRequestSaleRecord

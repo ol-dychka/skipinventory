@@ -246,7 +246,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-20))
+                DateTime.UtcNow.AddDays(-20)
             ),
             new SaleRecord(
                 45,
@@ -254,7 +254,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-20))
+                DateTime.UtcNow.AddDays(-20)
             ),
             new SaleRecord(
                 120,
@@ -262,7 +262,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-20))
+                DateTime.UtcNow.AddDays(-20)
             ),
             new SaleRecord(
                 75,
@@ -270,7 +270,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-20))
+                DateTime.UtcNow.AddDays(-20)
             ),
             new SaleRecord(
                 200,
@@ -278,7 +278,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-20))
+                DateTime.UtcNow.AddDays(-20)
             ),
             new SaleRecord(
                 30,
@@ -286,7 +286,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-20))
+                DateTime.UtcNow.AddDays(-20)
             ),
             new SaleRecord(
                 160,
@@ -294,7 +294,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-20))
+                DateTime.UtcNow.AddDays(-20)
             ),
             new SaleRecord(
                 55,
@@ -302,7 +302,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-20))
+                DateTime.UtcNow.AddDays(-20)
             ),
             new SaleRecord(
                 90,
@@ -310,7 +310,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-20))
+                DateTime.UtcNow.AddDays(-20)
             ),
             new SaleRecord(
                 15,
@@ -318,7 +318,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-20))
+                DateTime.UtcNow.AddDays(-20)
             ),
             new SaleRecord(
                 180,
@@ -326,7 +326,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-20))
+                DateTime.UtcNow.AddDays(-20)
             ),
             new SaleRecord(
                 40,
@@ -334,7 +334,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-20))
+                DateTime.UtcNow.AddDays(-20)
             ),
             // Day 2 (19 days ago)
             new SaleRecord(
@@ -343,7 +343,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-19))
+                DateTime.UtcNow.AddDays(-19)
             ),
             new SaleRecord(
                 20,
@@ -351,7 +351,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-19))
+                DateTime.UtcNow.AddDays(-19)
             ),
             new SaleRecord(
                 145,
@@ -359,7 +359,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-19))
+                DateTime.UtcNow.AddDays(-19)
             ),
             new SaleRecord(
                 60,
@@ -367,7 +367,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-19))
+                DateTime.UtcNow.AddDays(-19)
             ),
             new SaleRecord(
                 175,
@@ -375,7 +375,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-19))
+                DateTime.UtcNow.AddDays(-19)
             ),
             new SaleRecord(
                 100,
@@ -383,7 +383,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-19))
+                DateTime.UtcNow.AddDays(-19)
             ),
             new SaleRecord(
                 35,
@@ -391,7 +391,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-19))
+                DateTime.UtcNow.AddDays(-19)
             ),
             new SaleRecord(
                 190,
@@ -399,7 +399,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-19))
+                DateTime.UtcNow.AddDays(-19)
             ),
             new SaleRecord(
                 70,
@@ -407,7 +407,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-19))
+                DateTime.UtcNow.AddDays(-19)
             ),
             new SaleRecord(
                 130,
@@ -415,7 +415,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-19))
+                DateTime.UtcNow.AddDays(-19)
             ),
             new SaleRecord(
                 25,
@@ -423,7 +423,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-19))
+                DateTime.UtcNow.AddDays(-19)
             ),
             new SaleRecord(
                 155,
@@ -431,7 +431,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-19))
+                DateTime.UtcNow.AddDays(-19)
             ),
             // Day 3 (18 days ago)
             new SaleRecord(
@@ -440,7 +440,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-18))
+                DateTime.UtcNow.AddDays(-18)
             ),
             new SaleRecord(
                 65,
@@ -448,7 +448,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-18))
+                DateTime.UtcNow.AddDays(-18)
             ),
             new SaleRecord(
                 5,
@@ -456,7 +456,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 0,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-18))
+                DateTime.UtcNow.AddDays(-18)
             ),
             new SaleRecord(
                 185,
@@ -464,7 +464,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-18))
+                DateTime.UtcNow.AddDays(-18)
             ),
             new SaleRecord(
                 50,
@@ -472,7 +472,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-18))
+                DateTime.UtcNow.AddDays(-18)
             ),
             new SaleRecord(
                 140,
@@ -480,7 +480,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-18))
+                DateTime.UtcNow.AddDays(-18)
             ),
             new SaleRecord(
                 85,
@@ -488,7 +488,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-18))
+                DateTime.UtcNow.AddDays(-18)
             ),
             new SaleRecord(
                 0,
@@ -496,7 +496,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 0,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-18))
+                DateTime.UtcNow.AddDays(-18)
             ),
             new SaleRecord(
                 165,
@@ -504,7 +504,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-18))
+                DateTime.UtcNow.AddDays(-18)
             ),
             new SaleRecord(
                 95,
@@ -512,7 +512,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-18))
+                DateTime.UtcNow.AddDays(-18)
             ),
             new SaleRecord(
                 115,
@@ -520,7 +520,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-18))
+                DateTime.UtcNow.AddDays(-18)
             ),
             new SaleRecord(
                 30,
@@ -528,7 +528,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-18))
+                DateTime.UtcNow.AddDays(-18)
             ),
             // Day 4 (17 days ago)
             new SaleRecord(
@@ -537,7 +537,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-17))
+                DateTime.UtcNow.AddDays(-17)
             ),
             new SaleRecord(
                 40,
@@ -545,7 +545,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-17))
+                DateTime.UtcNow.AddDays(-17)
             ),
             new SaleRecord(
                 170,
@@ -553,7 +553,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-17))
+                DateTime.UtcNow.AddDays(-17)
             ),
             new SaleRecord(
                 25,
@@ -561,7 +561,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-17))
+                DateTime.UtcNow.AddDays(-17)
             ),
             new SaleRecord(
                 105,
@@ -569,7 +569,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-17))
+                DateTime.UtcNow.AddDays(-17)
             ),
             new SaleRecord(
                 55,
@@ -577,7 +577,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-17))
+                DateTime.UtcNow.AddDays(-17)
             ),
             new SaleRecord(
                 135,
@@ -585,7 +585,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-17))
+                DateTime.UtcNow.AddDays(-17)
             ),
             new SaleRecord(
                 80,
@@ -593,7 +593,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-17))
+                DateTime.UtcNow.AddDays(-17)
             ),
             new SaleRecord(
                 15,
@@ -601,7 +601,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-17))
+                DateTime.UtcNow.AddDays(-17)
             ),
             new SaleRecord(
                 160,
@@ -609,7 +609,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-17))
+                DateTime.UtcNow.AddDays(-17)
             ),
             new SaleRecord(
                 70,
@@ -617,7 +617,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-17))
+                DateTime.UtcNow.AddDays(-17)
             ),
             new SaleRecord(
                 120,
@@ -625,7 +625,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-17))
+                DateTime.UtcNow.AddDays(-17)
             ),
             // Day 5 (16 days ago)
             new SaleRecord(
@@ -634,7 +634,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-16))
+                DateTime.UtcNow.AddDays(-16)
             ),
             new SaleRecord(
                 150,
@@ -642,7 +642,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-16))
+                DateTime.UtcNow.AddDays(-16)
             ),
             new SaleRecord(
                 90,
@@ -650,7 +650,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-16))
+                DateTime.UtcNow.AddDays(-16)
             ),
             new SaleRecord(
                 200,
@@ -658,7 +658,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-16))
+                DateTime.UtcNow.AddDays(-16)
             ),
             new SaleRecord(
                 45,
@@ -666,7 +666,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-16))
+                DateTime.UtcNow.AddDays(-16)
             ),
             new SaleRecord(
                 175,
@@ -674,7 +674,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-16))
+                DateTime.UtcNow.AddDays(-16)
             ),
             new SaleRecord(
                 60,
@@ -682,7 +682,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-16))
+                DateTime.UtcNow.AddDays(-16)
             ),
             new SaleRecord(
                 125,
@@ -690,7 +690,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-16))
+                DateTime.UtcNow.AddDays(-16)
             ),
             new SaleRecord(
                 20,
@@ -698,7 +698,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-16))
+                DateTime.UtcNow.AddDays(-16)
             ),
             new SaleRecord(
                 185,
@@ -706,7 +706,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-16))
+                DateTime.UtcNow.AddDays(-16)
             ),
             new SaleRecord(
                 75,
@@ -714,7 +714,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-16))
+                DateTime.UtcNow.AddDays(-16)
             ),
             new SaleRecord(
                 140,
@@ -722,7 +722,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-16))
+                DateTime.UtcNow.AddDays(-16)
             ),
             // Day 6 (15 days ago)
             new SaleRecord(
@@ -731,7 +731,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-15))
+                DateTime.UtcNow.AddDays(-15)
             ),
             new SaleRecord(
                 85,
@@ -739,7 +739,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-15))
+                DateTime.UtcNow.AddDays(-15)
             ),
             new SaleRecord(
                 30,
@@ -747,7 +747,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-15))
+                DateTime.UtcNow.AddDays(-15)
             ),
             new SaleRecord(
                 110,
@@ -755,7 +755,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-15))
+                DateTime.UtcNow.AddDays(-15)
             ),
             new SaleRecord(
                 190,
@@ -763,7 +763,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-15))
+                DateTime.UtcNow.AddDays(-15)
             ),
             new SaleRecord(
                 65,
@@ -771,7 +771,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-15))
+                DateTime.UtcNow.AddDays(-15)
             ),
             new SaleRecord(
                 15,
@@ -779,7 +779,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-15))
+                DateTime.UtcNow.AddDays(-15)
             ),
             new SaleRecord(
                 145,
@@ -787,7 +787,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-15))
+                DateTime.UtcNow.AddDays(-15)
             ),
             new SaleRecord(
                 100,
@@ -795,7 +795,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-15))
+                DateTime.UtcNow.AddDays(-15)
             ),
             new SaleRecord(
                 50,
@@ -803,7 +803,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-15))
+                DateTime.UtcNow.AddDays(-15)
             ),
             new SaleRecord(
                 170,
@@ -811,7 +811,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-15))
+                DateTime.UtcNow.AddDays(-15)
             ),
             new SaleRecord(
                 5,
@@ -819,7 +819,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 0,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-15))
+                DateTime.UtcNow.AddDays(-15)
             ),
             // Day 7 (14 days ago)
             new SaleRecord(
@@ -828,7 +828,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-14))
+                DateTime.UtcNow.AddDays(-14)
             ),
             new SaleRecord(
                 0,
@@ -836,7 +836,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 0,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-14))
+                DateTime.UtcNow.AddDays(-14)
             ),
             new SaleRecord(
                 180,
@@ -844,7 +844,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-14))
+                DateTime.UtcNow.AddDays(-14)
             ),
             new SaleRecord(
                 70,
@@ -852,7 +852,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-14))
+                DateTime.UtcNow.AddDays(-14)
             ),
             new SaleRecord(
                 130,
@@ -860,7 +860,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-14))
+                DateTime.UtcNow.AddDays(-14)
             ),
             new SaleRecord(
                 20,
@@ -868,7 +868,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-14))
+                DateTime.UtcNow.AddDays(-14)
             ),
             new SaleRecord(
                 195,
@@ -876,7 +876,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-14))
+                DateTime.UtcNow.AddDays(-14)
             ),
             new SaleRecord(
                 55,
@@ -884,7 +884,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-14))
+                DateTime.UtcNow.AddDays(-14)
             ),
             new SaleRecord(
                 115,
@@ -892,7 +892,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-14))
+                DateTime.UtcNow.AddDays(-14)
             ),
             new SaleRecord(
                 165,
@@ -900,7 +900,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-14))
+                DateTime.UtcNow.AddDays(-14)
             ),
             new SaleRecord(
                 40,
@@ -908,7 +908,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-14))
+                DateTime.UtcNow.AddDays(-14)
             ),
             new SaleRecord(
                 90,
@@ -916,7 +916,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-14))
+                DateTime.UtcNow.AddDays(-14)
             ),
             // Day 8 (13 days ago)
             new SaleRecord(
@@ -925,7 +925,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-13))
+                DateTime.UtcNow.AddDays(-13)
             ),
             new SaleRecord(
                 135,
@@ -933,7 +933,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-13))
+                DateTime.UtcNow.AddDays(-13)
             ),
             new SaleRecord(
                 25,
@@ -941,7 +941,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-13))
+                DateTime.UtcNow.AddDays(-13)
             ),
             new SaleRecord(
                 155,
@@ -949,7 +949,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-13))
+                DateTime.UtcNow.AddDays(-13)
             ),
             new SaleRecord(
                 80,
@@ -957,7 +957,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-13))
+                DateTime.UtcNow.AddDays(-13)
             ),
             new SaleRecord(
                 200,
@@ -965,7 +965,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-13))
+                DateTime.UtcNow.AddDays(-13)
             ),
             new SaleRecord(
                 45,
@@ -973,7 +973,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-13))
+                DateTime.UtcNow.AddDays(-13)
             ),
             new SaleRecord(
                 170,
@@ -981,7 +981,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-13))
+                DateTime.UtcNow.AddDays(-13)
             ),
             new SaleRecord(
                 10,
@@ -989,7 +989,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-13))
+                DateTime.UtcNow.AddDays(-13)
             ),
             new SaleRecord(
                 120,
@@ -997,7 +997,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-13))
+                DateTime.UtcNow.AddDays(-13)
             ),
             new SaleRecord(
                 85,
@@ -1005,7 +1005,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-13))
+                DateTime.UtcNow.AddDays(-13)
             ),
             new SaleRecord(
                 50,
@@ -1013,7 +1013,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-13))
+                DateTime.UtcNow.AddDays(-13)
             ),
             // Day 9 (12 days ago)
             new SaleRecord(
@@ -1022,7 +1022,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-12))
+                DateTime.UtcNow.AddDays(-12)
             ),
             new SaleRecord(
                 95,
@@ -1030,7 +1030,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-12))
+                DateTime.UtcNow.AddDays(-12)
             ),
             new SaleRecord(
                 140,
@@ -1038,7 +1038,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-12))
+                DateTime.UtcNow.AddDays(-12)
             ),
             new SaleRecord(
                 15,
@@ -1046,7 +1046,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-12))
+                DateTime.UtcNow.AddDays(-12)
             ),
             new SaleRecord(
                 160,
@@ -1054,7 +1054,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-12))
+                DateTime.UtcNow.AddDays(-12)
             ),
             new SaleRecord(
                 45,
@@ -1062,7 +1062,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-12))
+                DateTime.UtcNow.AddDays(-12)
             ),
             new SaleRecord(
                 110,
@@ -1070,7 +1070,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-12))
+                DateTime.UtcNow.AddDays(-12)
             ),
             new SaleRecord(
                 30,
@@ -1078,7 +1078,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-12))
+                DateTime.UtcNow.AddDays(-12)
             ),
             new SaleRecord(
                 190,
@@ -1086,7 +1086,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-12))
+                DateTime.UtcNow.AddDays(-12)
             ),
             new SaleRecord(
                 75,
@@ -1094,7 +1094,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-12))
+                DateTime.UtcNow.AddDays(-12)
             ),
             new SaleRecord(
                 5,
@@ -1102,7 +1102,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 0,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-12))
+                DateTime.UtcNow.AddDays(-12)
             ),
             new SaleRecord(
                 145,
@@ -1110,7 +1110,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-12))
+                DateTime.UtcNow.AddDays(-12)
             ),
             // Day 10 (11 days ago)
             new SaleRecord(
@@ -1119,7 +1119,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-11))
+                DateTime.UtcNow.AddDays(-11)
             ),
             new SaleRecord(
                 180,
@@ -1127,7 +1127,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-11))
+                DateTime.UtcNow.AddDays(-11)
             ),
             new SaleRecord(
                 55,
@@ -1135,7 +1135,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-11))
+                DateTime.UtcNow.AddDays(-11)
             ),
             new SaleRecord(
                 130,
@@ -1143,7 +1143,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-11))
+                DateTime.UtcNow.AddDays(-11)
             ),
             new SaleRecord(
                 20,
@@ -1151,7 +1151,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-11))
+                DateTime.UtcNow.AddDays(-11)
             ),
             new SaleRecord(
                 165,
@@ -1159,7 +1159,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-11))
+                DateTime.UtcNow.AddDays(-11)
             ),
             new SaleRecord(
                 70,
@@ -1167,7 +1167,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-11))
+                DateTime.UtcNow.AddDays(-11)
             ),
             new SaleRecord(
                 195,
@@ -1175,7 +1175,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-11))
+                DateTime.UtcNow.AddDays(-11)
             ),
             new SaleRecord(
                 35,
@@ -1183,7 +1183,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-11))
+                DateTime.UtcNow.AddDays(-11)
             ),
             new SaleRecord(
                 150,
@@ -1191,7 +1191,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-11))
+                DateTime.UtcNow.AddDays(-11)
             ),
             new SaleRecord(
                 90,
@@ -1199,7 +1199,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-11))
+                DateTime.UtcNow.AddDays(-11)
             ),
             new SaleRecord(
                 25,
@@ -1207,7 +1207,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-11))
+                DateTime.UtcNow.AddDays(-11)
             ),
             // Day 11 (10 days ago)
             new SaleRecord(
@@ -1216,7 +1216,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-10))
+                DateTime.UtcNow.AddDays(-10)
             ),
             new SaleRecord(
                 50,
@@ -1224,7 +1224,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-10))
+                DateTime.UtcNow.AddDays(-10)
             ),
             new SaleRecord(
                 115,
@@ -1232,7 +1232,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-10))
+                DateTime.UtcNow.AddDays(-10)
             ),
             new SaleRecord(
                 80,
@@ -1240,7 +1240,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-10))
+                DateTime.UtcNow.AddDays(-10)
             ),
             new SaleRecord(
                 0,
@@ -1248,7 +1248,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 0,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-10))
+                DateTime.UtcNow.AddDays(-10)
             ),
             new SaleRecord(
                 140,
@@ -1256,7 +1256,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-10))
+                DateTime.UtcNow.AddDays(-10)
             ),
             new SaleRecord(
                 175,
@@ -1264,7 +1264,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-10))
+                DateTime.UtcNow.AddDays(-10)
             ),
             new SaleRecord(
                 65,
@@ -1272,7 +1272,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-10))
+                DateTime.UtcNow.AddDays(-10)
             ),
             new SaleRecord(
                 105,
@@ -1280,7 +1280,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-10))
+                DateTime.UtcNow.AddDays(-10)
             ),
             new SaleRecord(
                 40,
@@ -1288,7 +1288,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-10))
+                DateTime.UtcNow.AddDays(-10)
             ),
             new SaleRecord(
                 160,
@@ -1296,7 +1296,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-10))
+                DateTime.UtcNow.AddDays(-10)
             ),
             new SaleRecord(
                 200,
@@ -1304,7 +1304,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-10))
+                DateTime.UtcNow.AddDays(-10)
             ),
             // Day 12 (9 days ago)
             new SaleRecord(
@@ -1313,7 +1313,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-9))
+                DateTime.UtcNow.AddDays(-9)
             ),
             new SaleRecord(
                 155,
@@ -1321,7 +1321,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-9))
+                DateTime.UtcNow.AddDays(-9)
             ),
             new SaleRecord(
                 10,
@@ -1329,7 +1329,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-9))
+                DateTime.UtcNow.AddDays(-9)
             ),
             new SaleRecord(
                 190,
@@ -1337,7 +1337,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-9))
+                DateTime.UtcNow.AddDays(-9)
             ),
             new SaleRecord(
                 85,
@@ -1345,7 +1345,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-9))
+                DateTime.UtcNow.AddDays(-9)
             ),
             new SaleRecord(
                 120,
@@ -1353,7 +1353,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-9))
+                DateTime.UtcNow.AddDays(-9)
             ),
             new SaleRecord(
                 30,
@@ -1361,7 +1361,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-9))
+                DateTime.UtcNow.AddDays(-9)
             ),
             new SaleRecord(
                 145,
@@ -1369,7 +1369,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-9))
+                DateTime.UtcNow.AddDays(-9)
             ),
             new SaleRecord(
                 95,
@@ -1377,7 +1377,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-9))
+                DateTime.UtcNow.AddDays(-9)
             ),
             new SaleRecord(
                 5,
@@ -1385,7 +1385,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 0,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-9))
+                DateTime.UtcNow.AddDays(-9)
             ),
             new SaleRecord(
                 170,
@@ -1393,7 +1393,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-9))
+                DateTime.UtcNow.AddDays(-9)
             ),
             new SaleRecord(
                 55,
@@ -1401,7 +1401,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-9))
+                DateTime.UtcNow.AddDays(-9)
             ),
             // Day 13 (8 days ago)
             new SaleRecord(
@@ -1410,7 +1410,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8))
+                DateTime.UtcNow.AddDays(-8)
             ),
             new SaleRecord(
                 25,
@@ -1418,7 +1418,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8))
+                DateTime.UtcNow.AddDays(-8)
             ),
             new SaleRecord(
                 195,
@@ -1426,7 +1426,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8))
+                DateTime.UtcNow.AddDays(-8)
             ),
             new SaleRecord(
                 60,
@@ -1434,7 +1434,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8))
+                DateTime.UtcNow.AddDays(-8)
             ),
             new SaleRecord(
                 150,
@@ -1442,7 +1442,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8))
+                DateTime.UtcNow.AddDays(-8)
             ),
             new SaleRecord(
                 35,
@@ -1450,7 +1450,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8))
+                DateTime.UtcNow.AddDays(-8)
             ),
             new SaleRecord(
                 100,
@@ -1458,7 +1458,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8))
+                DateTime.UtcNow.AddDays(-8)
             ),
             new SaleRecord(
                 180,
@@ -1466,7 +1466,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8))
+                DateTime.UtcNow.AddDays(-8)
             ),
             new SaleRecord(
                 45,
@@ -1474,7 +1474,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8))
+                DateTime.UtcNow.AddDays(-8)
             ),
             new SaleRecord(
                 115,
@@ -1482,7 +1482,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8))
+                DateTime.UtcNow.AddDays(-8)
             ),
             new SaleRecord(
                 20,
@@ -1490,7 +1490,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8))
+                DateTime.UtcNow.AddDays(-8)
             ),
             new SaleRecord(
                 165,
@@ -1498,7 +1498,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-8))
+                DateTime.UtcNow.AddDays(-8)
             ),
             // Day 14 (7 days ago)
             new SaleRecord(
@@ -1507,7 +1507,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7))
+                DateTime.UtcNow.AddDays(-7)
             ),
             new SaleRecord(
                 110,
@@ -1515,7 +1515,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7))
+                DateTime.UtcNow.AddDays(-7)
             ),
             new SaleRecord(
                 75,
@@ -1523,7 +1523,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7))
+                DateTime.UtcNow.AddDays(-7)
             ),
             new SaleRecord(
                 200,
@@ -1531,7 +1531,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7))
+                DateTime.UtcNow.AddDays(-7)
             ),
             new SaleRecord(
                 15,
@@ -1539,7 +1539,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7))
+                DateTime.UtcNow.AddDays(-7)
             ),
             new SaleRecord(
                 185,
@@ -1547,7 +1547,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7))
+                DateTime.UtcNow.AddDays(-7)
             ),
             new SaleRecord(
                 55,
@@ -1555,7 +1555,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7))
+                DateTime.UtcNow.AddDays(-7)
             ),
             new SaleRecord(
                 125,
@@ -1563,7 +1563,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7))
+                DateTime.UtcNow.AddDays(-7)
             ),
             new SaleRecord(
                 170,
@@ -1571,7 +1571,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7))
+                DateTime.UtcNow.AddDays(-7)
             ),
             new SaleRecord(
                 90,
@@ -1579,7 +1579,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7))
+                DateTime.UtcNow.AddDays(-7)
             ),
             new SaleRecord(
                 135,
@@ -1587,7 +1587,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7))
+                DateTime.UtcNow.AddDays(-7)
             ),
             new SaleRecord(
                 0,
@@ -1595,7 +1595,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 0,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-7))
+                DateTime.UtcNow.AddDays(-7)
             ),
             // Day 15 (6 days ago)
             new SaleRecord(
@@ -1604,7 +1604,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-6))
+                DateTime.UtcNow.AddDays(-6)
             ),
             new SaleRecord(
                 75,
@@ -1612,7 +1612,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-6))
+                DateTime.UtcNow.AddDays(-6)
             ),
             new SaleRecord(
                 120,
@@ -1620,7 +1620,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-6))
+                DateTime.UtcNow.AddDays(-6)
             ),
             new SaleRecord(
                 35,
@@ -1628,7 +1628,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-6))
+                DateTime.UtcNow.AddDays(-6)
             ),
             new SaleRecord(
                 195,
@@ -1636,7 +1636,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-6))
+                DateTime.UtcNow.AddDays(-6)
             ),
             new SaleRecord(
                 80,
@@ -1644,7 +1644,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-6))
+                DateTime.UtcNow.AddDays(-6)
             ),
             new SaleRecord(
                 145,
@@ -1652,7 +1652,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-6))
+                DateTime.UtcNow.AddDays(-6)
             ),
             new SaleRecord(
                 20,
@@ -1660,7 +1660,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-6))
+                DateTime.UtcNow.AddDays(-6)
             ),
             new SaleRecord(
                 65,
@@ -1668,7 +1668,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-6))
+                DateTime.UtcNow.AddDays(-6)
             ),
             new SaleRecord(
                 180,
@@ -1676,7 +1676,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-6))
+                DateTime.UtcNow.AddDays(-6)
             ),
             new SaleRecord(
                 105,
@@ -1684,7 +1684,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-6))
+                DateTime.UtcNow.AddDays(-6)
             ),
             new SaleRecord(
                 50,
@@ -1692,7 +1692,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-6))
+                DateTime.UtcNow.AddDays(-6)
             ),
             // Day 16 (5 days ago)
             new SaleRecord(
@@ -1701,7 +1701,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-5))
+                DateTime.UtcNow.AddDays(-5)
             ),
             new SaleRecord(
                 190,
@@ -1709,7 +1709,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-5))
+                DateTime.UtcNow.AddDays(-5)
             ),
             new SaleRecord(
                 60,
@@ -1717,7 +1717,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-5))
+                DateTime.UtcNow.AddDays(-5)
             ),
             new SaleRecord(
                 155,
@@ -1725,7 +1725,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-5))
+                DateTime.UtcNow.AddDays(-5)
             ),
             new SaleRecord(
                 95,
@@ -1733,7 +1733,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-5))
+                DateTime.UtcNow.AddDays(-5)
             ),
             new SaleRecord(
                 10,
@@ -1741,7 +1741,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-5))
+                DateTime.UtcNow.AddDays(-5)
             ),
             new SaleRecord(
                 175,
@@ -1749,7 +1749,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-5))
+                DateTime.UtcNow.AddDays(-5)
             ),
             new SaleRecord(
                 110,
@@ -1757,7 +1757,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-5))
+                DateTime.UtcNow.AddDays(-5)
             ),
             new SaleRecord(
                 140,
@@ -1765,7 +1765,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-5))
+                DateTime.UtcNow.AddDays(-5)
             ),
             new SaleRecord(
                 55,
@@ -1773,7 +1773,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-5))
+                DateTime.UtcNow.AddDays(-5)
             ),
             new SaleRecord(
                 200,
@@ -1781,7 +1781,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-5))
+                DateTime.UtcNow.AddDays(-5)
             ),
             new SaleRecord(
                 85,
@@ -1789,7 +1789,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-5))
+                DateTime.UtcNow.AddDays(-5)
             ),
             // Day 17 (4 days ago)
             new SaleRecord(
@@ -1798,7 +1798,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-4))
+                DateTime.UtcNow.AddDays(-4)
             ),
             new SaleRecord(
                 45,
@@ -1806,7 +1806,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-4))
+                DateTime.UtcNow.AddDays(-4)
             ),
             new SaleRecord(
                 100,
@@ -1814,7 +1814,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-4))
+                DateTime.UtcNow.AddDays(-4)
             ),
             new SaleRecord(
                 5,
@@ -1822,7 +1822,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 0,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-4))
+                DateTime.UtcNow.AddDays(-4)
             ),
             new SaleRecord(
                 135,
@@ -1830,7 +1830,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-4))
+                DateTime.UtcNow.AddDays(-4)
             ),
             new SaleRecord(
                 195,
@@ -1838,7 +1838,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-4))
+                DateTime.UtcNow.AddDays(-4)
             ),
             new SaleRecord(
                 40,
@@ -1846,7 +1846,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-4))
+                DateTime.UtcNow.AddDays(-4)
             ),
             new SaleRecord(
                 160,
@@ -1854,7 +1854,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-4))
+                DateTime.UtcNow.AddDays(-4)
             ),
             new SaleRecord(
                 75,
@@ -1862,7 +1862,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-4))
+                DateTime.UtcNow.AddDays(-4)
             ),
             new SaleRecord(
                 125,
@@ -1870,7 +1870,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-4))
+                DateTime.UtcNow.AddDays(-4)
             ),
             new SaleRecord(
                 30,
@@ -1878,7 +1878,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-4))
+                DateTime.UtcNow.AddDays(-4)
             ),
             new SaleRecord(
                 185,
@@ -1886,7 +1886,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-4))
+                DateTime.UtcNow.AddDays(-4)
             ),
             // Day 18 (3 days ago)
             new SaleRecord(
@@ -1895,7 +1895,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-3))
+                DateTime.UtcNow.AddDays(-3)
             ),
             new SaleRecord(
                 165,
@@ -1903,7 +1903,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-3))
+                DateTime.UtcNow.AddDays(-3)
             ),
             new SaleRecord(
                 15,
@@ -1911,7 +1911,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-3))
+                DateTime.UtcNow.AddDays(-3)
             ),
             new SaleRecord(
                 120,
@@ -1919,7 +1919,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-3))
+                DateTime.UtcNow.AddDays(-3)
             ),
             new SaleRecord(
                 55,
@@ -1927,7 +1927,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-3))
+                DateTime.UtcNow.AddDays(-3)
             ),
             new SaleRecord(
                 150,
@@ -1935,7 +1935,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-3))
+                DateTime.UtcNow.AddDays(-3)
             ),
             new SaleRecord(
                 80,
@@ -1943,7 +1943,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-3))
+                DateTime.UtcNow.AddDays(-3)
             ),
             new SaleRecord(
                 0,
@@ -1951,7 +1951,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 0,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-3))
+                DateTime.UtcNow.AddDays(-3)
             ),
             new SaleRecord(
                 200,
@@ -1959,7 +1959,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-3))
+                DateTime.UtcNow.AddDays(-3)
             ),
             new SaleRecord(
                 35,
@@ -1967,7 +1967,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-3))
+                DateTime.UtcNow.AddDays(-3)
             ),
             new SaleRecord(
                 145,
@@ -1975,7 +1975,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-3))
+                DateTime.UtcNow.AddDays(-3)
             ),
             new SaleRecord(
                 110,
@@ -1983,7 +1983,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-3))
+                DateTime.UtcNow.AddDays(-3)
             ),
             // Day 19 (2 days ago)
             new SaleRecord(
@@ -1992,7 +1992,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-2))
+                DateTime.UtcNow.AddDays(-2)
             ),
             new SaleRecord(
                 130,
@@ -2000,7 +2000,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-2))
+                DateTime.UtcNow.AddDays(-2)
             ),
             new SaleRecord(
                 185,
@@ -2008,7 +2008,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-2))
+                DateTime.UtcNow.AddDays(-2)
             ),
             new SaleRecord(
                 45,
@@ -2016,7 +2016,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 3,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-2))
+                DateTime.UtcNow.AddDays(-2)
             ),
             new SaleRecord(
                 170,
@@ -2024,7 +2024,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-2))
+                DateTime.UtcNow.AddDays(-2)
             ),
             new SaleRecord(
                 25,
@@ -2032,7 +2032,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-2))
+                DateTime.UtcNow.AddDays(-2)
             ),
             new SaleRecord(
                 115,
@@ -2040,7 +2040,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-2))
+                DateTime.UtcNow.AddDays(-2)
             ),
             new SaleRecord(
                 70,
@@ -2048,7 +2048,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-2))
+                DateTime.UtcNow.AddDays(-2)
             ),
             new SaleRecord(
                 155,
@@ -2056,7 +2056,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-2))
+                DateTime.UtcNow.AddDays(-2)
             ),
             new SaleRecord(
                 100,
@@ -2064,7 +2064,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-2))
+                DateTime.UtcNow.AddDays(-2)
             ),
             new SaleRecord(
                 10,
@@ -2072,7 +2072,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 1,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-2))
+                DateTime.UtcNow.AddDays(-2)
             ),
             new SaleRecord(
                 190,
@@ -2080,7 +2080,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-2))
+                DateTime.UtcNow.AddDays(-2)
             ),
             // Day 20 (yesterday)
             new SaleRecord(
@@ -2089,7 +2089,7 @@ public class Seed
                 organizationId,
                 products[0].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1))
+                DateTime.UtcNow.AddDays(-1)
             ),
             new SaleRecord(
                 60,
@@ -2097,7 +2097,7 @@ public class Seed
                 organizationId,
                 products[1].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1))
+                DateTime.UtcNow.AddDays(-1)
             ),
             new SaleRecord(
                 20,
@@ -2105,7 +2105,7 @@ public class Seed
                 organizationId,
                 products[2].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1))
+                DateTime.UtcNow.AddDays(-1)
             ),
             new SaleRecord(
                 175,
@@ -2113,7 +2113,7 @@ public class Seed
                 organizationId,
                 products[3].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1))
+                DateTime.UtcNow.AddDays(-1)
             ),
             new SaleRecord(
                 105,
@@ -2121,7 +2121,7 @@ public class Seed
                 organizationId,
                 products[4].Id,
                 6,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1))
+                DateTime.UtcNow.AddDays(-1)
             ),
             new SaleRecord(
                 30,
@@ -2129,7 +2129,7 @@ public class Seed
                 organizationId,
                 products[5].Id,
                 2,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1))
+                DateTime.UtcNow.AddDays(-1)
             ),
             new SaleRecord(
                 165,
@@ -2137,7 +2137,7 @@ public class Seed
                 organizationId,
                 products[6].Id,
                 9,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1))
+                DateTime.UtcNow.AddDays(-1)
             ),
             new SaleRecord(
                 85,
@@ -2145,7 +2145,7 @@ public class Seed
                 organizationId,
                 products[7].Id,
                 5,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1))
+                DateTime.UtcNow.AddDays(-1)
             ),
             new SaleRecord(
                 120,
@@ -2153,7 +2153,7 @@ public class Seed
                 organizationId,
                 products[8].Id,
                 7,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1))
+                DateTime.UtcNow.AddDays(-1)
             ),
             new SaleRecord(
                 195,
@@ -2161,7 +2161,7 @@ public class Seed
                 organizationId,
                 products[9].Id,
                 10,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1))
+                DateTime.UtcNow.AddDays(-1)
             ),
             new SaleRecord(
                 55,
@@ -2169,7 +2169,7 @@ public class Seed
                 organizationId,
                 products[10].Id,
                 4,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1))
+                DateTime.UtcNow.AddDays(-1)
             ),
             new SaleRecord(
                 145,
@@ -2177,7 +2177,7 @@ public class Seed
                 organizationId,
                 products[11].Id,
                 8,
-                DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1))
+                DateTime.UtcNow.AddDays(-1)
             ),
         ];
     }
