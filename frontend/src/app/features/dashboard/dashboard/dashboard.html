@@ -1,1 +1,8 @@
-<p>dashboard</p>
+<div>
+  <p class="text-primary-d text-2xl font-semibold">
+    Welcome, {{ authService.currentUser()!.name }}!
+  </p>
+  @if (saleRecordService.saleRecordSummary()?.days) {
+    <!-- <p>{{ saleRecordService.saleRecordSummary()!.days[0].total }}</p> -->
+  }
+</div>

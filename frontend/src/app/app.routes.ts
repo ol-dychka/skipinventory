@@ -18,6 +18,7 @@ import { SaleRecords } from './features/dashboard/sale-records/sale-records';
 import { ModelTraining } from './features/dashboard/model-training/model-training';
 import { Chat } from './features/dashboard/chat/chat';
 import { chatMessageGuard } from './core/guards/chat-message-guard';
+import { saleRecordSummaryGuard } from './core/guards/sale-record-summary-guard';
 
 export const routes: Routes = [
   { path: 'login', component: Login, canActivate: [noAuthGuard] },
@@ -37,7 +38,7 @@ export const routes: Routes = [
         canActivate: [orgGuard],
         children: [
           { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-          { path: 'dashboard', component: Dashboard },
+          { path: 'dashboard', component: Dashboard, canActivate: [saleRecordSummaryGuard] },
           { path: 'members', component: Members },
           { path: 'join-requests', component: JoinRequests },
           { path: 'products', component: Products, canActivate: [productGuard] },

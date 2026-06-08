@@ -10,7 +10,7 @@ public class Seed
     public static async Task SeedData(PsqlDbContext context, IPasswordHasher passwordHasher)
     {
         // check only users. if no users exist, db is completely empty
-        if (context.Users.Any())
+        if (!context.Users.Any())
         {
             var users = GenerateUsers(passwordHasher);
             await context.Users.AddRangeAsync(users);
@@ -153,7 +153,7 @@ public class Seed
             ),
             new Product(
                 "product 7",
-                "pro-1-1",
+                "pro-7-1",
                 "vendor",
                 organizationId,
                 0.50m,
@@ -166,7 +166,7 @@ public class Seed
             ),
             new Product(
                 "product 8",
-                "pro-1-1",
+                "pro-8-1",
                 "vendor",
                 organizationId,
                 0.50m,
@@ -179,7 +179,7 @@ public class Seed
             ),
             new Product(
                 "product 9",
-                "pro-1-1",
+                "pro-9-1",
                 "vendor",
                 organizationId,
                 0.50m,
@@ -192,7 +192,7 @@ public class Seed
             ),
             new Product(
                 "product 10",
-                "pro-1-1",
+                "pro-10-1",
                 "vendor",
                 organizationId,
                 0.50m,
@@ -205,7 +205,7 @@ public class Seed
             ),
             new Product(
                 "product 11",
-                "pro-1-1",
+                "pro-11-1",
                 "vendor",
                 organizationId,
                 0.50m,
@@ -218,7 +218,7 @@ public class Seed
             ),
             new Product(
                 "product 12",
-                "pro-1-1",
+                "pro-12-1",
                 "vendor",
                 organizationId,
                 0.50m,

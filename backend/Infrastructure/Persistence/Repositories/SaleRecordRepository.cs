@@ -36,4 +36,18 @@ public class SaleRecordRepository(PsqlDbContext context) : ISaleRecordRepository
             .SaleRecords.Where(sr => sr.OrganizationId == organizationId && sr.Date == date)
             .ToListAsync(cancellationToken);
     }
+
+    public Task<List<SaleRecord>> GetFromDateRangeAsync(
+        string organizationId,
+        int numberOfDays,
+        CancellationToken cancellationToken
+    )
+    {
+        return _context
+            .SaleRecords.Where(sr =>
+                sr.OrganizationId == organizationId
+                && sr.Date > DateOnly.FromDateTime(DateTime.UtcNow.AddDays(-1 * numberOfDays))
+            )
+            .ToListAsync(cancellationToken);
+    }
 }

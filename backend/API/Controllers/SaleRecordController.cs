@@ -2,6 +2,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using API.DTOs.Requests.SaleRecords;
+using API.DTOs.Responses;
 using Application.SaleRecords.Commands;
 using Application.SaleRecords.Queries;
 using Domain.StaticClasses;
@@ -56,5 +57,20 @@ public class SaleRecordController : BaseAPIController
             return Unauthorized(result.Error);
 
         return Ok(result.Value);
+    }
+
+    [HttpGet("list/{numberOfDays}")]
+    public async Task<IActionResult> GetSummaryFromDateRange(int numberOfDays)
+    {
+        if (OrganizationId == null)
+            return Unauthorized("organization does not exist");
+
+        var result = await Mediator.Send(new Summary.Query(OrganizationId, numberOfDays));
+        if (!result.IsSuccess || result.Value == null)
+            return Unauthorized(result.Error);
+
+        var summaryDto = new SaleRecordSummaryDto(result.Value);
+
+        return Ok(summaryDto);
     }
 }

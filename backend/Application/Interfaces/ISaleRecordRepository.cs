@@ -11,9 +11,16 @@ public interface ISaleRecordRepository
         DateOnly date,
         CancellationToken cancellationToken
     );
+
     Task<bool> ExistsFromDateAsync(
         string organizationId,
         DateOnly date,
+        CancellationToken cancellationToken
+    );
+
+    Task<List<SaleRecord>> GetFromDateRangeAsync(
+        string organizationId,
+        int NumberOfDays,
         CancellationToken cancellationToken
     );
 }

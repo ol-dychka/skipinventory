@@ -9,3 +9,12 @@ export interface SaleRecordInput {
   sku: string;
   quantity: number;
 }
+
+export interface SaleRecordSummary {
+  days: SaleRecordSummaryLine[];
+}
+
+interface SaleRecordSummaryLine {
+  date: Date;
+  total: number;
+}
