@@ -14,7 +14,7 @@ export interface SaleRecordSummary {
   days: SaleRecordSummaryLine[];
 }
 
-interface SaleRecordSummaryLine {
+export interface SaleRecordSummaryLine {
   date: Date;
   total: number;
 }

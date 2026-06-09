@@ -3,6 +3,8 @@
     Welcome, {{ authService.currentUser()!.name }}!
   </p>
   @if (saleRecordService.saleRecordSummary()?.days) {
-    <!-- <p>{{ saleRecordService.saleRecordSummary()!.days[0].total }}</p> -->
+    <div class="h-75 w-200">
+      <app-chart [data]="saleRecordService.saleRecordSummary()?.days!" />
+    </div>
   }
 </div>
