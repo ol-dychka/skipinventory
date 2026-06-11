@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, HostListener, inject, OnInit, signal } from '@angular/core';
 import { ChatService } from '../../../core/services/chat-service';
 import { FormsModule } from '@angular/forms';
 
@@ -18,6 +18,14 @@ export class Chat implements OnInit {
 
   handleMessage() {
     if (this.isContent()) this.chatService.sendMessage(this.content());
+    this.content.set('');
+  }
+
+  @HostListener('window:keydown', ['$event'])
+  keyEvent(event: KeyboardEvent) {
+    if (event.key == 'Enter') {
+      this.handleMessage();
+    }
   }
 
   updateContent(value: string) {
