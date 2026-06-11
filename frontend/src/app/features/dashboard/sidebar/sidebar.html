@@ -12,6 +12,7 @@
     (click)="switchPage('join-requests')"
     name="Join Requests"
     [isActive]="isCurrent('join-requests')"
+    [notification]="organizationService.currentOrganization()?.joinRequests?.length"
   >
     join requests
   </app-sidebar-link>

@@ -9,4 +9,5 @@ import { Component, Input } from '@angular/core';
 export class SidebarLink {
   @Input() isActive: boolean = false;
   @Input() name: string = '';
+  @Input() notification: number | undefined = undefined;
 }

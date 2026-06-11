@@ -6,4 +6,10 @@
   }"
 >
   {{ name }}
+
+  @if (notification) {
+    <span class="bg-error rounded-lg p-1 font-medium text-white">
+      {{ notification }}
+    </span>
+  }
 </div>

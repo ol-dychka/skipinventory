@@ -2,6 +2,7 @@ import { NgClass } from '@angular/common';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { SidebarLink } from './sidebar-link/sidebar-link';
+import { OrganizationService } from '../../../core/services/organization-service';
 
 @Component({
   selector: 'app-sidebar',
@@ -10,6 +11,7 @@ import { SidebarLink } from './sidebar-link/sidebar-link';
 })
 export class Sidebar implements OnInit {
   private router = inject(Router);
+  organizationService = inject(OrganizationService);
 
   ngOnInit(): void {
     const url = this.router.url;
