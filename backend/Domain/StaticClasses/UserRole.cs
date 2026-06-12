@@ -17,4 +17,9 @@ public static class UserRole
     {
         return role == Owner;
     }
+
+    public static bool HasMLServiceRights(string role)
+    {
+        return role == Owner || role == Manager;
+    }
 }

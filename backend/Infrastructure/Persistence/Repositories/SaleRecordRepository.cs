@@ -29,6 +29,19 @@ public class SaleRecordRepository(PsqlDbContext context) : ISaleRecordRepository
         );
     }
 
+    public Task<List<SaleRecord>> GetAllAsync(
+        string organizationId,
+        CancellationToken cancellationToken
+    )
+    {
+        // safety net; mock data is generated for only 21 days
+        var startDate = DateTime.UtcNow.AddDays(-21);
+
+        return _context
+            .SaleRecords.Where(sr => sr.OrganizationId == organizationId && sr.Date > startDate)
+            .ToListAsync(cancellationToken);
+    }
+
     public Task<List<SaleRecord>> GetFromDateAsync(
         string organizationId,
         DateTime date,

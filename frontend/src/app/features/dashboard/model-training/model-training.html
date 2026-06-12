@@ -5,3 +5,7 @@
 <button class="btn mt-4 block" (click)="train()">
   {{ generating() ? 'Training...' : 'Train on mock data' }}
 </button>
+
+<button class="btn mt-4 block" (click)="forecast()">
+  {{ forecasting() ? 'Forecasting...' : 'Forecast ordering based on sales' }}
+</button>

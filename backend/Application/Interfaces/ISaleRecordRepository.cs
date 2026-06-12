@@ -23,4 +23,6 @@ public interface ISaleRecordRepository
         int NumberOfDays,
         CancellationToken cancellationToken
     );
+
+    Task<List<SaleRecord>> GetAllAsync(string organizationId, CancellationToken cancellationToken);
 }

@@ -21,4 +21,10 @@ export class ModelTrainingService {
       .post<void>(`${this.api}/mlservice/train/data`, {})
       .pipe(tap(() => console.log('training is done')));
   }
+
+  forecast() {
+    return this.http
+      .post<any>(`${this.api}/mlservice/forecast`, {})
+      .pipe(tap((val) => console.log(val)));
+  }
 }
