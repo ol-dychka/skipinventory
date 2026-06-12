@@ -60,7 +60,7 @@ export class ChartComponent implements AfterViewInit {
         responsive: true,
         scales: {
           y: {
-            min: Math.min(...appendedData.map((day) => day.total)),
+            min: Math.max(Math.min(...appendedData.map((day) => day.total)) - 10, 0),
           },
         },
         color: 'primary',

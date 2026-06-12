@@ -19,12 +19,21 @@ export class SaleRecords implements OnInit {
   loading = signal(false);
   error = signal<string | null>(null);
 
+  isFuture() {
+    if (this.selectedDate.value == null) return false;
+    const selected = new Date(this.selectedDate.value);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    return selected > today;
+  }
+
   ngOnInit() {
     this.selectedDate.valueChanges
       .pipe(
         filter((date) => !!date),
         tap(() => {
-          console.log('nigga', this.selectedDate);
+          console.log('n', this.selectedDate);
           this.loading.set(true);
           this.error.set(null);
         }),

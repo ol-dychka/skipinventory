@@ -2179,6 +2179,75 @@ public class Seed
                 8,
                 DateTime.UtcNow.AddDays(-1)
             ),
+            // Day 20 (yesterday)
+            new SaleRecord(
+                140,
+                products[0].Sku,
+                organizationId,
+                products[0].Id,
+                8,
+                DateTime.UtcNow
+            ),
+            new SaleRecord(60, products[1].Sku, organizationId, products[1].Id, 4, DateTime.UtcNow),
+            new SaleRecord(20, products[2].Sku, organizationId, products[2].Id, 2, DateTime.UtcNow),
+            new SaleRecord(
+                175,
+                products[3].Sku,
+                organizationId,
+                products[3].Id,
+                9,
+                DateTime.UtcNow
+            ),
+            new SaleRecord(
+                105,
+                products[4].Sku,
+                organizationId,
+                products[4].Id,
+                6,
+                DateTime.UtcNow
+            ),
+            new SaleRecord(30, products[5].Sku, organizationId, products[5].Id, 2, DateTime.UtcNow),
+            new SaleRecord(
+                165,
+                products[6].Sku,
+                organizationId,
+                products[6].Id,
+                9,
+                DateTime.UtcNow
+            ),
+            new SaleRecord(85, products[7].Sku, organizationId, products[7].Id, 5, DateTime.UtcNow),
+            new SaleRecord(
+                120,
+                products[8].Sku,
+                organizationId,
+                products[8].Id,
+                7,
+                DateTime.UtcNow
+            ),
+            new SaleRecord(
+                195,
+                products[9].Sku,
+                organizationId,
+                products[9].Id,
+                10,
+                DateTime.UtcNow
+            ),
+            new SaleRecord(
+                55,
+                products[10].Sku,
+                organizationId,
+                products[10].Id,
+                4,
+                DateTime.UtcNow
+            ),
+            new SaleRecord(
+                145,
+                products[11].Sku,
+                organizationId,
+                products[11].Id,
+                8,
+                DateTime.UtcNow
+            ),
         ];
     }
 }

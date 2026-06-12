@@ -6,11 +6,11 @@
 
 @if (exists()) {
   <p>Sales data has been submitted for this day</p>
+} @else if (isFuture()) {
+  <p>You can't submit sales data for this day yet</p>
+} @else if (selectedDate.value) {
+  <p>Date: {{ selectedDate.value }}</p>
+  <app-create-sale-record [date]="selectedDate.value" />
 } @else {
-  @if (selectedDate.value) {
-    <p>Date: {{ selectedDate.value }}</p>
-    <app-create-sale-record [date]="selectedDate.value" />
-  } @else {
-    <p>Select the date</p>
-  }
+  <p>Select the date</p>
 }
