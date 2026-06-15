@@ -9,7 +9,7 @@ from pipeline.order_quantity import calculate_order_quantity
 from pipeline.preprocessor import Preprocessor
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
-WEIGHTS_PATH = BASE_DIR / "aftifacts" / "weights.npy"
+WEIGHTS_PATH = BASE_DIR / "artifacts" / "weights.npy"
 PREPROCESSING_PATH = BASE_DIR / "artifacts" / "preprocessing.npy"
 
 router = APIRouter(prefix="/predict", tags=["predictions"])
@@ -42,22 +42,27 @@ def predict_single(payload: PredictionPayload) -> dict:
 
 @router.post("/batch")
 def predict_batch(payload: list[PredictionPayload]):
-    if model.weights is None:
-        raise HTTPException(status_code=503, detail="Model not trained yet")
-    
-    result = []
-    for item in payload: 
-        features = build_features(item.sales, item.product)
-        features_scaled = preprocessor.transform(features.reshape(1, -1))
-        predicted_demand = float(model.predict(features_scaled)[0])
-        demand_std = features[3]
+    try:
+        if model.weights is None:
+            raise HTTPException(status_code=503, detail="Model not trained yet")
+        
+        result = []
+        for item in payload: 
+            features = build_features(item.sales, item.product)
+            features_scaled = preprocessor.transform(features.reshape(1, -1))
+            predicted_demand = float(model.predict(features_scaled)[0])
+            demand_std = features[3]
 
-        order_quantity = calculate_order_quantity(predicted_demand, item.product, demand_std)
+            order_quantity = calculate_order_quantity(predicted_demand, item.product, demand_std)
 
-        result.append({
-            "sku": item.product.sku,
-            "predicted_weekly_demand": round(predicted_demand, 2),
-            "recommended_order_quantity": order_quantity
-        })
+            result.append({
+                "sku": item.product.sku,
+                "predicted_weekly_demand": round(predicted_demand, 2),
+                "recommended_order_quantity": order_quantity
+            })
 
-    return result
+        return result
+    except Exception as e:
+        import traceback
+        print("ENDPOINT ERROR:", traceback.format_exc())
+        raise

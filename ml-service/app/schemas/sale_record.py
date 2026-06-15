@@ -1,13 +1,15 @@
-from datetime import date
-from pydantic import BaseModel
+from datetime import datetime
+from pydantic import BaseModel, ConfigDict, Field
 
 class SaleRecord (BaseModel):
-    id: str
-    sku: str
-    date: date
+    model_config = ConfigDict(populate_by_name=True)
 
-    units_sold: int
-    units_returned: int
+    id: str = Field(alias="Id")
+    sku: str = Field(alias="Sku")
+    date: datetime = Field(alias="Date")
 
-    organization_id: str
-    product_id: str
+    units_sold: int = Field(alias="UnitsSold")
+    units_returned: int = Field(alias="UnitsReturned")
+
+    organization_id: str = Field(alias="OrganizationId")
+    product_id: str = Field(alias="ProductId")

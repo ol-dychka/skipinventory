@@ -1,6 +1,8 @@
 using System;
 using System.Text;
 using System.Text.Json;
+using API.DTOs.MlService;
+using Application.Core;
 using Application.SaleRecords.Queries;
 using Domain.StaticClasses;
 using Microsoft.AspNetCore.Mvc;
@@ -56,10 +58,21 @@ public class MlServiceController(IHttpClientFactory factory) : BaseAPIController
             return Unauthorized("token does not exist");
 
         var salesDataResponse = await Mediator.Send(new All.Query(OrganizationId));
-        var salesDataJson = JsonSerializer.Serialize(salesDataResponse.Value);
+        if (!salesDataResponse.IsSuccess || salesDataResponse.Value == null)
+            return Unauthorized(salesDataResponse.Error);
+
+        List<SaleRecordsDto> salesDataDto =
+        [
+            .. salesDataResponse
+                .Value.GroupBy(sr => sr.ProductId)
+                .Select(g => new SaleRecordsDto([.. g])),
+        ];
+        var salesDataJson = JsonSerializer.Serialize(salesDataDto);
         var salesDataContent = new StringContent(salesDataJson, Encoding.UTF8, "application/json");
 
-        var mlServiceResponse = await _client.PostAsync("/forecast", salesDataContent);
+        Console.WriteLine("SALES DATA:" + salesDataJson);
+
+        var mlServiceResponse = await _client.PostAsync("/predict/batch", salesDataContent);
 
         if (!mlServiceResponse.IsSuccessStatusCode)
         {

@@ -39,6 +39,7 @@ public class SaleRecordRepository(PsqlDbContext context) : ISaleRecordRepository
 
         return _context
             .SaleRecords.Where(sr => sr.OrganizationId == organizationId && sr.Date > startDate)
+            .Include(sr => sr.Product)
             .ToListAsync(cancellationToken);
     }
 
