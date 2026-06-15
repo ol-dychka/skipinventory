@@ -2,16 +2,16 @@ namespace Domain;
 
 public class SaleForecast(
     string sku,
-    string modelVersion,
     string organizationId,
     string productId,
     DateOnly forecastStart,
     DateOnly forecastEnd,
     int predictedQuantity,
-    int lowerLimit,
-    int upperLimit,
-    int confidenceScore,
-    bool suggestReorder
+    bool suggestReorder,
+    string modelVersion = "1",
+    int lowerLimit = 0,
+    int upperLimit = 0,
+    int confidenceScore = 100
 )
 {
     // core

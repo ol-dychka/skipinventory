@@ -5,7 +5,6 @@
     name="Dashboard"
     [isActive]="isCurrent('dashboard')"
   >
-    dashboard
   </app-sidebar-link>
   <app-sidebar-link
     [routerLink]="['join-requests']"
@@ -14,7 +13,6 @@
     [isActive]="isCurrent('join-requests')"
     [notification]="organizationService.currentOrganization()?.joinRequests?.length"
   >
-    join requests
   </app-sidebar-link>
   <app-sidebar-link
     [routerLink]="['members']"
@@ -22,7 +20,6 @@
     name="Members"
     [isActive]="isCurrent('members')"
   >
-    members
   </app-sidebar-link>
   <app-sidebar-link
     [routerLink]="['products']"
@@ -30,7 +27,6 @@
     name="Products"
     [isActive]="isCurrent('products')"
   >
-    products
   </app-sidebar-link>
   <app-sidebar-link
     [routerLink]="['sale-records']"
@@ -38,7 +34,6 @@
     name="Sale Records"
     [isActive]="isCurrent('sale-records')"
   >
-    sale records
   </app-sidebar-link>
   <app-sidebar-link
     [routerLink]="['model-training']"
@@ -46,7 +41,13 @@
     name="Model Training"
     [isActive]="isCurrent('model-training')"
   >
-    ml model training
+  </app-sidebar-link>
+  <app-sidebar-link
+    [routerLink]="['forecasts']"
+    (click)="switchPage('forecasts')"
+    name="Sale Forecasts"
+    [isActive]="isCurrent('forecasts')"
+  >
   </app-sidebar-link>
   <app-sidebar-link
     [routerLink]="['chat']"
@@ -54,6 +55,5 @@
     name="Chat"
     [isActive]="isCurrent('chat')"
   >
-    chat
   </app-sidebar-link>
 </div>

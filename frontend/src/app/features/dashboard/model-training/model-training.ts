@@ -12,7 +12,6 @@ export class ModelTraining {
 
   generating = signal(false);
   training = signal(false);
-  forecasting = signal(false);
 
   generate(): void {
     this.generating.set(true);
@@ -29,15 +28,6 @@ export class ModelTraining {
     this.modelTrainingService
       .train()
       .pipe(finalize(() => this.training.set(false)))
-      .subscribe();
-  }
-
-  forecast(): void {
-    this.forecasting.set(true);
-
-    this.modelTrainingService
-      .forecast()
-      .pipe(finalize(() => this.forecasting.set(false)))
       .subscribe();
   }
 }

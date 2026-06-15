@@ -1,7 +1,8 @@
-import { inject, Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
+import { Forecast } from '../models/forecast';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +10,8 @@ import { Observable, tap } from 'rxjs';
 export class ModelTrainingService {
   private readonly api = environment.apiUrl;
   private readonly http = inject(HttpClient);
+
+  forecasts = signal<Forecast[]>([]);
 
   generate(): Observable<void> {
     return this.http
@@ -26,5 +29,14 @@ export class ModelTrainingService {
     return this.http
       .post<any>(`${this.api}/mlservice/forecast`, {})
       .pipe(tap((val) => console.log(val)));
+  }
+
+  list() {
+    return this.http.get<Forecast[]>(`${this.api}/mlservice/list`).pipe(
+      tap((list) => {
+        this.forecasts.set(list);
+        console.log(this.forecasts());
+      }),
+    );
   }
 }
