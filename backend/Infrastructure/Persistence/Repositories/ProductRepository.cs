@@ -26,6 +26,18 @@ public class ProductRepository(PsqlDbContext context) : IProductRepository
 
     public Task<Product?> GetByIdAsync(string id, CancellationToken cancellationToken)
     {
-        return _context.Products.FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
+        return _context.Products.FirstOrDefaultAsync(p => p.Id == id, cancellationToken);
+    }
+
+    public Task<Product?> GetBySkuAsync(
+        string sku,
+        string organizationId,
+        CancellationToken cancellationToken
+    )
+    {
+        return _context.Products.FirstOrDefaultAsync(
+            p => p.Sku == sku && p.OrganizationId == organizationId,
+            cancellationToken
+        );
     }
 }

@@ -4,10 +4,10 @@ public class SaleForecast(
     string sku,
     string organizationId,
     string productId,
-    DateOnly forecastStart,
-    DateOnly forecastEnd,
+    DateTime forecastStart,
+    DateTime forecastEnd,
     int predictedQuantity,
-    bool suggestReorder,
+    bool suggestReorder = true,
     string modelVersion = "1",
     int lowerLimit = 0,
     int upperLimit = 0,
@@ -19,8 +19,8 @@ public class SaleForecast(
     public string Sku { get; set; } = sku;
     public string ModelVersion { get; set; } = modelVersion;
     public DateTime GeneratedAt { get; set; } = DateTime.UtcNow;
-    public DateOnly ForecastStart { get; set; } = forecastStart;
-    public DateOnly ForecastEnd { get; set; } = forecastEnd;
+    public DateTime ForecastStart { get; set; } = forecastStart;
+    public DateTime ForecastEnd { get; set; } = forecastEnd;
 
     // numbers
     public int PredictedQuantity { get; set; } = predictedQuantity;

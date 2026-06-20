@@ -36,6 +36,7 @@ def predict_single(payload: PredictionPayload) -> dict:
 
     return {
         "sku": payload.product.sku,
+        "id": payload.product.id,
         "predicted_weekly_demand": round(predicted_demand, 2),
         "recommended_order_quantity": order_quantity
     }
@@ -57,6 +58,7 @@ def predict_batch(payload: list[PredictionPayload]):
 
             result.append({
                 "sku": item.product.sku,
+                "id": item.product.id,
                 "predicted_weekly_demand": round(predicted_demand, 2),
                 "recommended_order_quantity": order_quantity
             })

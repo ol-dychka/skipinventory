@@ -30,6 +30,7 @@ builder.Services.AddScoped<IJoinRequestRepository, JoinRequestRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ISaleRecordRepository, SaleRecordRepository>();
 builder.Services.AddScoped<IChatMessageRepository, ChatMessageRepository>();
+builder.Services.AddScoped<ISaleForecastRepository, SaleForecastRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //redis

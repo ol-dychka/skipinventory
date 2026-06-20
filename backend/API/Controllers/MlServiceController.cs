@@ -2,10 +2,13 @@ using System;
 using System.Text;
 using System.Text.Json;
 using API.DTOs.MlService;
+using API.DTOs.Responses;
 using Application.Core;
+using Application.SaleForecasts.Commands;
 using Application.SaleRecords.Queries;
 using Domain.StaticClasses;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace API.Controllers;
 
@@ -52,11 +55,13 @@ public class MlServiceController(IHttpClientFactory factory) : BaseAPIController
     [HttpPost("forecast")]
     public async Task<IActionResult> Forecast()
     {
+        // authorization
         if (Role == null || !UserRole.HasMLServiceRights(Role))
             return Unauthorized("unsufficient rights");
         if (OrganizationId == null)
             return Unauthorized("token does not exist");
 
+        // get sales data
         var salesDataResponse = await Mediator.Send(new All.Query(OrganizationId));
         if (!salesDataResponse.IsSuccess || salesDataResponse.Value == null)
             return Unauthorized(salesDataResponse.Error);
@@ -72,6 +77,7 @@ public class MlServiceController(IHttpClientFactory factory) : BaseAPIController
 
         Console.WriteLine("SALES DATA:" + salesDataJson);
 
+        // ml service
         var mlServiceResponse = await _client.PostAsync("/predict/batch", salesDataContent);
 
         if (!mlServiceResponse.IsSuccessStatusCode)
@@ -79,8 +85,17 @@ public class MlServiceController(IHttpClientFactory factory) : BaseAPIController
             return StatusCode((int)mlServiceResponse.StatusCode);
         }
 
-        var responseBody = await mlServiceResponse.Content.ReadAsStringAsync();
+        // persist in db and return a list
+        var response = await Mediator.Send(
+            new Save.Command(mlServiceResponse.Content, OrganizationId)
+        );
+        if (!response.IsSuccess || response.Value == null)
+        {
+            return Unauthorized(response.Error);
+        }
 
-        return Content(responseBody, "application/json");
+        var forecastsDto = response.Value.Select(f => new SaleForecastDto(f));
+
+        return Ok(forecastsDto);
     }
 }

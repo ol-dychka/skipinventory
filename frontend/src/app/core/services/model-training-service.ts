@@ -26,9 +26,12 @@ export class ModelTrainingService {
   }
 
   forecast() {
-    return this.http
-      .post<any>(`${this.api}/mlservice/forecast`, {})
-      .pipe(tap((val) => console.log(val)));
+    return this.http.post<Forecast[]>(`${this.api}/mlservice/forecast`, {}).pipe(
+      tap((list) => {
+        this.forecasts.set(list);
+        console.log(this.forecasts());
+      }),
+    );
   }
 
   list() {

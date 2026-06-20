@@ -5,6 +5,5 @@ export interface Forecast {
   forecastStart: Date;
   forecastEnd: Date;
   predictedQuantity: number;
-  suggestReorder: number;
   productId: string;
 }
