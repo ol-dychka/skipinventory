@@ -5,6 +5,7 @@ using API.DTOs.MlService;
 using API.DTOs.Responses;
 using Application.Core;
 using Application.SaleForecasts.Commands;
+using Application.SaleForecasts.Queries;
 using Application.SaleRecords.Queries;
 using Domain.StaticClasses;
 using Microsoft.AspNetCore.Mvc;
@@ -89,6 +90,23 @@ public class MlServiceController(IHttpClientFactory factory) : BaseAPIController
         var response = await Mediator.Send(
             new Save.Command(mlServiceResponse.Content, OrganizationId)
         );
+        if (!response.IsSuccess || response.Value == null)
+        {
+            return Unauthorized(response.Error);
+        }
+
+        var forecastsDto = response.Value.Select(f => new SaleForecastDto(f));
+
+        return Ok(forecastsDto);
+    }
+
+    [HttpGet("list")]
+    public async Task<IActionResult> List()
+    {
+        if (OrganizationId == null)
+            return Unauthorized("token does not exist");
+
+        var response = await Mediator.Send(new List.Query(OrganizationId));
         if (!response.IsSuccess || response.Value == null)
         {
             return Unauthorized(response.Error);

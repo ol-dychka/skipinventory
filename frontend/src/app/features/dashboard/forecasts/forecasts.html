@@ -1,3 +1,17 @@
 <button class="btn mt-4 block" (click)="forecast()">
   {{ forecasting() ? 'Forecasting...' : 'Forecast ordering based on sales' }}
 </button>
+
+@if (modelTrainingService.forecasts().length > 0) {
+  <p>Latest Forecast:</p>
+  <p>
+    {{ formatDate(modelTrainingService.forecasts()[0].forecastStart) }} -
+    {{ formatDate(modelTrainingService.forecasts()[0].forecastEnd) }}
+  </p>
+  <p>Generated At: {{ formatDate(modelTrainingService.forecasts()[0].generatedAt) }}</p>
+  @for (forecast of modelTrainingService.forecasts(); track forecast.id) {
+    <div>{{ forecast.sku }} - {{ forecast.predictedQuantity }}</div>
+  }
+} @else {
+  <p>No forecasts generated yet</p>
+}

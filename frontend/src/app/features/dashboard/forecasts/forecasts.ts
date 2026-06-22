@@ -1,6 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { ModelTrainingService } from '../../../core/services/model-training-service';
 import { finalize } from 'rxjs';
+import { displayDate } from '../../../core/helpers/display-date';
 
 @Component({
   selector: 'app-forecasts',
@@ -8,9 +9,13 @@ import { finalize } from 'rxjs';
   templateUrl: './forecasts.html',
 })
 export class Forecasts {
-  private modelTrainingService = inject(ModelTrainingService);
+  modelTrainingService = inject(ModelTrainingService);
 
   forecasting = signal(false);
+
+  formatDate(date: Date) {
+    return displayDate(date);
+  }
 
   forecast(): void {
     this.forecasting.set(true);
