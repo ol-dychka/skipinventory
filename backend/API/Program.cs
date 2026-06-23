@@ -106,6 +106,18 @@ builder.Services.AddCors(options =>
                 .AllowCredentials();
         }
     );
+
+    options.AddPolicy(
+        "AllowNetlify",
+        policy =>
+        {
+            policy
+                .WithOrigins("https://skipinventory.netlify.app")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
+        }
+    );
 });
 builder.Services.AddHttpClient(
     "mlservice",
@@ -119,6 +131,7 @@ var app = builder.Build();
 
 // http
 app.UseCors("AllowAngular");
+app.UseCors("AllowNetlify");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
