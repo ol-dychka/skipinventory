@@ -1,13 +1,12 @@
 from fastapi import FastAPI
-from routers.predictions import router as predictionsRouter
-from routers.training import router as trainingRouter
+from app.routers.predictions import router as predictionsRouter
+from app.routers.training import router as trainingRouter
+from fastapi import Request
+from fastapi.responses import JSONResponse
 
 app = FastAPI()
 app.include_router(predictionsRouter)
 app.include_router(trainingRouter)
-
-from fastapi import Request
-from fastapi.responses import JSONResponse
 
 @app.exception_handler(Exception)
 async def general_exception_handler(request: Request, exc: Exception):

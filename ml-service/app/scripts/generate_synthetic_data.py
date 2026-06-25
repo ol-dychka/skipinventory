@@ -5,9 +5,9 @@ import numpy as np
 import json
 from datetime import date, timedelta
 import random
-from schemas.product import Product
-from schemas.sale_record import SaleRecord
-from schemas.mock_prediction_payload import MockPredictionPayload
+from app.schemas.product import Product
+from app.schemas.sale_record import SaleRecord
+from app.schemas.mock_prediction_payload import MockPredictionPayload
 from pathlib import Path
 
 fake = Faker()

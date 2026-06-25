@@ -2,11 +2,11 @@ from pathlib import Path
 
 from fastapi import APIRouter, HTTPException
 
-from models.linear import RidgeRegressionGD
-from schemas.prediction_payload import PredictionPayload
-from pipeline.features import build_features
-from pipeline.order_quantity import calculate_order_quantity
-from pipeline.preprocessor import Preprocessor
+from app.models.linear import RidgeRegressionGD
+from app.schemas.prediction_payload import PredictionPayload
+from app.pipeline.features import build_features
+from app.pipeline.order_quantity import calculate_order_quantity
+from app.pipeline.preprocessor import Preprocessor
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 WEIGHTS_PATH = BASE_DIR / "artifacts" / "weights.npy"

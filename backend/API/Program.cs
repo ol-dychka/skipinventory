@@ -34,9 +34,11 @@ builder.Services.AddScoped<ISaleForecastRepository, SaleForecastRepository>();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 //redis
-builder.Services.AddSingleton<IConnectionMultiplexer>(
-    ConnectionMultiplexer.Connect("localhost:6379")
-);
+builder.Services.AddSingleton<IConnectionMultiplexer>(sp =>
+{
+    var redisConnectionString = builder.Configuration.GetConnectionString("Redis");
+    return ConnectionMultiplexer.Connect(redisConnectionString!);
+});
 builder.Services.AddScoped<IRedisTokenService, RedisTokenService>();
 builder.Services.AddScoped<RedisTokenValidationFilter>();
 builder.Services.AddControllers(options =>
@@ -95,27 +97,15 @@ builder.Services.AddAuthorization();
 // interlayer communication (frontend, ml service)
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(
-        "AllowAngular",
-        policy =>
-        {
-            policy
-                .WithOrigins("http://localhost:4200")
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials();
-        }
-    );
+    var baseUrl =
+        builder.Configuration["Frontend:BaseUrl"]
+        ?? throw new InvalidOperationException("Frontend:BaseUrl is not configured.");
 
     options.AddPolicy(
-        "AllowNetlify",
+        "AllowFrontend",
         policy =>
         {
-            policy
-                .WithOrigins("https://skipinventory.netlify.app")
-                .AllowAnyHeader()
-                .AllowAnyMethod()
-                .AllowCredentials();
+            policy.WithOrigins(baseUrl).AllowAnyHeader().AllowAnyMethod().AllowCredentials();
         }
     );
 });
@@ -123,15 +113,19 @@ builder.Services.AddHttpClient(
     "mlservice",
     client =>
     {
-        client.BaseAddress = new Uri("http://localhost:8000");
+        var baseUrl =
+            builder.Configuration["MlService:BaseUrl"]
+            ?? throw new InvalidOperationException("MlService:BaseUrl is not configured.");
+        ;
+        client.BaseAddress = new Uri(baseUrl);
+        client.Timeout = TimeSpan.FromSeconds(30);
     }
 );
 
 var app = builder.Build();
 
 // http
-app.UseCors("AllowAngular");
-app.UseCors("AllowNetlify");
+app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();

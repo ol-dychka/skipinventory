@@ -1,4 +1,4 @@
-from schemas.product import Product
+from app.schemas.product import Product
 import numpy as np
 
 def calculate_order_quantity(

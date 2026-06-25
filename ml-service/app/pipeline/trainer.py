@@ -1,10 +1,10 @@
 import numpy as np
 import json
-from schemas.sale_record import SaleRecord
-from schemas.product import Product
-from pipeline.features import build_features
-from models.linear import RidgeRegressionGD
-from pipeline.preprocessor import Preprocessor
+from app.schemas.sale_record import SaleRecord
+from app.schemas.product import Product
+from app.pipeline.features import build_features
+from app.models.linear import RidgeRegressionGD
+from app.pipeline.preprocessor import Preprocessor
 
 def load_data(path: str) -> tuple[np.ndarray, np.ndarray]:
     with open(path) as f:

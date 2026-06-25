@@ -13,8 +13,8 @@
 
 import numpy as np
 import pandas as pd
-from schemas.sale_record import SaleRecord
-from schemas.product import Product
+from app.schemas.sale_record import SaleRecord
+from app.schemas.product import Product
 
 def build_features(sales: list[SaleRecord], product: Product) -> np.ndarray:
     df = pd.DataFrame([s.model_dump() for s in sales])

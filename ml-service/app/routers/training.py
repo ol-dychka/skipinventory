@@ -1,7 +1,7 @@
 from pathlib import Path
 from fastapi import APIRouter
-from scripts.generate_synthetic_data import write
-from pipeline.trainer import train
+from app.scripts.generate_synthetic_data import write
+from app.pipeline.trainer import train
 
 router = APIRouter(prefix="/train", tags=["training"])
 

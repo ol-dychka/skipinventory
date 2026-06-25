@@ -1,6 +1,6 @@
 from pydantic import BaseModel, ConfigDict, Field
-from schemas.sale_record import SaleRecord
-from schemas.product import Product
+from app.schemas.sale_record import SaleRecord
+from app.schemas.product import Product
 
 
 class PredictionPayload (BaseModel):
