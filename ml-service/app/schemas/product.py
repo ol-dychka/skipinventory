@@ -11,6 +11,7 @@ class Product (BaseModel):
     category: Optional[str] = Field(alias="Category")
     vendor: str = Field(alias="Vendor")
     unit: str = Field(alias="Unit")
+    organization_id: str = Field(alias="OrganizationId")
 
     cost_price: float = Field(alias="CostPrice")
     sale_price: float = Field(alias="SalePrice")

@@ -105,7 +105,11 @@ builder.Services.AddCors(options =>
         "AllowFrontend",
         policy =>
         {
-            policy.WithOrigins(baseUrl).AllowAnyHeader().AllowAnyMethod().AllowCredentials();
+            policy
+                .WithOrigins("https://skipinventory.netlify.app")
+                .AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowCredentials();
         }
     );
 });
@@ -117,7 +121,7 @@ builder.Services.AddHttpClient(
             builder.Configuration["MlService:BaseUrl"]
             ?? throw new InvalidOperationException("MlService:BaseUrl is not configured.");
         ;
-        client.BaseAddress = new Uri(baseUrl);
+        client.BaseAddress = new Uri("https://skipinventory-ml-service-latest.onrender.com");
         client.Timeout = TimeSpan.FromSeconds(30);
     }
 );

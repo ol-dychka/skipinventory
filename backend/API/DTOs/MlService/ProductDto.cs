@@ -11,6 +11,7 @@ public class ProductDto(Product product)
     public string? Category { get; set; } = product.Category;
     public string Vendor { get; set; } = product.Vendor;
     public string Unit { get; set; } = product.Unit.ToString();
+    public string OrganizationId { get; set; } = product.OrganizationId;
 
     // price
     public decimal CostPrice { get; set; } = product.CostPrice;

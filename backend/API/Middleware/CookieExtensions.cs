@@ -16,8 +16,10 @@ public static class CookieExtensions
             new CookieOptions
             {
                 HttpOnly = true,
-                Secure = false,
-                SameSite = SameSiteMode.Lax,
+                // Secure = false,
+                // SameSite = SameSiteMode.Lax,
+                Secure = true,
+                SameSite = SameSiteMode.None,
                 Path = "/api/auth",
                 Expires = refreshTokenData.ExpiresAt,
             }

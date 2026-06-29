@@ -27,7 +27,8 @@ public class MlServiceController(IHttpClientFactory factory) : BaseAPIController
 
         if (!response.IsSuccessStatusCode)
         {
-            return StatusCode((int)response.StatusCode);
+            var error = await response.Content.ReadAsStringAsync();
+            return StatusCode((int)response.StatusCode, error);
         }
 
         var responseBody = await response.Content.ReadAsStringAsync();
