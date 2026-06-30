@@ -28,7 +28,7 @@ export class LoadingService {
       }
 
       this.timer = null;
-    }, 1000); // don't show for fast requests
+    }, 2500); // don't show for fast requests
   }
 
   hide() {
