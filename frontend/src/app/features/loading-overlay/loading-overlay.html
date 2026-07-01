@@ -20,9 +20,11 @@
         />
       </svg>
       <p class="text-lg font-semibold">Loading Server...</p>
-      <p class="text-primary-d">
-        The backend may take about 30 seconds to wake up on your first visit
-      </p>
+      @if (loadingService.isWakingUp()) {
+        <p class="text-primary-d">
+          The backend may take about 30 seconds to wake up on your first visit.
+        </p>
+      }
     </div>
   </div>
 }
