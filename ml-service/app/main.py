@@ -5,6 +5,14 @@ from fastapi import Request
 from fastapi.responses import JSONResponse
 
 app = FastAPI()
+@app.get("/")
+def root():
+    return {"status": "ok"}
+
+@app.get("/health")
+def health():
+    return {"status": "healthy"}
+
 app.include_router(predictionsRouter)
 app.include_router(trainingRouter)
 

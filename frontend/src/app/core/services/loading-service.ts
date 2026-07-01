@@ -60,5 +60,6 @@ export class LoadingService {
       this.wakingUpTimer = null;
     }
     this.isLoading.set(false);
+    this.isWakingUp.set(false);
   }
 }
