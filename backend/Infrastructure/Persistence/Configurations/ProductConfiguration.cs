@@ -22,6 +22,8 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(p => p.CostPrice).HasPrecision(18, 4);
         builder.Property(p => p.SalePrice).HasPrecision(18, 4);
 
+        builder.HasQueryFilter(p => p.Organization.DeletedAt == null);
+
         builder.HasIndex(p => p.OrganizationId);
 
         builder.HasIndex(p => new { p.OrganizationId, p.Sku }).IsUnique();

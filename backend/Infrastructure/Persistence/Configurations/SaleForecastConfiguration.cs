@@ -22,6 +22,8 @@ public class SaleForecastConfiguration : IEntityTypeConfiguration<SaleForecast>
             .HasForeignKey(f => f.ProductId)
             .OnDelete(DeleteBehavior.Restrict);
 
+        builder.HasQueryFilter(o => o.Organization.DeletedAt == null);
+
         // ── Indexes ──────────────────────────────────────────────────────────
         builder.HasIndex(f => f.OrganizationId);
 

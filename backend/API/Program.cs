@@ -21,9 +21,23 @@ using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var sentryDsn = builder.Configuration["Sentry:Dsn"];
+
 // error logging
+if (!string.IsNullOrWhiteSpace(sentryDsn))
+{
+    Console.WriteLine($"[DEBUG] sentryDsn = '{sentryDsn}'");
+    builder.WebHost.UseSentry(o =>
+    {
+        o.Dsn = sentryDsn;
+        o.Environment = builder.Configuration["Sentry:Environment"];
+        o.TracesSampleRate = builder.Configuration.GetValue<double?>("Sentry:TracesSampleRate");
+    });
+}
+
 builder.Host.UseSerilog(
     (context, service, config) =>
+    {
         config
             .ReadFrom.Configuration(context.Configuration)
             .Enrich.FromLogContext()
@@ -31,12 +45,19 @@ builder.Host.UseSerilog(
             .Enrich.WithThreadId()
             .WriteTo.Console(
                 outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}"
-            )
-            .WriteTo.Sentry(o =>
+            );
+
+        if (!string.IsNullOrWhiteSpace(sentryDsn))
+        {
+            Console.WriteLine($"[DEBUG] sentryDsn = '{sentryDsn}'");
+            config.WriteTo.Sentry(o =>
             {
+                o.Dsn = sentryDsn;
                 o.MinimumEventLevel = Serilog.Events.LogEventLevel.Error; // only Error+ becomes a Sentry event
                 o.MinimumBreadcrumbLevel = Serilog.Events.LogEventLevel.Information; // Info+ becomes breadcrumb trail
-            })
+            });
+        }
+    }
 );
 
 builder.Services.AddControllers();
@@ -133,11 +154,14 @@ builder.Services.AddCors(options =>
         builder.Configuration["Frontend:BaseUrl"]
         ?? throw new InvalidOperationException("Frontend:BaseUrl is not configured.");
 
+    Console.WriteLine(baseUrl);
+
     options.AddPolicy(
         "AllowFrontend",
         policy =>
         {
             policy
+                // .WithOrigins(baseUrl)
                 .WithOrigins("https://skipinventory.netlify.app")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
@@ -153,7 +177,10 @@ builder
             var baseUrl =
                 builder.Configuration["MlService:BaseUrl"]
                 ?? throw new InvalidOperationException("MlService:BaseUrl is not configured.");
-            ;
+
+            Console.WriteLine(baseUrl);
+
+            client.BaseAddress = new Uri(baseUrl);
             client.BaseAddress = new Uri("https://skipinventory-ml-service-latest.onrender.com");
             client.Timeout = TimeSpan.FromSeconds(30);
 
@@ -202,7 +229,11 @@ app.UseAuthorization();
 app.MapControllers();
 
 //sentry
-app.UseSentryTracing();
+if (!string.IsNullOrWhiteSpace(sentryDsn))
+{
+    app.UseSentryTracing();
+}
+;
 
 // signal r
 app.MapHub<ChatHub>("/hubs/chat");
