@@ -1,8 +1,10 @@
 using System;
+using System.Net;
 using System.Text;
 using System.Text.Json;
 using API.DTOs.MlService;
 using API.DTOs.Responses;
+using API.Helpers;
 using Application.Core;
 using Application.SaleForecasts.Commands;
 using Application.SaleForecasts.Queries;
@@ -23,7 +25,34 @@ public class MlServiceController(IHttpClientFactory factory) : BaseAPIController
         if (Role == null || !UserRole.HasMLServiceRights(Role))
             return Unauthorized("unsufficient rights");
 
-        var response = await _client.PostAsync("/train/generate", null);
+        var request = new HttpRequestMessage(HttpMethod.Post, "/train/generate")
+        {
+            Version = HttpVersion.Version11,
+            VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+        };
+
+        // var request = new HttpRequestMessage(HttpMethod.Get, "/health")
+        // {
+        //     Version = HttpVersion.Version11,
+        //     VersionPolicy = HttpVersionPolicy.RequestVersionExact,
+        // };
+
+        Logger.LogHttpRequest(request);
+
+        HttpResponseMessage response;
+
+        try
+        {
+            response = await _client.SendAsync(request);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("HTTP CALL FAILED:");
+            Console.WriteLine(ex.ToString());
+            throw;
+        }
+
+        Logger.LogHttpResponse(response);
 
         if (!response.IsSuccessStatusCode)
         {

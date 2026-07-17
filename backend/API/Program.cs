@@ -1,6 +1,9 @@
+using System.Net;
 using System.Text;
 using API.Filters;
 using API.Hubs;
+using API.Middleware;
+using Application.Core;
 using Application.Interfaces;
 using Application.Organizations.Queries;
 using Infrastructure.Auth;
@@ -8,14 +11,43 @@ using Infrastructure.Persistence;
 using Infrastructure.Persistence.Repositories;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Http.Resilience;
 using Microsoft.IdentityModel.Tokens;
+using Polly;
+using Polly.Retry;
+using Serilog;
+// using Polly;
 using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// error logging
+builder.Host.UseSerilog(
+    (context, service, config) =>
+        config
+            .ReadFrom.Configuration(context.Configuration)
+            .Enrich.FromLogContext()
+            .Enrich.WithMachineName()
+            .Enrich.WithThreadId()
+            .WriteTo.Console(
+                outputTemplate: "[{Timestamp:HH:mm:ss} {Level:u3}] {Message:lj} {Properties:j}{NewLine}{Exception}"
+            )
+            .WriteTo.Sentry(o =>
+            {
+                o.MinimumEventLevel = Serilog.Events.LogEventLevel.Error; // only Error+ becomes a Sentry event
+                o.MinimumBreadcrumbLevel = Serilog.Events.LogEventLevel.Information; // Info+ becomes breadcrumb trail
+            })
+);
+
 builder.Services.AddControllers();
-builder.Services.AddMediatR(x => x.RegisterServicesFromAssemblyContaining<List.Handler>());
+builder.Services.AddMediatR(x =>
+{
+    x.RegisterServicesFromAssemblyContaining<List.Handler>();
+    x.AddOpenBehavior(typeof(LoggingBehavior<,>));
+});
 builder.Services.AddSignalR();
+
+// builder.Services.AddScoped<WakeUpHandler>();
 
 // postgresql
 builder.Services.AddDbContext<PsqlDbContext>(options =>
@@ -113,18 +145,53 @@ builder.Services.AddCors(options =>
         }
     );
 });
-builder.Services.AddHttpClient(
-    "mlservice",
-    client =>
+builder
+    .Services.AddHttpClient(
+        "mlservice",
+        client =>
+        {
+            var baseUrl =
+                builder.Configuration["MlService:BaseUrl"]
+                ?? throw new InvalidOperationException("MlService:BaseUrl is not configured.");
+            ;
+            client.BaseAddress = new Uri("https://skipinventory-ml-service-latest.onrender.com");
+            client.Timeout = TimeSpan.FromSeconds(30);
+
+            client.DefaultRequestVersion = HttpVersion.Version11;
+            client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
+
+            client.DefaultRequestHeaders.UserAgent.ParseAdd(
+                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/137.0.0.0 Safari/537.36"
+            );
+        }
+    )
+    .ConfigurePrimaryHttpMessageHandler(() =>
     {
-        var baseUrl =
-            builder.Configuration["MlService:BaseUrl"]
-            ?? throw new InvalidOperationException("MlService:BaseUrl is not configured.");
-        ;
-        client.BaseAddress = new Uri("https://skipinventory-ml-service-latest.onrender.com");
-        client.Timeout = TimeSpan.FromSeconds(30);
-    }
-);
+        return new SocketsHttpHandler
+        {
+            PooledConnectionLifetime = TimeSpan.FromSeconds(120),
+            PooledConnectionIdleTimeout = TimeSpan.FromSeconds(15),
+        };
+    })
+    // .AddHttpMessageHandler<WakeUpHandler>()
+    .AddResilienceHandler(
+        "ml-retry",
+        resilienceBuilder =>
+        {
+            resilienceBuilder.AddRetry(
+                new RetryStrategyOptions<HttpResponseMessage>
+                {
+                    MaxRetryAttempts = 5,
+                    Delay = TimeSpan.FromSeconds(8),
+                    BackoffType = DelayBackoffType.Linear,
+                    ShouldHandle = new PredicateBuilder<HttpResponseMessage>()
+                        .Handle<HttpRequestException>()
+                        .HandleResult(r => r.StatusCode == HttpStatusCode.BadGateway),
+                }
+            );
+            resilienceBuilder.AddTimeout(TimeSpan.FromSeconds(15));
+        }
+    );
 
 var app = builder.Build();
 
@@ -133,6 +200,9 @@ app.UseCors("AllowFrontend");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+
+//sentry
+app.UseSentryTracing();
 
 // signal r
 app.MapHub<ChatHub>("/hubs/chat");

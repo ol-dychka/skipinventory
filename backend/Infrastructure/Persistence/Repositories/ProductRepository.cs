@@ -40,4 +40,15 @@ public class ProductRepository(PsqlDbContext context) : IProductRepository
             cancellationToken
         );
     }
+
+    public Task<Dictionary<string, Product>> GetBySkusAsync(
+        string organizationId,
+        List<string> skus,
+        CancellationToken cancellationToken
+    )
+    {
+        return _context
+            .Products.Where(p => p.OrganizationId == organizationId && skus.Contains(p.Sku))
+            .ToDictionaryAsync(p => p.Sku, cancellationToken);
+    }
 }

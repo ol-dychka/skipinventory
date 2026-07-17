@@ -14,4 +14,9 @@ public interface IProductRepository
         string organizationId,
         CancellationToken cancellationToken
     );
+    Task<Dictionary<string, Product>> GetBySkusAsync(
+        string organizationId,
+        List<string> skus,
+        CancellationToken cancellationToken
+    );
 }
