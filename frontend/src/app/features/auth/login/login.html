@@ -18,6 +18,8 @@
         [error]="passwordError"
       />
 
+      <p>Credentials: testowner@test.com P4$$word</p>
+
       <button class="btn w-full" type="submit" [disabled]="loading()">
         {{ loading() ? 'Signing in…' : 'Sign in' }}
       </button>
